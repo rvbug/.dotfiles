@@ -6,6 +6,5 @@
 # installing pip
 python -m pip install --upgrade pip
 
-# add pip to path, located here :-
-/Users/rakesh.venkat/Library/Python/3.8/bin
-
+# add pip to path, located here -> /Users/rakesh.venkat/Library/Python/3.8/bin
+export PATH=/Users/rakesh.venkat/Library/Python/3.8/bin:$PATH
