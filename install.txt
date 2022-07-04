@@ -11,3 +11,6 @@ export PATH=/Users/rakesh.venkat/Library/Python/3.8/bin:$PATH
 
 # add pipenv - it is for package manager and also virtual env
 pip install pipenv
+
+# install jupyter notebook
+pip install notebook
