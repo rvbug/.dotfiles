@@ -11,3 +11,5 @@ To manage the .dotfiles
 
 ## Pipenv 
 pip3 install --user pipenv  
+- To use  
+pipenv shell
