@@ -15,4 +15,4 @@ pip3 install --user pipenv
 pipenv shell
 
 ## Tensorflow
-pip3 install tensorflow-macos
+pipenv install tensorflow-macos
