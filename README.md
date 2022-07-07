@@ -13,3 +13,6 @@ To manage the .dotfiles
 pip3 install --user pipenv  
 - To use  
 pipenv shell
+
+## Tensorflow
+pip3 install tensorflow-macos
