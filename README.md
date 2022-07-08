@@ -1,7 +1,7 @@
 # .dotfiles
 To manage the .dotfiles
 
-# Jupyter NBEXtension
+## Jupyter NBEXtension
 
 ## Installation 
 `pip3 install nbextension`  
