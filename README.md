@@ -16,3 +16,6 @@ pipenv shell
 
 ## Tensorflow
 pipenv install tensorflow-macos
+
+## Tmux
+- To be added
