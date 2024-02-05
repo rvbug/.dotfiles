@@ -1,1 +1,0 @@
-/Users/rakesh.venkat/.wezterm.lua
