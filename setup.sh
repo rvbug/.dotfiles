@@ -2,10 +2,9 @@
 
 ########################################################
 # script      : setup.sh
-# description : 
-# 
-#
-#
+# description : installs the essentials on mac
+# author      : rvbug
+# date        : 06 Feb 2020 : inital commit
 ########################################################
 
 
