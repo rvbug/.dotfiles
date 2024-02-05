@@ -32,7 +32,7 @@ help()
 
 check_for_installation ()
 {
-   $? = "command -v bre0"
+   $? = "command -v brew"
    ##if ! [[ command -v brew &> /dev/null ]]; then
      if ! [[ "$0" != 0 ]]; then
      echo "brew is not installed"
@@ -50,9 +50,11 @@ check_for_installation ()
 
 install ()
 {
-  read -p "Do you want to install $1? 
-  ([aA] to install all, 1 for $1, 2 for tmux, 
-  3 for neovim, or press Enter to skip): " choice
+  read -p "Do you want to install \n $1? (
+    [aA] to install all, \n
+    1 for $1, \n 2 for tmux, \n
+    3 for neovim, \n
+  or press Enter to skip): " choice
 
     case "$choice" in
       a|A) echo "installed brew"
@@ -79,6 +81,6 @@ if [[ "$1" == "--h" ]]; then
   help
 fi  
 
-check_for_installation
+#check_for_installation
 install
 
