@@ -1,4 +1,6 @@
-# .dotfiles
+# <p align="center"> <bold>.</bold> dotfiles <p>
+
+
 To manage the .dotfiles
 
 ## Jupyter NBEXtension
