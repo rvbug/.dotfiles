@@ -3,6 +3,12 @@
 
 To manage the .dotfiles
 
+# File and description
+- .wezterm
+- starship
+- tmux
+
+
 ## Jupyter NBEXtension
 
 ## Installation 
