@@ -30,7 +30,23 @@ Install the following
   
 - tmux
 ```bash
-  brew install tmux
+  $> brew install tmux
+```
+
+- install Ocaml and the dependencies via
+```bash
+# install ocaml
+$> bash -c "sh <(curl -fsSL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)"
+
+# initalize
+$> ocaml init
+
+# tool chain
+$> opam install ocaml-lsp-server odoc ocamlformat utop
+
+# finally run the following to update the current shell env
+$> eval $(opam env --switch=default)
+
 ```
 
 
