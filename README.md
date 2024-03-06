@@ -49,6 +49,18 @@ $> eval $(opam env --switch=default)
 
 ```
 
+# Neovim & Dependencies
+Install [Neovim](https://github.com/rvbug/nvim) and install some of the dependencies including AI assistant
+
+```sh
+# install tabbyML
+$> brew install tabbyml/tabby/tabby
+
+# run it locally on your machine
+tabby serve --device metal --model TabbyML/StarCoder-1B
+
+```
+
 
 ## Jupyter NBEXtension
 
