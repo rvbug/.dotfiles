@@ -44,12 +44,26 @@ function check_essentials() {
   # open softwares.yaml file and read the contents
   # install all the softwares mentioned in the file
 
-  # open softwares.yaml file and read the contents
+  list=($(yq '.software-list' softwares.yaml))
+
+  for software in "${list[@]}"; do
+    # prints everyting in the list
+    # echo $software
+
+    # for each of the software in the list, check if it is already installed using brew list option
+    # if not then install it using brew install
+
+    if brew list $software &>/dev/null; then
+      echo "$software is already installed"
+    else
+      echo "Installing $software..."
+      # brew install $software
+    fi
+
+
+  done
 
 }
 
-
-# function install_essentials() {
-#       brew install git
-#       brew install ffmpeg
-# }
+# call the function
+check_essentials
