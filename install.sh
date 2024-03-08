@@ -41,15 +41,10 @@ function check_os() {
 
 
 function check_essentials() {
-    # open software.txt file to check if these essentials are installed or no using command -v option
-    # if not installed then install it
+  # open softwares.yaml file and read the contents
+  # install all the softwares mentioned in the file
 
-    # if command -v git &>/dev/null; then
-    #   echo "Git already installed"
-    # else
-    #   echo "Installing git..."
-    #   brew install git
-    # fi
+  # open softwares.yaml file and read the contents
 
 }
 
