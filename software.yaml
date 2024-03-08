@@ -1,0 +1,16 @@
+---
+software-list:
+  - git
+  - wezterm
+  - neovim
+  - starship
+  - curl
+  - wget
+  - tmux
+  - fd
+  - ripgrep
+  - npm
+  - yarn
+  - python3
+  - lua
+  - rust-analyzer
