@@ -1,0 +1,14 @@
+git
+wezterm
+neovim
+starship
+curl
+wget
+tmux
+fd
+ripgrep
+npm
+yarn
+python
+lua
+rust-analyzer

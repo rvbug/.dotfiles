@@ -8,7 +8,16 @@
 ########################################################
 
 
-help()
+# check for which OS are you  currently using and install accordingly using uname command
+
+OS_1 = $(uname -s)
+echo $OS_1
+
+echo "hello world"
+
+
+
+
 {
   # displays help
   # this script helps you to install on a fresh machine
@@ -68,8 +77,13 @@ install ()
 
 
 if [[ "$#" -eq 0 ]]; then
-  echo "no arguments provided, please use the following flag"
-  clear >$(tty)
+ echo "no arguments provided, please use the following flag"
+#  clear >$(tty)
+
+OS_1 = $(uname -s)
+echo $OS_1
+
+
 
   # call for help!
   help
@@ -77,7 +91,7 @@ if [[ "$#" -eq 0 ]]; then
 fi
 
 if [[ "$1" == "--h" ]]; then 
-  clear >$(tty)
+  #clear >$(tty)
   help
 fi  
 
