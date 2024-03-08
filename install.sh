@@ -61,9 +61,27 @@ function check_essentials() {
     fi
 
 
+    # need to add pip and also install the respective python scripts
+
+
   done
 
 }
 
 # call the function
 check_essentials
+
+
+# once you have the essntials installed, it is time to configure the dotfiles
+# copy the config/* files to their respective locations
+
+# step 1 read the config folder in this repo
+
+
+
+
+
+
+
+# finally messages to the user before starting the script
+# show the usage, what happens and how it happens
