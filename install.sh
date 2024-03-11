@@ -151,7 +151,6 @@ function ds_tools() {
 
 function add_config() {
   # add .config files
-  echo "adding config files"
   echo "backing up the .config files"
   config_list=($(yq '.config-list' softwares.yaml))
 
@@ -163,18 +162,28 @@ function add_config() {
   done
 
   echo "cloning the repo"
-  config_dir = "config"
-  git clone "https://github.com/rvbug/cookie-ml.git" "$HOME/.dotfiles"
+  config_dir="config"
+  git clone "https://github.com/rvbug/.dotfiles/" "$HOME/.dotfiles"
   # check if config folder is available
   # if available, then skip the installation
-  if [ -d "$HOME/$config_dir" ]; then
-    for file in "$HOME/.dotfiles/$config_dir"/*; do
-      mv "$file" "$HOME"
-  else
-    mv "$HOME/.dotfiles/$config_dir" "$HOME"
+  if [ -d "$HOME/.dotfiles/$config_dir" ]; then
+      cp "$HOME/.dotfiles/$config_dir"/.tmux.conf "$HOME/"
+      cp "$HOME/.dotfiles/$config_dir"/.wezterm.lua "$HOME/"
+      cp "$HOME/.dotfiles/$config_dir"/.zshrc "$HOME/"
+      
+  #    for files in "$HOME/.dotfiles/$config_dir"/.*; do
+  #     echo $files
+  #     mv "$files" "$HOME/"
+  #     echo "files are now moved"
+  #   done
+   else
+    echo "config folder is not available"
+    exit 0
   fi
 
-
+  # delete the cloned repo
+  echo "deleting the repo..."
+  rm -rf "$HOME/.dotfiles"
 }
 
 
