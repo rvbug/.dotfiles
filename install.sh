@@ -14,7 +14,6 @@ function check_n_install_essentials() {
   # check if it is already installed using brew list option
   # if not then install it using brew install
 
-
   list=($(yq '.software-list' softwares.yaml))
 
   if [ $1 == "macos" ]; then
@@ -41,16 +40,17 @@ function check_n_install_essentials() {
         # sudo apt install $software
         fi
       done
-
-
   fi
 
 }
 
 
-# function to check the OS version
 
 function check_os() {
+  # function to check the OS version
+  # and use the package manager to
+  # install the essentials
+  
   os=$(uname -s)
   echo $os 
 
@@ -82,12 +82,17 @@ function check_os() {
 
 
 function ds_tools() {
+  # this will install ds tools from cookie-ml repo
+  # setup all the libraries on the virtual env
+  # regardless of the OS
 
   pip_list=($(yq '.pip-list' softwares.yaml))
 
   read -p "Do you want to install Data Science tools? (y/n): " choice
     case "$choice" in
       y|Y) echo "setting up cookie-ml repo..."
+        echo "ml-cookie-cutter project is setup your $HOME directory"
+        
         # cd into HOME directory  
         cd $HOME
         # clone the cookie-ml repo
@@ -147,6 +152,29 @@ function ds_tools() {
 function add_config() {
   # add .config files
   echo "adding config files"
+  echo "backing up the .config files"
+  config_list=($(yq '.config-list' softwares.yaml))
+
+  
+  # backup the .config files
+  for config_list in "${config_list[@]}"; do
+    echo "backing up $config_list"
+    cp "$HOME/$config_list" "$HOME/$config_list.bak.$(date +%Y-%m-%d)"
+  done
+
+  echo "cloning the repo"
+  config_dir = "config"
+  git clone "https://github.com/rvbug/cookie-ml.git" "$HOME/.dotfiles"
+  # check if config folder is available
+  # if available, then skip the installation
+  if [ -d "$HOME/$config_dir" ]; then
+    for file in "$HOME/.dotfiles/$config_dir"/*; do
+      mv "$file" "$HOME"
+  else
+    mv "$HOME/.dotfiles/$config_dir" "$HOME"
+  fi
+
+
 }
 
 
@@ -154,9 +182,9 @@ echo "This script will install the essentials on your system"
 
 # check the OS version and use the package manager 
 # to install the essentials
-check_os
+#check_os
 # call the function to install the datascience tools
-ds_tools
+#ds_tools
 
 echo "it's time to add .config files"
 add_config
