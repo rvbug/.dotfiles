@@ -1,2 +1,3 @@
 ---
 software-list: yq git wezterm neovim starship curl wget tmux fd ripgrep npm yarn python3 lua rust-analyzer lazygit ocaml tree tree-sitter
+pip-list: jupyter numpy pandas scikit-learn matplotlib seaborn tensorflow

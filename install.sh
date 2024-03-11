@@ -40,7 +40,7 @@ function check_os() {
 # check_os
 
 
-function check_essentials() {
+function check_n_install_essentials() {
   # open softwares.yaml file and read the contents
   # install all the softwares mentioned in the file
 
@@ -62,14 +62,82 @@ function check_essentials() {
 
 
     # need to add pip and also install the respective python scripts
+    # check user input as Y or N if they want to install data science tools
 
-
-  done
+     done
 
 }
 
 # call the function
-check_essentials
+# check_n_install_essentials
+
+function ds_tools() {
+
+  pip_list=($(yq '.pip-list' softwares.yaml))
+
+  read -p "Do you want to install Data Science tools? (y/n): " choice
+    case "$choice" in
+      y|Y) echo "setting up cookie-ml repo..."
+        # cd into HOME directory  
+        cd $HOME
+        # clone the cookie-ml repo
+        git clone https://github.com/rvbug/cookie-ml.git 
+        # cd into the cloned repo 
+        cd cookie-ml
+        # cookie-ml help
+        echo " "
+        echo "here's the help file for cookie-ml"
+        python3 main.py --h
+
+        echo " "
+        # check if ml-cookie-cutter folder is available
+        # if available, then skip the installation
+
+        if [ -d "$HOME/ml-cookie-cutter" ]; then
+          echo "cookie cutter is already installed"
+          echo "Skipping installation..."
+          echo "deleteing the cookie-ml repo"
+          rm -rf "$HOME/cookie-ml"
+          exit 0
+        fi
+        
+        # run the command with the structure
+        # setting up cookie-ml repo
+        python3 main.py --v 
+        pwd
+        # delete the cloned repo
+        echo "deleting the cookie-ml repo..."
+        cd $HOME
+        rm -rf cookie-ml
+
+        # moving to ml-cookie-cutter folder
+        cd $HOME/ml-cookie-cutter
+        # activing the venv
+        echo "activating the venv..."
+        source venv/bin/activate
+
+        # installing the necessary packages
+        # open softwares.yaml file and read the contents
+        # install all the softwares mentioned under pip
+
+        for pip_list in "${pip_list[@]}"; do
+          echo "installing $pip_list"
+        done
+
+
+      ;;
+      n|N) echo "Skipping ..."
+        exit 0
+      ;;
+      *) echo "Invalid choice. Skipping..."
+        exit 0
+      ;;
+    esac
+
+}
+
+# call the function
+ds_tools
 
 
 # once you have the essntials installed, it is time to configure the dotfiles
