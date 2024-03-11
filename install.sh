@@ -31,6 +31,9 @@ function check_os() {
     fi
 
   # this could be linux machine 
+  elif [ $os == "Linux" ]; then
+    echo "Detected Linux OS..."
+    echo "using apt as package manager"
   else
     echo "this might be a linux machine.. for now this script supports only mac os"
   fi
@@ -41,16 +44,15 @@ function check_os() {
 
 
 function check_n_install_essentials() {
-  # open softwares.yaml file and read the contents
-  # install all the softwares mentioned in the file
 
+  # list of generic softwares to be installed
+
+  # open softwares.yaml file and read the contents
   list=($(yq '.software-list' softwares.yaml))
 
   for software in "${list[@]}"; do
-    # prints everyting in the list
-    # echo $software
 
-    # for each of the software in the list, check if it is already installed using brew list option
+    # check if it is already installed using brew list option
     # if not then install it using brew install
 
     if brew list $software &>/dev/null; then
