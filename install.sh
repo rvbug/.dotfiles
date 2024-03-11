@@ -5,7 +5,7 @@
 # description : installs the essentials on mac
 # author      : rvbug
 # date        : 06 Feb 2020 : inital commit
-# future      : support for linux machine  
+# future      : support for all linux machine  
 ########################################################
 
 
@@ -123,8 +123,6 @@ function ds_tools() {
         for pip_list in "${pip_list[@]}"; do
           echo "installing $pip_list"
         done
-
-
       ;;
       n|N) echo "Skipping ..."
         exit 0
@@ -138,15 +136,6 @@ function ds_tools() {
 
 # call the function
 ds_tools
-
-
-# once you have the essntials installed, it is time to configure the dotfiles
-# copy the config/* files to their respective locations
-
-# step 1 read the config folder in this repo
-
-
-
 
 
 
