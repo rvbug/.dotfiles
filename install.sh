@@ -9,6 +9,12 @@
 ########################################################
 
 function check_n_install_essentials() {
+  # list of generic softwares to be installed
+
+  # open softwares.yaml file and read the contents
+  # check if it is already installed using brew list option
+  # if not then install it using brew install
+
 
   list=($(yq '.software-list' softwares.yaml))
 
@@ -24,9 +30,10 @@ function check_n_install_essentials() {
       fi
     done
 
-    else
+  else
       echo "this is linux OS"
-
+      # apt update -y
+      # apt upgrade -y
       for software in "${list[@]}"; do
         if dpkg -s $software &>/dev/null; then
             echo "$software is already installed"
@@ -38,22 +45,8 @@ function check_n_install_essentials() {
 
 
   fi
-  # list of generic softwares to be installed
-
-  # open softwares.yaml file and read the contents
-    # check if it is already installed using brew list option
-    # if not then install it using brew install
-
-
-
-    # need to add pip and also install the respective python scripts
-    # check user input as Y or N if they want to install data science tools
-
 
 }
-
-# call the function
-#check_n_install_essentials
 
 
 # function to check the OS version
@@ -87,9 +80,6 @@ function check_os() {
     exit 0
   fi
 }
-
-# call the function to 
- check_os
 
 
 function ds_tools() {
@@ -155,8 +145,22 @@ function ds_tools() {
 
 }
 
-# call the function
-#ds_tools
+function add_config() {
+  # add .config files
+  echo "adding config files"
+}
+
+
+echo "This script will install the essentials on your system"
+
+# check the OS version and use the package manager 
+# to install the essentials
+check_os
+# call the function to install the datascience tools
+ds_tools
+
+echo "it's time to add .config files"
+add_config
 
 
 
