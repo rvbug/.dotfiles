@@ -4,8 +4,7 @@
 # script      : setup.sh
 # description : installs the essentials on mac
 # author      : rvbug
-# date        : 06 Feb 2020 : inital commit
-# future      : support for all linux machine  
+# date        : 06 Feb 2013 : inital commit 
 ########################################################
 
 function check_n_install_essentials() {
