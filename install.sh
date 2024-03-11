@@ -8,13 +8,59 @@
 # future      : support for all linux machine  
 ########################################################
 
+function check_n_install_essentials() {
+
+  list=($(yq '.software-list' softwares.yaml))
+
+  if [ $1 == "macos" ]; then
+
+    echo "installing on mac..." 
+    for software in "${list[@]}"; do
+      if brew list $software &>/dev/null; then
+          echo "$software is already installed"
+      else
+      echo "Installing $software..."
+      # brew install $software
+      fi
+    done
+
+    else
+      echo "this is linux OS"
+
+      for software in "${list[@]}"; do
+        if dpkg -s $software &>/dev/null; then
+            echo "$software is already installed"
+        else
+        echo "Installing $software..."
+        # sudo apt install $software
+        fi
+      done
+
+
+  fi
+  # list of generic softwares to be installed
+
+  # open softwares.yaml file and read the contents
+    # check if it is already installed using brew list option
+    # if not then install it using brew install
+
+
+
+    # need to add pip and also install the respective python scripts
+    # check user input as Y or N if they want to install data science tools
+
+
+}
+
+# call the function
+#check_n_install_essentials
+
 
 # function to check the OS version
 
 function check_os() {
   os=$(uname -s)
   echo $os 
-
 
   if [ $os == "Darwin" ]; then
     echo "Detected Mac OS..."
@@ -24,54 +70,27 @@ function check_os() {
 
     if command -v brew &>/dev/null; then
       echo "Homebrew already installed"
-      exit
     else
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       echo "Installing homebrew..."
     fi
 
+   check_n_install_essentials "macos"
+
   # this could be linux machine 
   elif [ $os == "Linux" ]; then
     echo "Detected Linux OS..."
     echo "using apt as package manager"
+    check_n_install_essentials "linux"
   else
-    echo "this might be a linux machine.. for now this script supports only mac os"
+    echo "this might be another linux distro.. support coming soon"
+    exit 0
   fi
 }
 
 # call the function to 
-# check_os
+ check_os
 
-
-function check_n_install_essentials() {
-
-  # list of generic softwares to be installed
-
-  # open softwares.yaml file and read the contents
-  list=($(yq '.software-list' softwares.yaml))
-
-  for software in "${list[@]}"; do
-
-    # check if it is already installed using brew list option
-    # if not then install it using brew install
-
-    if brew list $software &>/dev/null; then
-      echo "$software is already installed"
-    else
-      echo "Installing $software..."
-      # brew install $software
-    fi
-
-
-    # need to add pip and also install the respective python scripts
-    # check user input as Y or N if they want to install data science tools
-
-     done
-
-}
-
-# call the function
-# check_n_install_essentials
 
 function ds_tools() {
 
@@ -137,7 +156,7 @@ function ds_tools() {
 }
 
 # call the function
-ds_tools
+#ds_tools
 
 
 
