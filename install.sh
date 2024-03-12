@@ -134,13 +134,12 @@ function ds_tools() {
         # installing the necessary packages
         # open softwares.yaml file and read the contents
         # install all the softwares mentioned under pip
+        echo "upgrade pip before installing .."
+        python3 -m pip install --upgrade pip
 
         for pip_list in "${pip_list[@]}"; do
-          echo "upgrade pip just in case.."
-          python3 -m pip install --upgrade pip
           echo "installing packages using $pip_list"
           # pip install $pip_list
-
         done
       ;;
       n|N) echo "Skipping ..."
