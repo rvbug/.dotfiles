@@ -195,9 +195,11 @@ echo "This script will install the essentials on your system"
 
 # check the OS version and use the package manager 
 # to install the essentials
-#check_os
+check_os
 # call the function to install the datascience tools
-#ds_tools
+echo "installing data science tools..."
+
+ds_tools
 
 echo "it's time to add .config files"
 add_config
