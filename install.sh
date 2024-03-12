@@ -136,7 +136,11 @@ function ds_tools() {
         # install all the softwares mentioned under pip
 
         for pip_list in "${pip_list[@]}"; do
-          echo "installing $pip_list"
+          echo "upgrade pip just in case.."
+          python3 -m pip install --upgrade pip
+          echo "installing packages using $pip_list"
+          # pip install $pip_list
+
         done
       ;;
       n|N) echo "Skipping ..."
