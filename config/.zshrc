@@ -16,3 +16,5 @@ alias pipenv="python -m pipenv"
 alias ml="cd /Users/rakesh.venkat/Documents/rakesh/ml"
 alias conf="cd .config/"
 echo "profile loaded... "
+
+eval "$(starship init zsh)"
