@@ -170,6 +170,7 @@ function add_config() {
       cp "$HOME/.dotfiles/$config_dir"/.tmux.conf "$HOME/"
       cp "$HOME/.dotfiles/$config_dir"/.wezterm.lua "$HOME/"
       cp "$HOME/.dotfiles/$config_dir"/.zshrc "$HOME/"
+      cp "$HOME/.dotfiles/$config_dir"/startship.toml "$HOME/"
       
   #    for files in "$HOME/.dotfiles/$config_dir"/.*; do
   #     echo $files
