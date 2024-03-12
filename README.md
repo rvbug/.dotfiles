@@ -47,5 +47,13 @@ The list of things I did was
   $> docker exec -it container-id /bin/sh
 
 ```
-
+- Once inside the image then do the following (to be automated)
+```bash
+  # update the image
+  $> apt update
+  # install git to clone the repo
+  # will have to make this repo public
+  $> apt install git -y
+ 
+```
 
