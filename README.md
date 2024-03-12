@@ -51,9 +51,19 @@ The list of things I did was
 ```bash
   # update the image
   $> apt update
+
   # install git to clone the repo
   # will have to make this repo public
   $> apt install git -y
+
+  # create a folder for cloning the repo
+  $> mkdir project; cd project
+
+  # cloning the repo
+  $> git clone https://github.com/rvbug/.dotfiles.git
+
+  $> cd .dotfiles
+  $> /bin/sh install.sh
  
 ```
 
