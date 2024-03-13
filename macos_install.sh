@@ -69,85 +69,85 @@ function ds_tools() {
   echo " "
   read -p "####### Do you want to install Data Science & ML tools? (y/n): " choice
     case "$choice" in
-      y|Y) echo "setting up ml-cookie-cutter in your $HOME dir.."
-        echo "ml-cookie-cutter project is setup your $HOME directory"
-        
-        # cd into HOME directory  
-        cd $HOME
-        # clone the cookie-ml repo
-        git clone https://github.com/rvbug/cookie-ml.git 
-        # cd into the cloned repo 
-        cd cookie-ml
-        # cookie-ml help
-        echo " "
-        echo " "
-        echo "###########################################################################"
-        python3 main.py --h
-        echo " "
-        echo " " 
-        echo "###########################################################################"
+      y|Y) echo " "
         
         # check if ml-cookie-cutter folder is available
         # if available, then skip the installation
-
         if [ -d "$HOME/ml-cookie-cutter" ]; then
           echo " "
-          echo "cookie cutter could be already installed"
-          echo "Skipping installation..."
-          echo "deleteing the cookie-ml repo"
-          rm -rf "$HOME/cookie-ml"
-          exit 0
-        fi
+          echo "cookie cutter project is setup at \"$HOME\" ..."
+          echo "skipping installation..."
+          echo " "          
+          echo "continue with rest of the installation..."
+        else
+          # run the command with the structure
+          # setting up cookie-ml repo
+          echo "####### setting up ml-cookie-cutter in your \"$HOME\" dir.."
+          echo " "
+          echo "installing cookie cutter project...."
+          echo " "
+          python3 main.py --v 
+          pwd
         
-        # run the command with the structure
-        # setting up cookie-ml repo
-        echo " "
-        echo "installing cookie cutter project...."
-        echo " "
-        python3 main.py --v 
-        pwd
+          # cd into HOME directory  
+          cd $HOME
+          # clone the cookie-ml repo
+          git clone https://github.com/rvbug/cookie-ml.git 
+          # cd into the cloned repo 
+          cd cookie-ml
+          # cookie-ml help
+          echo " "
+          echo " "
+          echo "###########################################################################"
+          python3 main.py --h
+          echo " "
+          echo " " 
+          echo "###########################################################################"
 
-        echo " "
-        # delete the cloned repo
-        echo "####### deleting the cookie-ml repo..."
-        cd $HOME
-        rm -rf cookie-ml
+          echo " "
+          # delete the cloned repo
+          echo "####### deleting the cookie-ml repo..."
+          cd $HOME
+          rm -rf cookie-ml
 
-        # moving to ml-cookie-cutter folder
-        cd $HOME/ml-cookie-cutter
-        # activing the venv
-        echo " "
-        echo " "
-        echo "####### activating the venv..."
-        source venv/bin/activate
+          # moving to ml-cookie-cutter folder
+          cd $HOME/ml-cookie-cutter
+          # activing the venv
+          echo " "
+          echo " "
+          echo "####### activating the venv..."
+          source venv/bin/activate
 
-        # installing the necessary packages
-        # open softwares.yaml file and read the contents
-        # install all the softwares mentioned under pip
-        echo " "
-        echo "upgrading pip before installing rest of the tools.."
-        python3 -m pip install --upgrade pip
+          # installing the necessary packages
+          # open softwares.yaml file and read the contents
+          # install all the softwares mentioned under pip
+          echo " "
+          echo "upgrading pip before installing rest of the tools.."
+          python3 -m pip install --upgrade pip
 
-        for pip_list in "${pip_list[@]}"; do
-          echo "installing packages using $pip_list"
-          # pip install $pip_list
-        done
-    
-        echo " "
-        echo "####### packages is installed successfully"
-        echo " "
-        echo "deactivating the venv..."
-        deactivate
-
-        echo " "
-        echo " "
-        echo "###################################################################"
-        echo "ml-cookie-cutter is available in your $HOME directory"
-        echo "activate your project using source venv/bin/activate"
-        echo "###################################################################"
-        echo " "
-        echo " "
-
+          for pip_list in "${pip_list[@]}"; do
+            echo "installing packages using $pip_list"
+            # pip install $pip_list
+          done
+      
+          echo " "
+          echo "####### packages is installed successfully"
+          echo " "
+          echo "deactivating the venv..."
+          deactivate
+          echo " "
+          echo "deleteing the cookie-ml repo..."
+          rm -rf "$HOME/cookie-ml"
+          echo " "
+          echo " "
+          echo "###################################################################"
+          echo "ml-cookie-cutter is setup at $HOME directory"
+          echo " "
+          echo "activate your project using source venv/bin/activate"
+          echo "###################################################################"
+          echo " "
+          echo " "
+        fi
       ;;
       n|N) echo "Skipping ..."
       ;;
@@ -201,7 +201,7 @@ function configure_mac() {
 
 # Install Xcode Command Line Tools
 echo " "
-echo "installing the xcode command line tools..."
+echo "####### installing the xcode command line tools..."
 echo " "
 
 xcode-select --version > /dev/null
@@ -209,8 +209,13 @@ xcode-select --version > /dev/null
 # check if the above command is successful
 if [ $? -eq 0 ]; then
   echo " "
-  echo "Xcode Command Line Tools is available..."
+  echo "command line tools is already available..."
+  echo " "
+  echo "#############################################################"
+  echo " "
   echo "installation on macos is complete... enjoy !!!" 
+  echo " "
+  echo "#############################################################"
 else
   echo " "
   echo "trying to install xcode command line tools..."
