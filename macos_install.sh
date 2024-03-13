@@ -91,7 +91,8 @@ function ds_tools() {
         # if available, then skip the installation
 
         if [ -d "$HOME/ml-cookie-cutter" ]; then
-          echo "cookie cutter is already installed"
+          echo " "
+          echo "cookie cutter could be already installed"
           echo "Skipping installation..."
           echo "deleteing the cookie-ml repo"
           rm -rf "$HOME/cookie-ml"
@@ -101,7 +102,7 @@ function ds_tools() {
         # run the command with the structure
         # setting up cookie-ml repo
         echo " "
-        echo "######## installing cookie cutter project...."
+        echo "installing cookie cutter project...."
         echo " "
         python3 main.py --v 
         pwd
@@ -131,12 +132,26 @@ function ds_tools() {
           echo "installing packages using $pip_list"
           # pip install $pip_list
         done
+    
+        echo " "
+        echo "####### packages is installed successfully"
+        echo " "
+        echo "deactivating the venv..."
+        deactivate
+
+        echo " "
+        echo " "
+        echo "###################################################################"
+        echo "ml-cookie-cutter is available in your $HOME directory"
+        echo "activate your project using source venv/bin/activate"
+        echo "###################################################################"
+        echo " "
+        echo " "
+
       ;;
       n|N) echo "Skipping ..."
-        exit 0
       ;;
       *) echo "Invalid choice. Skipping..."
-        exit 0
       ;;
     esac
 
