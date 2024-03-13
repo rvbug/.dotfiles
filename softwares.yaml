@@ -1,5 +1,5 @@
 ---
 software-list: wezterm neovim starship curl wget tmux fd ripgrep npm yarn python3 lua5.4 rust-analyzer lazygit ocaml tree tree-sitter neovim
 pip-list: jupyter numpy pandas scikit-learn matplotlib seaborn tensorflow
-config-list : .tmux.conf .wezterm.lua .zshrc .config/startship.toml
+config-list : .tmux.conf .wezterm.lua .zshrc .config/starship.toml
 

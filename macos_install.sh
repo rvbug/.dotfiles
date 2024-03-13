@@ -159,6 +159,9 @@ function ds_tools() {
 
 ds_tools
 
+
+
+
 function configure_mac() {
   # backup dotfiles from the yaml file
   echo "backing up .config files"
@@ -188,16 +191,60 @@ function configure_mac() {
   #     echo "files are now moved"
   #   done
   # else
-    echo "config folder is not available"
+  # echo "config folder is not available"
   # exit 0
   #fi
+
+  # now once this is completed then check if neovim is installed
+  # if not then install it
+  # check if neovim is installed
+  if brew list neovim &>/dev/null; then
+    echo " "
+    echo "neovim is already installed"
+    echo " "
+    echo "starting configuring neovim..."
+
+    # now since neovim is already installed, check if 
+    # .config and .config/nvim folder is available 
+
+    # if not then create it
+    if [ -d "$HOME/.config/nvim" ]; then
+      echo " "
+      echo "neovim config folder is available"
+      echo " "
+      cd "$HOME"
+      echo " "
+      echo "backing up the existing neovim config if available..." 
+      dt=$(date +%Y-%m-%d) 
+       cp -r $HOME/.config/nvim/ $HOME/.config/nvim.bak.$dt
+      # mv $HOME/.config/nvim/ $HOME/.config/nvim.bak.$dt
+      echo " "
+    else
+      cd "$HOME/.config/"
+      echo "pushing the git repo here" 
+    fi
+
+  
+    # download the neovim github repo
+    echo "downloading the neovim github repo..."
+
+    # git clone https://github.com/neovim/neovim.git "$HOME/nvim"
+
+
+  else
+    echo " "
+    echo "something went wrong, go for manual installation..."
+    echo " "
+  fi
 
 }
 
 
-
-
-
+echo "###################################################################"
+echo " configuring your new machine"
+echo " "
+echo "###################################################################"
+configure_mac
 
 # Install Xcode Command Line Tools
 echo " "
