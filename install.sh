@@ -7,13 +7,15 @@
 # date        : 06 Feb 2013 : inital commit 
 ########################################################
 
-echo " Starting installation process... "
-
+echo " "
+echo "Starting installation process... "
+echo " "
 # preinstallation steps to be done
 # before installing the essentials
 
 function check_for_docker() {
 
+    echo  " "
      read -p "Do you want install on a docker machine? (y/n): " choice
 
      case "$choice" in
@@ -23,7 +25,7 @@ function check_for_docker() {
           exit 0
           ;;   
         n|N) echo "Skipping docker installation..."
-            exit 0
+            # exit 1 
         ;;
         *) echo "Invalid choice. Skipping..."
           exit 0
@@ -42,12 +44,13 @@ function check_os() {
 
   if [ $os == "Darwin" ]; then
 
-    echo "####### detected Mac OS..."
+    echo " "
+    echo "####### Mac OS detected..."
     check_for_docker
 
+    echo " "
     echo "####### initiating macos installation"
-
-    source  ./macos_install.sh
+    ./macos_install.sh
 
     # check_n_install_essentials "macos"
 
@@ -120,8 +123,6 @@ function check_n_install_essentials() {
   fi
 
 }
-
-
 
 
 
@@ -235,17 +236,17 @@ function add_config() {
 }
 
 
-echo "This script will install the essentials on your system"
+# echo "This script will install the essentials on your system"
 
 # check the OS version and use the package manager 
 # to install the essentials
 #check_os
 # call the function to install the datascience tools
-echo "installing data science tools..."
+# echo "installing data science tools..."
 
 #ds_tools
 
-echo "it's time to add .config files"
+# echo "it's time to add .config files"
 #add_config
 
 #source ./linux.sh
