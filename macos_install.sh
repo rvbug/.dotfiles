@@ -41,7 +41,6 @@ else
 
 fi
 
-
 function install_essentials() {
   # open softwares.yaml file and read the contents
   # check if it is already installed using brew list option
@@ -59,8 +58,93 @@ function install_essentials() {
    done
 }
 
+
+function ds_tools() {
+  # this will install ds tools from cookie-ml repo
+  # setup all the libraries on the virtual env
+  # regardless of the OS
+
+  pip_list=($(yq '.pip-list' softwares.yaml))
+
+  echo " "
+  read -p "####### Do you want to install Data Science & ML tools? (y/n): " choice
+    case "$choice" in
+      y|Y) echo "setting up ml-cookie-cutter in your $HOME dir.."
+        echo "ml-cookie-cutter project is setup your $HOME directory"
+        
+        # cd into HOME directory  
+        cd $HOME
+        # clone the cookie-ml repo
+        git clone https://github.com/rvbug/cookie-ml.git 
+        # cd into the cloned repo 
+        cd cookie-ml
+        # cookie-ml help
+        echo " "
+        echo " "
+        echo "###########################################################################"
+        python3 main.py --h
+        echo " "
+        echo " " 
+        echo "###########################################################################"
+        
+        # check if ml-cookie-cutter folder is available
+        # if available, then skip the installation
+
+        if [ -d "$HOME/ml-cookie-cutter" ]; then
+          echo "cookie cutter is already installed"
+          echo "Skipping installation..."
+          echo "deleteing the cookie-ml repo"
+          rm -rf "$HOME/cookie-ml"
+          exit 0
+        fi
+        
+        # run the command with the structure
+        # setting up cookie-ml repo
+        echo " "
+        echo "######## installing cookie cutter project...."
+        echo " "
+        python3 main.py --v 
+        pwd
+
+        echo " "
+        # delete the cloned repo
+        echo "####### deleting the cookie-ml repo..."
+        cd $HOME
+        rm -rf cookie-ml
+
+        # moving to ml-cookie-cutter folder
+        cd $HOME/ml-cookie-cutter
+        # activing the venv
+        echo " "
+        echo " "
+        echo "####### activating the venv..."
+        source venv/bin/activate
+
+        # installing the necessary packages
+        # open softwares.yaml file and read the contents
+        # install all the softwares mentioned under pip
+        echo " "
+        echo "upgrading pip before installing rest of the tools.."
+        python3 -m pip install --upgrade pip
+
+        for pip_list in "${pip_list[@]}"; do
+          echo "installing packages using $pip_list"
+          # pip install $pip_list
+        done
+      ;;
+      n|N) echo "Skipping ..."
+        exit 0
+      ;;
+      *) echo "Invalid choice. Skipping..."
+        exit 0
+      ;;
+    esac
+
+}
+
+ds_tools
+
 function configure_mac() {
-  
   # backup dotfiles from the yaml file
   echo "backing up .config files"
   config_list=($(yq '.config-list' softwares.yaml))
