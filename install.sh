@@ -1,11 +1,73 @@
-#!bin/sh
+#!/bin/sh
 
 ########################################################
 # script      : setup.sh
-# description : installs the essentials on mac
+# description : primary script 
 # author      : rvbug
 # date        : 06 Feb 2013 : inital commit 
 ########################################################
+
+echo " Starting installation process... "
+
+# preinstallation steps to be done
+# before installing the essentials
+
+function check_for_docker() {
+
+     read -p "Do you want install on a docker machine? (y/n): " choice
+
+     case "$choice" in
+        y|Y) echo "installation on docker instance..."
+          echo "####### calling docker script"
+          source ./docker_install.sh
+          exit 0
+          ;;   
+        n|N) echo "Skipping docker installation..."
+            exit 0
+        ;;
+        *) echo "Invalid choice. Skipping..."
+          exit 0
+        ;;
+     esac   
+}
+
+
+function check_os() {
+  # function to check the OS version
+  # and use the package manager to
+  # install the essentials
+  
+  os=$(uname -s)
+  # echo $os 
+
+  if [ $os == "Darwin" ]; then
+
+    echo "####### detected Mac OS..."
+    check_for_docker
+
+    echo "####### initiating macos installation"
+
+    source  ./macos_install.sh
+
+    # check_n_install_essentials "macos"
+
+  elif [ $os == "Linux" ]; then
+
+    check_for_docker
+    
+    #check_n_install_essentials "linux"
+    echo "####### detected Linux OS..."
+    echo "####### initiating linux installation"
+
+    source ./linux_install.sh
+
+  else
+    echo "####### $os not supported"
+    exit 0
+  fi
+}
+
+check_os
 
 function check_n_install_essentials() {
   # list of generic softwares to be installed
@@ -61,32 +123,6 @@ function check_n_install_essentials() {
 
 
 
-function check_os() {
-  # function to check the OS version
-  # and use the package manager to
-  # install the essentials
-  
-  os=$(uname -s)
-  echo $os 
-
-  if [ $os == "Darwin" ]; then
-    echo "Detected Mac OS..."
-
-    # now check if homebrew is installed if not then install it
-    # we will use command -v option to check if homebrew is installed
-
-   check_n_install_essentials "macos"
-
-  # this could be linux machine 
-  elif [ $os == "Linux" ]; then
-    echo "Detected Linux OS..."
-    echo "using apt as package manager"
-    check_n_install_essentials "linux"
-  else
-    echo "this might be another linux distro.. support coming soon"
-    exit 0
-  fi
-}
 
 
 function ds_tools() {
@@ -212,7 +248,7 @@ echo "installing data science tools..."
 echo "it's time to add .config files"
 #add_config
 
-source ./linux.sh
+#source ./linux.sh
 
 
 # finally messages to the user before starting the script
