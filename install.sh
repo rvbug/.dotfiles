@@ -18,7 +18,19 @@ function check_n_install_essentials() {
 
   if [ $1 == "macos" ]; then
 
+    echo "#############################################"
     echo "installing on mac..." 
+    
+    echo "check if homebrew is installed"
+    echo "#############################################"
+
+    if command -v brew &>/dev/null; then
+      echo "Homebrew already installed"
+    else
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      echo "##### Installing homebrew..."
+    fi
+
     for software in "${list[@]}"; do
       if brew list $software &>/dev/null; then
           echo "$software is already installed"
@@ -30,6 +42,9 @@ function check_n_install_essentials() {
 
   else
       echo "this is linux OS"
+      echo "calling linux script"
+      source ./linux.sh
+
       # apt update -y
       # apt upgrade -y
       for software in "${list[@]}"; do
@@ -59,13 +74,6 @@ function check_os() {
 
     # now check if homebrew is installed if not then install it
     # we will use command -v option to check if homebrew is installed
-
-    if command -v brew &>/dev/null; then
-      echo "Homebrew already installed"
-    else
-      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      echo "Installing homebrew..."
-    fi
 
    check_n_install_essentials "macos"
 
@@ -195,16 +203,16 @@ echo "This script will install the essentials on your system"
 
 # check the OS version and use the package manager 
 # to install the essentials
-check_os
+#check_os
 # call the function to install the datascience tools
 echo "installing data science tools..."
 
-ds_tools
+#ds_tools
 
 echo "it's time to add .config files"
-add_config
+#add_config
 
-
+source ./linux.sh
 
 
 # finally messages to the user before starting the script
