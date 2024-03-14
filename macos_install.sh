@@ -182,22 +182,24 @@ function configure_mac() {
    # check if config folder is available
    # if available, then skip the installation
    if [ -d "$HOME/.dotfiles/$config_dir" ]; then
-       # cp "$HOME/.dotfiles/$config_dir"/.tmux.conf "$HOME/"
-       # cp "$HOME/.dotfiles/$config_dir"/.wezterm.lua "$HOME/"
-       # cp "$HOME/.dotfiles/$config_dir"/.zshrc "$HOME/"
-       # cp "$HOME/.dotfiles/$config_dir"/startship.toml "$HOME/"
+       cp "$HOME/.dotfiles/$config_dir"/.tmux.conf "$HOME/"
+       cp "$HOME/.dotfiles/$config_dir"/.wezterm.lua "$HOME/"
+       cp "$HOME/.dotfiles/$config_dir"/.zshrc "$HOME/"
+       cp "$HOME/.dotfiles/$config_dir"/startship.toml "$HOME/$config_dir/"
      
-     for files in "$HOME/.dotfiles/$config_dir"/.*; do
-       echo $files
-       cp "$files" "$HOME/"
-       echo "files are now moved"
-     done
+     # for files in "$HOME/.dotfiles/$config_dir"/.*; do
+     #   echo $files
+     #   cp "$files" "$HOME/"
+     #   echo "files are now moved"
+     # done
+
    else
    echo "config folder is not available"
-   exit 0
+   echo " continue with rest of the installation..."
   fi
 
   # delete the repo
+  echo " "
   echo "deleting the repo..."
   rm -rf "$HOME/.dotfiles"
 
