@@ -83,6 +83,7 @@ function ds_tools() {
           # run the command with the structure
           # setting up cookie-ml repo
           echo "####### setting up ml-cookie-cutter in your \"$HOME\" dir.."
+          echo "feel free to rename this project"
           echo " "
           echo "installing cookie cutter project...."
           echo " "
@@ -164,40 +165,48 @@ ds_tools
 
 function configure_mac() {
   # backup dotfiles from the yaml file
-  echo "backing up .config files"
+  echo " "
+  echo "####### backing up .config files"
   config_list=($(yq '.config-list' softwares.yaml))
 
   # backup the .config files
   for config_list in "${config_list[@]}"; do
-    echo "backing up $config_list"
-    # cp "$HOME/$config_list" "$HOME/$config_list.bak.$(date +%Y-%m-%d)"
+    # echo "backing up $config_list"
+    cp "$HOME/$config_list" "$HOME/$config_list.bak.$(date +%Y-%m-%d-%H:%M:%S)"
     ls "$HOME/$config_list"
   done
 
-  # echo "cloning the repo"
-  # config_dir="config"
-  # git clone "https://github.com/rvbug/.dotfiles/" "$HOME/.dotfiles"
-  # # check if config folder is available
-  # # if available, then skip the installation
-  # if [ -d "$HOME/.dotfiles/$config_dir" ]; then
-  #     cp "$HOME/.dotfiles/$config_dir"/.tmux.conf "$HOME/"
-  #     cp "$HOME/.dotfiles/$config_dir"/.wezterm.lua "$HOME/"
-  #     cp "$HOME/.dotfiles/$config_dir"/.zshrc "$HOME/"
-  #     cp "$HOME/.dotfiles/$config_dir"/startship.toml "$HOME/"
-      
-  #    for files in "$HOME/.dotfiles/$config_dir"/.*; do
-  #     echo $files
-  #     mv "$files" "$HOME/"
-  #     echo "files are now moved"
-  #   done
-  # else
-  # echo "config folder is not available"
-  # exit 0
-  #fi
+   echo "cloning the repo"
+   config_dir="config"
+   git clone "https://github.com/rvbug/.dotfiles/" "$HOME/.dotfiles"
+   # check if config folder is available
+   # if available, then skip the installation
+   if [ -d "$HOME/.dotfiles/$config_dir" ]; then
+       # cp "$HOME/.dotfiles/$config_dir"/.tmux.conf "$HOME/"
+       # cp "$HOME/.dotfiles/$config_dir"/.wezterm.lua "$HOME/"
+       # cp "$HOME/.dotfiles/$config_dir"/.zshrc "$HOME/"
+       # cp "$HOME/.dotfiles/$config_dir"/startship.toml "$HOME/"
+     
+     for files in "$HOME/.dotfiles/$config_dir"/.*; do
+       echo $files
+       cp "$files" "$HOME/"
+       echo "files are now moved"
+     done
+   else
+   echo "config folder is not available"
+   exit 0
+  fi
+
+  # delete the repo
+  echo "deleting the repo..."
+  rm -rf "$HOME/.dotfiles"
+
 
   # now once this is completed then check if neovim is installed
   # if not then install it
+  
   # check if neovim is installed
+  
   if brew list neovim &>/dev/null; then
     echo " "
     echo "neovim is already installed"
@@ -215,10 +224,10 @@ function configure_mac() {
       cd "$HOME"
       echo " "
       echo "backing up the existing neovim config if available..." 
-      dt=$(date +%Y-%m-%d) 
+      dt=$(date +%Y-%m-%d-%H-%M-%S) 
        # cp -r $HOME/.config/nvim/ $HOME/.config/nvim.bak.$dt
        # mv $HOME/.config/nvim/ $HOME/.config/nvim.bak.$dt
-        cp -r $HOME/.config/nvim/ $HOME/Documents/rakesh/tmp/nvim.bak.$dt
+        cp -r $HOME/.config/nvim/ $HOME/.config/nvim.bak.$dt
       echo " "
     else
       # if these folders are not available then create them
@@ -229,8 +238,9 @@ function configure_mac() {
 
       echo " "
       echo " " 
-      echo "####### downloading the neovim github repo..."
-      git clone https://github.com/rvbug/neovim.git "$HOME/Documents/rakesh/tmp/nvim"
+      echo "####### downloading the neovim github repo to your $HOME/.config folder..."
+
+      git clone https://github.com/rvbug/neovim.git $HOME/.config/nvim
       echo " "
       echo "###################################################################"
       echo " "
