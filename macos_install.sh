@@ -216,17 +216,32 @@ function configure_mac() {
       echo " "
       echo "backing up the existing neovim config if available..." 
       dt=$(date +%Y-%m-%d) 
-       cp -r $HOME/.config/nvim/ $HOME/.config/nvim.bak.$dt
-      # mv $HOME/.config/nvim/ $HOME/.config/nvim.bak.$dt
+       # cp -r $HOME/.config/nvim/ $HOME/.config/nvim.bak.$dt
+       # mv $HOME/.config/nvim/ $HOME/.config/nvim.bak.$dt
+        cp -r $HOME/.config/nvim/ $HOME/Documents/rakesh/tmp/nvim.bak.$dt
       echo " "
     else
-      cd "$HOME/.config/"
-      echo "pushing the git repo here" 
+      # if these folders are not available then create them
+      mkdir -p "$HOME/.config/nvim"
+      echo " "
+      echo "folders created..."
     fi
 
+      echo " "
+      echo " " 
+      echo "####### downloading the neovim github repo..."
+      git clone https://github.com/rvbug/neovim.git "$HOME/Documents/rakesh/tmp/nvim"
+      echo " "
+      echo "###################################################################"
+      echo " "
+      echo " "
+      echo "Now open nvim and wait for the magic to happen!!"
+      echo " "
+      echo "###################################################################"
+
+      echo "Now open nvim and let it do it's thing.. wait for the magic to happen!!"
   
     # download the neovim github repo
-    echo "downloading the neovim github repo..."
 
     # git clone https://github.com/neovim/neovim.git "$HOME/nvim"
 
@@ -255,7 +270,6 @@ xcode-select --version > /dev/null
 # echo "$?"
 # check if the above command is successful
 if [ $? -eq 0 ]; then
-  echo " "
   echo "command line tools is already available..."
   echo " "
   echo "#############################################################"
