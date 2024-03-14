@@ -8,5 +8,11 @@
 ########################################################
 
 
-echo "calling docker script"
+echo " "
+echo "#############################################"
+echo " "
+echo "docker support coming soon..."
+echo "latest version of ubuntu does not install neovim 0.9+"
+echo "#############################################"
+
 

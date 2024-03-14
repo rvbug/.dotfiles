@@ -33,7 +33,6 @@ function check_for_docker() {
      esac   
 }
 
-
 function check_os() {
   # function to check the OS version
   # and use the package manager to
