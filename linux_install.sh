@@ -128,6 +128,9 @@ function install_essentials {
         echo "skipping wezterm.. use the inbuilt terminal insead"
         echo "skipping starship..use ohmyzsh"
         echo " "
+    elif [ "$software" == "lua5.4" ]; then
+        echo " "
+        echo "installing lua 5.1 instead of 5.4"
      elif [ "$software" == "npm" ]; then 
         echo "Installing npm..."
         dnf install nodejs 
