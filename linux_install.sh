@@ -158,6 +158,12 @@ function install_essentials {
       tree-sitter) echo " "
         echo "####### tree-sitter is unavailable in fedora...download it manually..."
         ;;
+      opam) echo " "
+        dnf install opam -y
+        echo "####### installing opam..."
+        bash -c "sh <(curl -fsSL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)"
+        opam init
+
       *) echo "checking other packages..."
           # if dnf list $software &>/dev/null; then 
           #   echo "####### $software is already installed" 
