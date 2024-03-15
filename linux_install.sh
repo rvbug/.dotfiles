@@ -213,8 +213,9 @@ function ds_tools() {
               echo " "
             else
               echo "pip3 is not installed..."
+              # exit 0
               echo "installing pip3..."
-              python3 -m ensurepip3 --default-pip3 
+              dnf install python3-pip -y
             fi
           fi
 
@@ -228,6 +229,11 @@ function ds_tools() {
           done
           echo "upgrading pip before installing rest of the tools.."
           python3 -m pip install --upgrade pip
+
+          echo " "
+          echo "####### installing yaml parser"
+          python3 -m pip install pyyaml
+
 
           for pip_list in "${pip_list[@]}"; do
             echo "installing packages using $pip_list"
