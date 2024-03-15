@@ -178,16 +178,42 @@ function install_essentials {
 install_essentials
 
 function configure_linux() {
-  # backup dotfiles from the yaml file
-  echo " "
-  echo "####### backing up .config files"
+
   config_list=($(yq '.config-list' softwares.yaml))
 
-  # backup the .config files
+
+  echo " "
+  echo "######## starting configuration process..."
+
+  echo " "
+  echo "ensure you do not run this as root..." 
+
+  # check if the config folder is available
+  # if available, then skip the installation
+  if [ -d "$HOME/.config" ]; then
+    echo " "
+    echo "config folder is already available at $HOME/.config"
+  else
+    echo " "
+    echo "config is not available at $HOME creating one"
+    mkdir -p "$HOME/.config"
+  fi
+
+  # backup dotfiles from the yaml file
+  echo " "
+  echo "####### check if your config files esists" 
+
   for config_list in "${config_list[@]}"; do
-    # echo "backing up $config_list"
-    cp "$HOME/$config_list" "$HOME/$config_list.bak.$(date +%Y-%m-%d-%H:%M:%S)"
-    ls "$HOME/$config_list"
+    if [ -f "$HOME/$config_list" ]; then
+      echo " "
+      echo "file $config_list exists"
+      echo " "
+      echo "backing up $config_list"
+      cp "$HOME/$config_list" "$HOME/$config_list.bak.$(date +%Y-%m-%d-%H:%M:%S)"
+    else
+      echo " "
+      echo "file $config_list does not exist"
+    fi
   done
 
    echo "cloning the repo"
@@ -200,13 +226,6 @@ function configure_linux() {
        cp "$HOME/.dotfiles/$config_dir"/.wezterm.lua "$HOME/"
        cp "$HOME/.dotfiles/$config_dir"/.zshrc "$HOME/"
        cp "$HOME/.dotfiles/$config_dir"/startship.toml "$HOME/$config_dir/"
-     
-     # for files in "$HOME/.dotfiles/$config_dir"/.*; do
-     #   echo $files
-     #   cp "$files" "$HOME/"
-     #   echo "files are now moved"
-     # done
-
    else
    echo "config folder is not available"
    echo " continue with rest of the installation..."
@@ -223,7 +242,7 @@ function configure_linux() {
   
   # check if neovim is installed
   
-  if brew list neovim &>/dev/null; then
+  if dnf list neovim &>/dev/null; then
     echo " "
     echo "neovim is already installed"
     echo " "
@@ -249,7 +268,7 @@ function configure_linux() {
       # if these folders are not available then create them
       mkdir -p "$HOME/.config/nvim"
       echo " "
-      echo "folders created..."
+      echo "nvim folders created..."
     fi
 
       echo " "
