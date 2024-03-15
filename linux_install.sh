@@ -163,6 +163,8 @@ function install_essentials {
           #   echo "####### $software is already installed" 
           # else
             dnf install $software -y
+            echo "running ocaml init"
+            opam init
           ;;
     esac
   done
