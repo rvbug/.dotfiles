@@ -170,8 +170,6 @@ function install_essentials {
           #   echo "####### $software is already installed" 
           # else
             dnf install $software -y
-            echo "running ocaml init"
-            opam init
           ;;
     esac
   done
@@ -311,7 +309,7 @@ function configure_linux() {
 # calling the ds script
 
 echo "calling the datascience tools script..."
-./data_science_tools.sh
+./datascience_tools.sh
 
 
 
