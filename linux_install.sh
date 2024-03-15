@@ -123,7 +123,8 @@ function install_essentials {
           echo "$software is already installed"
       else
       echo "Installing $software..."
-        dnf install $software -y
+        # dnf install $software -y
+        dnf list $software
       fi
    done
 
@@ -160,6 +161,8 @@ function ds_tools() {
           echo "feel free to rename this project"
           echo " "
           echo "installing cookie cutter project...."
+          echo " "
+          echo "####### Here's the help for cookie-ml..."
           echo " "
           python3 main.py --v 
           pwd
@@ -232,12 +235,12 @@ function ds_tools() {
 
 }
 
-ds_tools
+# ds_tools
 
 
 
 
-function configure_mac() {
+function configure_linux() {
   # backup dotfiles from the yaml file
   echo " "
   echo "####### backing up .config files"
@@ -345,5 +348,5 @@ echo "###################################################################"
 echo " configuring your new machine"
 echo " "
 echo "###################################################################"
-configure_mac
+configure_linux
 
