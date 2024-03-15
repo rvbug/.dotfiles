@@ -111,6 +111,7 @@ function install_essentials {
           sudo $pkg_mgr update -y
         ;;
     n|N ) echo "skipping update..."
+      ;;
     * ) echo "invalid input, skipping update"
     ;;
   esac
