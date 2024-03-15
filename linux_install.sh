@@ -171,7 +171,7 @@ function install_essentials {
           ;;
     esac
   done
-}
+
     if  dnf list installed ocaml &>/dev/null; then
       read -p "Do you want to initialize opam?: (y/n) " choice
 
@@ -192,7 +192,8 @@ function install_essentials {
     # echo "###################################################################"
     #
     # configure_linux
-
+  fi
+}
 install_essentials
 
 function configure_linux() {
