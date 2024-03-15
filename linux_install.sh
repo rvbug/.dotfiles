@@ -123,7 +123,7 @@ function install_essentials {
   for software in "${list[@]}"; do
      if dnf list $software &>/dev/null; then
        echo "$software is already installed"
-     elif [ "$software" == "wezterm" && "$software" == "starship" ]; then
+     elif [ "$software" == "wezterm" ] && ["$software" == "starship" ]; then
         echo " "
         echo "skipping wezterm.. use the inbuilt terminal insead"
         echo "skipping starship..use ohmyzsh"
