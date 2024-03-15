@@ -143,17 +143,17 @@ function install_essentials {
         ;;
       yarn) echo " "
         echo "####### installing yarnpkg"
-        dnf list yarnpkg
+        dnf install yarnpkg -y
         ;;
       lazygit) echo " " 
         echo "####### lazygit is not yet supported on fedora, installing gitui instead..."
-        dnf list gitui
+        dnf install gitui -y
         ;;
       lua5.4) echo "lua5.4 is not yet supported on fedora, installing lua5.1 instead..."
-        dnf list lua5.1
+        dnf install lua5.1 -y
         ;;
       npm) echo "npm is installed via nodejs in fedora, installing"
-        dnf list nodejs
+        dnf install nodejs -y
         ;;
       tree-sitter) echo " "
         echo "####### tree-sitter is unavailable in fedora...download it manually..."
@@ -217,7 +217,6 @@ function ds_tools() {
               echo "installing pip3..."
               dnf install python3-pip -y
             fi
-          fi
 
           echo " "
           echo "upgrading pip before installing rest of the tools.."
