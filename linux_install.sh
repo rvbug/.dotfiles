@@ -201,9 +201,44 @@ function ds_tools() {
           # run the command with the structure
           # setting up cookie-ml repo
           # cd into HOME directory  
+          echo " "
+          echo "before starting the installation, checking for python3 and pip installation..."
+          echo " " 
+          if python3 --version > /dev/null; then
+            echo "python3 is already installed..."
+            echo " "
+            echo "checking for pip3 installation..."
+            if pip3 --version > /dev/null; then
+              echo "pip3 is already installed..."
+              echo " "
+            else
+              echo "pip3 is not installed..."
+              echo "installing pip3..."
+              python3 -m ensurepip3 --default-pip3 
+            fi
+
+
+          fi
+
+
+          echo " "
+          echo "upgrading pip before installing rest of the tools.."
+          python3 -m pip install --upgrade pip
+
+          for pip_list in "${pip_list[@]}"; do
+            echo "installing packages using $pip_list"
+            # pip install $pip_list
+          done
+          echo "upgrading pip before installing rest of the tools.."
+          python3 -m pip install --upgrade pip
+
+          for pip_list in "${pip_list[@]}"; do
+            echo "installing packages using $pip_list"
+            # pip install $pip_list
+          done
           cd $HOME
           # clone the cookie-ml repo
-          git clone https://github.com/rvbug/cookie-ml.git 
+          git clone https://github.com/rvbug/cookie-ml.git $HOME/cookie-ml 
           # cd into the cloned repo 
           cd cookie-ml
           echo "####### setting up ml-cookie-cutter in your \"$HOME\" dir.."
