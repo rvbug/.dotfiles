@@ -311,7 +311,7 @@ function configure_linux() {
 # calling the ds script
 
 echo "calling the datascience tools script..."
-sh ./data_science_tools.sh
+./data_science_tools.sh
 
 
 
