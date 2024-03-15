@@ -162,7 +162,7 @@ function install_essentials {
           # if dnf list $software &>/dev/null; then 
           #   echo "####### $software is already installed" 
           # else
-            dnf install $software
+            dnf install $software -y
           ;;
     esac
   done
