@@ -45,7 +45,7 @@ function check_os() {
 
     echo " "
     echo "####### Mac OS detected..."
-    check_for_docker
+    # check_for_docker
 
     echo " "
     echo "####### initiating macos installation"
@@ -55,7 +55,7 @@ function check_os() {
 
   elif [ $os == "Linux" ]; then
 
-    check_for_docker
+    # check_for_docker
     
     #check_n_install_essentials "linux"
     echo "####### detected Linux OS..."
