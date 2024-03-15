@@ -159,7 +159,7 @@ function install_essentials {
         echo "####### tree-sitter is unavailable in fedora...download it manually..."
         ;;
       ocaml) echo " "
-        dnf install opam -y
+        # dnf install ocaml -y
         echo "####### installing opam..."
         bash -c "sh <(curl -fsSL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)"
         ;; 
