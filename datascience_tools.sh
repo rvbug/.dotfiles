@@ -47,7 +47,7 @@ function ds_tools() {
 
           for pip_list in "${pip_list[@]}"; do
             echo "installing packages using $pip_list"
-            # pip install $pip_list
+             #pip install $pip_list
           done
           echo "upgrading pip before installing rest of the tools.."
           python3 -m pip install --upgrade pip
@@ -59,7 +59,7 @@ function ds_tools() {
 
           for pip_list in "${pip_list[@]}"; do
             echo "installing packages using $pip_list"
-            # pip install $pip_list
+             pip install $pip_list
           done
           cd $HOME
           # clone the cookie-ml repo
