@@ -162,7 +162,7 @@ function install_essentials {
           # if dnf list $software &>/dev/null; then 
           #   echo "####### $software is already installed" 
           # else
-            dnf list $software
+            dnf install $software
           ;;
     esac
   done
@@ -216,10 +216,7 @@ function ds_tools() {
               echo "installing pip3..."
               python3 -m ensurepip3 --default-pip3 
             fi
-
-
           fi
-
 
           echo " "
           echo "upgrading pip before installing rest of the tools.."
