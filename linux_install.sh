@@ -208,7 +208,7 @@ function ds_tools() {
             echo "python3 is already installed..."
             echo " "
             echo "checking for pip3 installation..."
-            if pip3 --version > /dev/null; then
+           elif pip3 --version > /dev/null; then
               echo "pip3 is already installed..."
               echo " "
             else
