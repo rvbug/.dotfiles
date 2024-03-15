@@ -88,11 +88,13 @@ function install_essentials {
     echo "yq already installed..."
   else
       echo "##### Installing yq..."
-      
+      echo "downloaing the package using wget.."
+      echo "this will take few minutes..." 
       sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+      echo "...looks like this will take few more minutes..."
       if [ $? -eq 0 ]; then
       sudo chmod +x /usr/local/bin/yq
-
+      
       echo "checking for the installation..."
 
       if yq --version &>/dev/null; then
@@ -121,35 +123,35 @@ function install_essentials {
   list=($(yq '.software-list' softwares.yaml))
 
   for software in "${list[@]}"; do
-     if dnf list $software &>/dev/null; then
-       echo "$software is already installed"
-     elif [ "$software" == "wezterm" ] && ["$software" == "starship" ]; then
-        echo " "
-        echo "skipping wezterm.. use the inbuilt terminal insead"
-        echo "skipping starship..use ohmyzsh"
-        echo " "
-    elif [ "$software" == "lua5.4" ]; then
-        echo " "
-        echo "installing lua 5.1 instead of 5.4"
-     elif [ "$software" == "npm" ]; then 
-        echo "Installing npm..."
-        dnf install nodejs 
-      elif [ "$software" == "lazygit" ]; then
-        echo " "
-        echo "installing lazygit"
-        dnf copr enable atim/lazygit
-        dnf install lazygit
-     else    
-        dnf list $software
-     fi
+    case "$software" in
+      wezterm) echo "wezterm unaavailble on fedora, skipping..."
+        ;;
+      starship) echo "starship is not yet supported on fedora, use ohmyzsh instead..."
+        ;;
+      lazygit) echo "lazygit is not yet supported on fedora, installing gitui instead..."
+        dnf list gitui
+        ;;
+      lua5.4) echo "lua5.4 is not yet supported on fedora, installing lua5.1 instead..."
+        dnf list lua5.1
+        ;;
+      npm) echo "npm is installed via nodejs in fedora, installing"
+        dnf list nodejs
+        ;;
+      *) echo "checking other packages..."
+          # if dnf list $software &>/dev/null; then 
+          #   echo "####### $software is already installed" 
+          # else
+            dnf list $software
+          ;;
+    esac
   done
 
-    echo "###################################################################"
-    echo "####### starting configuration process..."
-    echo " "
-    echo "###################################################################"
-
-    configure_linux
+    # echo "###################################################################"
+    # echo "####### starting configuration process..."
+    # echo " "
+    # echo "###################################################################"
+    #
+    # configure_linux
 }
 
 install_essentials
