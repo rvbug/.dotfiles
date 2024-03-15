@@ -299,6 +299,13 @@ function configure_linux() {
 
 }
 
+# calling the ds script
+
+echo "calling the datascience tools script..."
+sh ./data_science_tools.sh
+
+
+
 function ds_tools() {
   # this will install ds tools from cookie-ml repo
   # setup all the libraries on the virtual env
@@ -436,7 +443,8 @@ function ds_tools() {
     configure_linux
 }
 
- ds_tools
+configure_linux
+ #ds_tools
 
 
 
