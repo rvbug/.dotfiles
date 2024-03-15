@@ -163,7 +163,7 @@ function install_essentials {
         echo "####### installing opam..."
         bash -c "sh <(curl -fsSL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)"
         opam init
-
+        ;; 
       *) echo "checking other packages..."
           # if dnf list $software &>/dev/null; then 
           #   echo "####### $software is already installed" 
