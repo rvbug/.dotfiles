@@ -82,21 +82,17 @@ function ds_tools() {
         else
           # run the command with the structure
           # setting up cookie-ml repo
+          # cd into HOME directory  
+          cd $HOME
+          git clone https://github.com/rvbug/cookie-ml.git 
+          # cd into the cloned repo 
+          cd cookie-ml
           echo "####### setting up ml-cookie-cutter in your \"$HOME\" dir.."
           echo "feel free to rename this project"
           echo " "
           echo "installing cookie cutter project...."
           echo " "
-          python3 main.py --v 
-          pwd
-        
-          # cd into HOME directory  
-          cd $HOME
-          # clone the cookie-ml repo
-          git clone https://github.com/rvbug/cookie-ml.git 
-          # cd into the cloned repo 
-          cd cookie-ml
-          # cookie-ml help
+          echo "####### Here's the help for cookie-ml..."
           echo " "
           echo " "
           echo "###########################################################################"
@@ -104,7 +100,10 @@ function ds_tools() {
           echo " "
           echo " " 
           echo "###########################################################################"
-
+          echo " "
+          # cookie-ml help
+          python3 main.py --v 
+          pwd
           echo " "
           # delete the cloned repo
           echo "####### deleting the cookie-ml repo..."

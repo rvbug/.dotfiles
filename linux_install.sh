@@ -41,7 +41,9 @@ echo " "
 echo "####### checking if package manager is dnf or yum"
 dnf > /dev/null 2>&1
 if [ $? -eq 0 ]; then
+  echo " "
   echo "dnf is available so using as the package manager"
+  echo " "
 fi
 
 echo " "
@@ -70,13 +72,15 @@ function install_essentials {
   echo "Package manager is $pkg_mgr"
 
   echo "####### checking other essentials..."
-
+  echo " "
   echo "checking for wget ..."
   wget --version > /dev/null 2>&1
   if [ $? -eq 0 ]; then
+    echo " "
     echo "wget is installed on your machine"
     echo "continuing..."
   else
+    echo " "
     echo "wget is not installed on your machine..."
     echo "installing wget..."
     sudo $pkg_mgr install wget -y
@@ -85,28 +89,31 @@ function install_essentials {
   echo "####### checking if yq is installed"
 
   if dnf list installed yq &>/dev/null; then
+    echo " "
     echo "yq already installed..."
   else
+      echo " "
       echo "##### Installing yq..."
-      echo "downloaing the package using wget.."
-      echo "this will take few minutes..." 
+      echo "#######downloaing the package using wget.."
+      echo "#######this will take few minutes..." 
       sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-      echo "...looks like this will take few more minutes..."
       if [ $? -eq 0 ]; then
       sudo chmod +x /usr/local/bin/yq
-      
-      echo "checking for the installation..."
+      echo " " 
+      echo "####### checking for the installation..."
 
       if yq --version &>/dev/null; then
+        echo " "
         echo "yq installed successfully..."
       fi
 
       else
-      echo "yq installation failed, please manually install this package to proceed with the installation"
+      echo "####### yq installation failed, please manually install this package to proceed with the installation"
       exit 0
       fi
   fi
 
+  echo " "
   read -p "Do you want to update your system?: (y/n) " choice 
   case "$choice" in
     y|Y ) echo "updating system..."
@@ -117,6 +124,7 @@ function install_essentials {
     * ) echo "invalid input, skipping update"
     ;;
   esac
+   echo " " 
    echo "####### for linux distro using dnf "  
 
 
@@ -124,11 +132,21 @@ function install_essentials {
 
   for software in "${list[@]}"; do
     case "$software" in
-      wezterm) echo "wezterm unaavailble on fedora, skipping..."
+      wezterm) echo " "
+        echo "####### wezterm is unavailble on fedora, use inbuilt terminal instead, skipping..."
         ;;
-      starship) echo "starship is not yet supported on fedora, use ohmyzsh instead..."
+      starship) echo " " 
+        echo "####### starship is not yet supported on fedora, use ohmyzsh instead..."
         ;;
-      lazygit) echo "lazygit is not yet supported on fedora, installing gitui instead..."
+      fd) echo " "
+        echo "####### fd is not yet supported on fedora, use ripgrep instead..."
+        ;;
+      yarn) echo " "
+        echo "####### installing yarnpkg"
+        dnf list yarnpkg
+        ;;
+      lazygit) echo " " 
+        echo "####### lazygit is not yet supported on fedora, installing gitui instead..."
         dnf list gitui
         ;;
       lua5.4) echo "lua5.4 is not yet supported on fedora, installing lua5.1 instead..."
@@ -136,6 +154,9 @@ function install_essentials {
         ;;
       npm) echo "npm is installed via nodejs in fedora, installing"
         dnf list nodejs
+        ;;
+      tree-sitter) echo " "
+        echo "####### tree-sitter is unavailable in fedora...download it manually..."
         ;;
       *) echo "checking other packages..."
           # if dnf list $software &>/dev/null; then 
@@ -179,6 +200,12 @@ function ds_tools() {
         else
           # run the command with the structure
           # setting up cookie-ml repo
+          # cd into HOME directory  
+          cd $HOME
+          # clone the cookie-ml repo
+          git clone https://github.com/rvbug/cookie-ml.git 
+          # cd into the cloned repo 
+          cd cookie-ml
           echo "####### setting up ml-cookie-cutter in your \"$HOME\" dir.."
           echo "feel free to rename this project"
           echo " "
@@ -186,24 +213,15 @@ function ds_tools() {
           echo " "
           echo "####### Here's the help for cookie-ml..."
           echo " "
-          python3 main.py --v 
-          pwd
-        
-          # cd into HOME directory  
-          cd $HOME
-          # clone the cookie-ml repo
-          git clone https://github.com/rvbug/cookie-ml.git 
-          # cd into the cloned repo 
-          cd cookie-ml
-          # cookie-ml help
-          echo " "
           echo " "
           echo "###########################################################################"
           python3 main.py --h
           echo " "
           echo " " 
           echo "###########################################################################"
-
+          echo " "
+          python3 main.py --v 
+          pwd
           echo " "
           # delete the cloned repo
           echo "####### deleting the cookie-ml repo..."
