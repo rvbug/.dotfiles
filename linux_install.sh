@@ -177,6 +177,109 @@ function install_essentials {
 
 install_essentials
 
+function configure_linux() {
+  # backup dotfiles from the yaml file
+  echo " "
+  echo "####### backing up .config files"
+  config_list=($(yq '.config-list' softwares.yaml))
+
+  # backup the .config files
+  for config_list in "${config_list[@]}"; do
+    # echo "backing up $config_list"
+    cp "$HOME/$config_list" "$HOME/$config_list.bak.$(date +%Y-%m-%d-%H:%M:%S)"
+    ls "$HOME/$config_list"
+  done
+
+   echo "cloning the repo"
+   config_dir="config"
+   git clone "https://github.com/rvbug/.dotfiles/" "$HOME/.dotfiles"
+   # check if config folder is available
+   # if available, then skip the installation
+   if [ -d "$HOME/.dotfiles/$config_dir" ]; then
+       cp "$HOME/.dotfiles/$config_dir"/.tmux.conf "$HOME/"
+       cp "$HOME/.dotfiles/$config_dir"/.wezterm.lua "$HOME/"
+       cp "$HOME/.dotfiles/$config_dir"/.zshrc "$HOME/"
+       cp "$HOME/.dotfiles/$config_dir"/startship.toml "$HOME/$config_dir/"
+     
+     # for files in "$HOME/.dotfiles/$config_dir"/.*; do
+     #   echo $files
+     #   cp "$files" "$HOME/"
+     #   echo "files are now moved"
+     # done
+
+   else
+   echo "config folder is not available"
+   echo " continue with rest of the installation..."
+  fi
+
+  # delete the repo
+  echo " "
+  echo "deleting the repo..."
+  rm -rf "$HOME/.dotfiles"
+
+
+  # now once this is completed then check if neovim is installed
+  # if not then install it
+  
+  # check if neovim is installed
+  
+  if brew list neovim &>/dev/null; then
+    echo " "
+    echo "neovim is already installed"
+    echo " "
+    echo "starting configuring neovim..."
+
+    # now since neovim is already installed, check if 
+    # .config and .config/nvim folder is available 
+
+    # if not then create it
+    if [ -d "$HOME/.config/nvim" ]; then
+      echo " "
+      echo "neovim config folder is available"
+      echo " "
+      cd "$HOME"
+      echo " "
+      echo "backing up the existing neovim config if available..." 
+      dt=$(date +%Y-%m-%d-%H-%M-%S) 
+       # cp -r $HOME/.config/nvim/ $HOME/.config/nvim.bak.$dt
+       # mv $HOME/.config/nvim/ $HOME/.config/nvim.bak.$dt
+        cp -r $HOME/.config/nvim/ $HOME/.config/nvim.bak.$dt
+      echo " "
+    else
+      # if these folders are not available then create them
+      mkdir -p "$HOME/.config/nvim"
+      echo " "
+      echo "folders created..."
+    fi
+
+      echo " "
+      echo " " 
+      echo "####### downloading the neovim github repo to your $HOME/.config folder..."
+
+      git clone https://github.com/rvbug/neovim.git $HOME/.config/nvim
+      echo " "
+      echo "###################################################################"
+      echo " "
+      echo " "
+      echo "Now open nvim and wait for the magic to happen!!"
+      echo " "
+      echo "###################################################################"
+
+      echo "Now open nvim and let it do it's thing.. wait for the magic to happen!!"
+  
+    # download the neovim github repo
+
+    # git clone https://github.com/neovim/neovim.git "$HOME/nvim"
+
+
+  else
+    echo " "
+    echo "something went wrong, go for manual installation..."
+    echo " "
+  fi
+
+}
+
 function ds_tools() {
   # this will install ds tools from cookie-ml repo
   # setup all the libraries on the virtual env
@@ -319,108 +422,6 @@ function ds_tools() {
 
 
 
-function configure_linux() {
-  # backup dotfiles from the yaml file
-  echo " "
-  echo "####### backing up .config files"
-  config_list=($(yq '.config-list' softwares.yaml))
-
-  # backup the .config files
-  for config_list in "${config_list[@]}"; do
-    # echo "backing up $config_list"
-    cp "$HOME/$config_list" "$HOME/$config_list.bak.$(date +%Y-%m-%d-%H:%M:%S)"
-    ls "$HOME/$config_list"
-  done
-
-   echo "cloning the repo"
-   config_dir="config"
-   git clone "https://github.com/rvbug/.dotfiles/" "$HOME/.dotfiles"
-   # check if config folder is available
-   # if available, then skip the installation
-   if [ -d "$HOME/.dotfiles/$config_dir" ]; then
-       cp "$HOME/.dotfiles/$config_dir"/.tmux.conf "$HOME/"
-       cp "$HOME/.dotfiles/$config_dir"/.wezterm.lua "$HOME/"
-       cp "$HOME/.dotfiles/$config_dir"/.zshrc "$HOME/"
-       cp "$HOME/.dotfiles/$config_dir"/startship.toml "$HOME/$config_dir/"
-     
-     # for files in "$HOME/.dotfiles/$config_dir"/.*; do
-     #   echo $files
-     #   cp "$files" "$HOME/"
-     #   echo "files are now moved"
-     # done
-
-   else
-   echo "config folder is not available"
-   echo " continue with rest of the installation..."
-  fi
-
-  # delete the repo
-  echo " "
-  echo "deleting the repo..."
-  rm -rf "$HOME/.dotfiles"
-
-
-  # now once this is completed then check if neovim is installed
-  # if not then install it
-  
-  # check if neovim is installed
-  
-  if brew list neovim &>/dev/null; then
-    echo " "
-    echo "neovim is already installed"
-    echo " "
-    echo "starting configuring neovim..."
-
-    # now since neovim is already installed, check if 
-    # .config and .config/nvim folder is available 
-
-    # if not then create it
-    if [ -d "$HOME/.config/nvim" ]; then
-      echo " "
-      echo "neovim config folder is available"
-      echo " "
-      cd "$HOME"
-      echo " "
-      echo "backing up the existing neovim config if available..." 
-      dt=$(date +%Y-%m-%d-%H-%M-%S) 
-       # cp -r $HOME/.config/nvim/ $HOME/.config/nvim.bak.$dt
-       # mv $HOME/.config/nvim/ $HOME/.config/nvim.bak.$dt
-        cp -r $HOME/.config/nvim/ $HOME/.config/nvim.bak.$dt
-      echo " "
-    else
-      # if these folders are not available then create them
-      mkdir -p "$HOME/.config/nvim"
-      echo " "
-      echo "folders created..."
-    fi
-
-      echo " "
-      echo " " 
-      echo "####### downloading the neovim github repo to your $HOME/.config folder..."
-
-      git clone https://github.com/rvbug/neovim.git $HOME/.config/nvim
-      echo " "
-      echo "###################################################################"
-      echo " "
-      echo " "
-      echo "Now open nvim and wait for the magic to happen!!"
-      echo " "
-      echo "###################################################################"
-
-      echo "Now open nvim and let it do it's thing.. wait for the magic to happen!!"
-  
-    # download the neovim github repo
-
-    # git clone https://github.com/neovim/neovim.git "$HOME/nvim"
-
-
-  else
-    echo " "
-    echo "something went wrong, go for manual installation..."
-    echo " "
-  fi
-
-}
 
 
 
