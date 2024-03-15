@@ -311,6 +311,8 @@ function ds_tools() {
       ;;
     esac
 
+
+    configure_linux
 }
 
  ds_tools
