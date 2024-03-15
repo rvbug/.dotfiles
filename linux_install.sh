@@ -52,7 +52,7 @@ echo "before starting the installation process, ensure you have git installed on
 git --version > /dev/null 2>&1
 if [ $? -eq 0 ]; then
   echo " "
-  echo "git is installed on your machine"
+  echo "####### git is already installed"
   echo "continuing..."
 else
   echo " "
@@ -115,22 +115,38 @@ function install_essentials {
     * ) echo "invalid input, skipping update"
     ;;
   esac
+   echo "####### for linux distro using dnf "  
 
 
   list=($(yq '.software-list' softwares.yaml))
 
   for software in "${list[@]}"; do
      if dnf list $software &>/dev/null; then
-          echo "$software is already installed"
-      else
-      echo "Installing $software..."
-        # dnf install $software -y
+       echo "$software is already installed"
+     elif [ "$software" == "wezterm" || "$software" == "starship" ]; then
+        echo " "
+        echo "skipping wezterm.. use the inbuilt terminal insead"
+        echo "skipping starship..use ohmyzsh"
+        echo " "
+     elif [ "$software" == "npm" ]; then 
+        echo "Installing npm..."
+        dnf install nodejs 
+      elif [ "$software" == "lazygit" ]; then
+        echo " "
+        echo "installing lazygit"
+        dnf copr enable atim/lazygit
+        dnf install lazygit
+     else    
         dnf list $software
-      fi
-   done
+     fi
+  done
 
+    echo "###################################################################"
+    echo "####### starting configuration process..."
+    echo " "
+    echo "###################################################################"
 
-
+    configure_linux
 }
 
 install_essentials
@@ -345,9 +361,4 @@ function configure_linux() {
 }
 
 
-echo "###################################################################"
-echo " configuring your new machine"
-echo " "
-echo "###################################################################"
-configure_linux
 
