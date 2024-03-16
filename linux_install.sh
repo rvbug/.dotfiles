@@ -50,13 +50,13 @@ echo " "
 echo " "
 
 # check if you are runing as root
-# user=$(whoami)
-# if [ "$user" == "root" ]; then
-#   echo " "
-#   echo "####### do not run this script as root"
-#   echo "####### exiting the script..."
-#   echo " "
-#   exit 0
+user=$(whoami)
+if [ "$user" == "root" ]; then
+  echo " "
+  echo "####### do not run this script as root"
+  echo "####### exiting the script..."
+  echo " "
+  exit 0
 # fi
 
 
