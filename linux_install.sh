@@ -49,6 +49,17 @@ fi
 echo " "
 echo " "
 
+# check if you are runing as root
+# user=$(whoami)
+# if [ "$user" == "root" ]; then
+#   echo " "
+#   echo "####### do not run this script as root"
+#   echo "####### exiting the script..."
+#   echo " "
+#   exit 0
+# fi
+
+
 echo "before starting the installation process, ensure you have git installed on your machine..."
 # check if git is installed on your machine
 git --version > /dev/null 2>&1

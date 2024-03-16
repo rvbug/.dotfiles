@@ -57,10 +57,10 @@ function ds_tools() {
           python3 -m pip install pyyaml
 
 
-          for pip_list in "${pip_list[@]}"; do
-            echo "installing packages using $pip_list"
-             pip install $pip_list
-          done
+          # for pip_list in "${pip_list[@]}"; do
+          #   echo "installing packages using $pip_list"
+          #    pip install $pip_list
+          # done
           cd $HOME
           # clone the cookie-ml repo
           git clone https://github.com/rvbug/cookie-ml.git $HOME/cookie-ml 
@@ -96,6 +96,28 @@ function ds_tools() {
           echo "####### activating the venv..."
           source venv/bin/activate
 
+          # check if virtualenv is active
+          echo " "
+          echo " "
+          echo "####### checking if virtualenv is active..."
+          
+          env | grep "VIRTUAL_ENV" | grep venv
+          if [ $? -ne 0 ]; then
+            echo " "
+            echo "virtualenv is not active..."
+            echo " "
+            echo "activating the venv..."
+            source venv/bin/activate
+          else
+            echo " "
+            echo "virtualenv is active..."
+            echo "continuing the installation..."
+          fi
+
+          echo " "
+          echo " "
+
+
           # installing the necessary packages
           # open softwares.yaml file and read the contents
           # install all the softwares mentioned under pip
@@ -105,7 +127,7 @@ function ds_tools() {
 
           for pip_list in "${pip_list[@]}"; do
             echo "installing packages using $pip_list"
-            # pip install $pip_list
+             pip install $pip_list
           done
       
           echo " "
