@@ -51,7 +51,6 @@ echo " "
 
 # check if you are runing as root
 user=$(whoami)
-print(user)
 if [ "$user" == "root" ]; then
   echo " "
   echo "####### do not run this script as root"
