@@ -53,8 +53,10 @@ echo " "
 user=$(whoami)
 if [ "$user" == "root" ]; then
   echo " "
-  echo "####### do not run this script as root"
-  echo "####### exiting the script..."
+  echo "########################################" 
+  echo "####### never run any script as root user" 
+  echo "####### think twice..." 
+  echo "########################################" 
   echo " "
   exit 0
  fi

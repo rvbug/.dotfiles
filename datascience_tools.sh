@@ -117,10 +117,6 @@ function ds_tools() {
           echo " "
           echo " "
 
-          echo "exiting the script..."
-          exit 0
-
-
           # installing the necessary packages
           # open softwares.yaml file and read the contents
           # install all the softwares mentioned under pip
