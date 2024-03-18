@@ -1,21 +1,45 @@
 # <p align="center"> <bold>•</bold> dotfiles <p> 
 
+
+![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)
+![Fedora](https://img.shields.io/badge/Fedora-294172?style=for-the-badge&logo=fedora&logoColor=white)
+![Arch](https://img.shields.io/badge/Arch%20Linux-1793D1?logo=arch-linux&logoColor=fff&style=for-the-badge)
+![Pop!\_OS](https://img.shields.io/badge/Pop!_OS-48B9C7?style=for-the-badge&logo=Pop!_OS&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+
 # Introduction
 
 This repository helps to restore or configure a new machine with one single shell script
 
-# Files 
+# Script Files 
 
 List of files under this repository
 
 | File | Type |  Description |
 | --- | --- | --- |
-| `install.sh` | Shell Script  | Installation & Configuration script  |    
+| `install.sh` | Shell Script  | starter script  |
+| `macos.sh` | Shell Script | Script to run on mac os| 
+| `linux.sh` | Shell Script | To run on Linux machine (Fedora) | 
+
+# Configuration files
+| File | Type |  Description |
+| --- | --- | --- |
 | `software.yaml`  | YAML file | List of softwares to be installed | 
 | `config/.tmux.conf`|  Tmux  | tmux configuration file| 
 | `config/.wezterm.lua`| Terminal | wezterm lua config file | 
 | `config/.zshrc`| profile | shell profile| 
 | `config/starship.toml`| Shell Prompt | shell prompt | 
+
+
+# Versions Tested on
+| OS | Version |  Details |
+| --- | --- | --- |
+| | | | 
+| | | | 
+| | | | 
+| | | | 
+| | | | 
+
 
 
 # Setup Process
