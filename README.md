@@ -15,9 +15,10 @@ This repository helps to restore or configure a new machine with one single shel
 
 | File | Type |  Description |
 | --- | --- | --- |
-| `install.sh` | Shell Script  | starter script  |
-| `macos.sh` | Shell Script | Script to run on mac os| 
-| `linux.sh` | Shell Script | To run on Linux machine (Fedora) | 
+| `install.sh` | shell Script  | starter script  |
+| `macos.sh` | shell Script | Script to run on mac os| 
+| `linux.sh` | shell Script | To run on Linux machine (Fedora) | 
+| `ds_tools.sh` | shell script | To setup data science & ML tools |
 
 # Configuration files
 | File | Type |  Description |
@@ -30,15 +31,13 @@ This repository helps to restore or configure a new machine with one single shel
 
 
 # Versions Tested on
-| OS | Version |  Details |
+| OS | Version |  package manager |
 | --- | --- | --- |
-| mac | Ventura | | 
-| mac  | Sonoma | | 
-| linux | Fedora | Virtual Machine & Docker | 
-| Linux | Arch | Docker | 
-| | | | 
+| mac | Ventura | homebrew | 
+| mac  | Sonoma | homebrew | 
+| linux | Fedora | dnf | 
 
-**`Note`**: The script works on Ubuntu machine but the apt package manager does not pull latest neovim version. 
+**`Note`**: The script works on Ubuntu/Arch/Debian machines but the apt package manager keeps pointing to neovim 0.7x version. Current version of neovim as of today is 0.9x 
 
 
 # Docker Images
@@ -49,6 +48,10 @@ If you want to install the script on a `throw away` machine then try on docker i
   
 ```bash
 $> docker pull fedora
+
+# for arch linux
+$> docker pull archlinux/archlinux
+
 
 # to check if the image is downloaded on your system
 $> docker images
