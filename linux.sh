@@ -72,7 +72,7 @@ else
   echo " "
   echo "git is not installed on your machine..."
   echo "installing git..."
-  sudo $pkg_mgr install git -y
+  $pkg_mgr install git -y
 fi
 
 
