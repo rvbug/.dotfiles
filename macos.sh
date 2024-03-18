@@ -43,7 +43,7 @@ else
    echo "###### yq installed successfully"
    echo "##### installing other essential tools"
   else
-    echo "yq installation failed, install it and then re-run the script..."
+    echo "yq installation failed, install it manually and then re-run the script..."
     exit 0
   fi
 
@@ -67,6 +67,33 @@ function install_essentials() {
       # brew install $software
       fi
    done
+
+
+  echo " "
+  echo "####### checking if ocaml is already installed..."
+
+
+  if brew list ocaml &>/dev/null; then
+    echo "####### ocaml is already installed"
+  else
+      echo " "
+      read -p "do you want to install ocaml? (y/n): " choice
+      
+      if [ -z "$choice" ]; then
+        choice="y"
+      fi
+      if [ "$choice" = "y" ] || [ "$choice" = "Y" ]; then
+          echo " "
+          echo "####### installing ocaml..."
+          brew install ocaml
+          echo "####### installing ocaml's package manager..."
+          bash -c "sh <(curl -fsSL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)"
+          echo "####### Initialise opam..."
+          opam init
+      fi
+
+  fi
+
 }
 
 
@@ -187,7 +214,7 @@ function configure_mac() {
   done
 
    echo "cloning the repo"
-   config_dir="config"
+   config_dir=".config"
    git clone "https://github.com/rvbug/.dotfiles/" "$HOME/.dotfiles"
    # check if config folder is available
    # if available, then skip the installation
