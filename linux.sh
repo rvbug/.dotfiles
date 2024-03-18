@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 echo " "
 echo "#############################################"
@@ -24,12 +24,12 @@ echo " "
 if [ -f "/etc/debian_version" ]; then
   echo "debian uses apt or apt-get pkg manager"
   echo "at this time, I am unable to get neovim installed on debian"
-  exit 0
+  pkg_mgr=apt
 
 elif [ -f "/etc/fedora-release" ]; then
   echo "looks like this is fedora"
   echo "starting the installation process"
-  # install_essentials
+  pkg_mgr=dnf
 else
   echo "this could be ubuntu"
   echo "currently, I am unable to install neovim on ubuntu"
