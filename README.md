@@ -48,6 +48,7 @@ This repository helps to restore/configure new machine via script based on the O
 | mac | Ventura | homebrew | 
 | mac  | Sonoma | homebrew | 
 | linux | Fedora | dnf | 
+| linux | Ubuntu | apt (neovim is not available)|
 
 **`Note`**: The script works on Ubuntu/Arch/Debian machines but the apt package manager keeps pointing to neovim 0.7x version. Current version of neovim as of today is 0.9x 
 
