@@ -61,7 +61,7 @@ function check_os() {
     echo "####### detected Linux OS..."
     echo "####### initiating linux installation"
 
-    source ./linux.sh
+    ./linux.sh
 
   else
     echo "####### $os not supported"
