@@ -58,7 +58,6 @@ if [ "$user" == "root" ]; then
   echo "####### think twice..." 
   echo "########################################" 
   echo " "
-  exit 0
  fi
 
 
