@@ -118,7 +118,7 @@ The list of things I did was
 # Script Workflow
 The main script `install.sh` will guide through the setup processes. The workflow is as follows
 
-- 
+- To do
 
 
 
