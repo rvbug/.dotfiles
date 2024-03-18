@@ -7,6 +7,23 @@
 # date        : 06 Feb 2017 : inital commit 
 ########################################################
 
+function install_essentials() {
+  # open softwares.yaml file and read the contents
+  # check if it is already installed using brew list option
+  # if not then install it using brew install
+
+  list=($(yq '.software-list' softwares.yaml))
+
+  for software in "${list[@]}"; do
+     if brew list $software &>/dev/null; then
+          echo "$software is already installed"
+      else
+      echo "Installing $software..."
+      # brew install $software
+      fi
+   done
+}
+
 
 # installating some essential softwares
 echo " "
@@ -47,31 +64,9 @@ else
     exit 0
   fi
 
-  echo "####### installing other essentials..."
-  install_essentials
-
 fi
-
-function install_essentials() {
-  # open softwares.yaml file and read the contents
-  # check if it is already installed using brew list option
-  # if not then install it using brew install
-
-  list=($(yq '.software-list' softwares.yaml))
-
-  for software in "${list[@]}"; do
-     if brew list $software &>/dev/null; then
-          echo "$software is already installed"
-      else
-      echo "Installing $software..."
-      # brew install $software
-      fi
-   done
-
-
   echo " "
   echo "####### checking if ocaml is already installed..."
-
 
   if brew list ocaml &>/dev/null; then
     echo "####### ocaml is already installed"
@@ -94,7 +89,10 @@ function install_essentials() {
 
   fi
 
-}
+ echo "####### installing other essentials..."
+ install_essentials
+
+
 
 
 function ds_tools() {
