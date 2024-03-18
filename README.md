@@ -118,7 +118,20 @@ The list of things I did was
 # Script Workflow
 The main script `install.sh` will guide through the setup processes. The workflow is as follows
 
-- To do
+- The script first check the OS version by using `uname -s` command
+
+```bash
+os=$(uname -s)
+if [ $os == "Darwin" ]; then
+  echo "detected mac os machine"
+elif [ $os == "Linux" ];
+  # this could be one of the distro of Linux
+  echo "detected mac linux machine"
+else
+echo " this could be any other machine other than linux"
+fi
+
+```
 
 
 
