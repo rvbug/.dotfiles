@@ -49,7 +49,7 @@ function check_os() {
 
     echo " "
     echo "####### initiating macos installation"
-    ./macos_install.sh
+    ./macos.sh
 
     # check_n_install_essentials "macos"
 
@@ -61,7 +61,7 @@ function check_os() {
     echo "####### detected Linux OS..."
     echo "####### initiating linux installation"
 
-    source ./linux_install.sh
+    source ./linux.sh
 
   else
     echo "####### $os not supported"
