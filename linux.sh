@@ -9,37 +9,43 @@ echo "####### checking for linux distro..."
 echo " "
 
 pkg_mgr=""
-
+os_name=""
 if [ -f "/etc/debian_version" ]; then
-    echo "debian uses apt or apt-get pkg manager"
-    echo "at this time, I am unable to get neovim installed on debian"
+    echo " " 
+    echo "looks like this is debian"
+    echo "####### debian uses apt or apt-get pkg manager"
+    # echo "at this time, I am unable to get neovim installed on debian"
     pkg_mgr=apt
-
+    os_name="debian"
 elif [ -f "/etc/fedora-release" ]; then
+    echo " "
     echo "looks like this is fedora"
-    echo "####### checking if package manager is dnf or yum"
+    echo "####### checking for dnf or yum"
     dnf > /dev/null 2>&1
     if [ $? -eq 0 ]; then
       echo " "
-      echo "dnf is available so using it as the package manager"
+      echo "dnf is available so using it as your package manager..."
       echo " "
       pkg_mgr=dnf
+      os_name="fedora"
     else
       echo "dnf is unavailable so using yum..."
       pkg_mgr=yum
+      os_name="fedora"
     fi
 
  elif [-z "/etc/os-release"]; then
      source /etc/os-release
-     os-name=$NAME
+     os_name=$NAME
      if [ "$os-name" == "Ubuntu" ]; then
        echo " "
        echo "looks like this is ubuntu"
-       echo "starting the installation process"
+       echo "####### using apt as your pkg manager"
      pkg_mgr=apt
+     os_name="ubuntu"
      fi 
   else
-    echo "not sure what this machine is"
+    echo "sorry, I am not sure what this machine is"
     echo "exiting the script..."
     exit 0
 fi
@@ -47,23 +53,32 @@ fi
 echo " "
 echo " "
 echo " "
+echo "####### os detected will be $os_name"
+echo "####### package manager will be $pkg_mgr"
+
+exit 0
+echo " "
+
+
 
 # check if you are runing as root
 user=$(whoami)
 if [ "$user" == "root" ]; then
   echo " "
-  echo "########################################" 
-  echo "####### never run any script as root user" 
+  echo "###################################################" 
+  echo "####### looks like you are running as root"
+  echo "####### never run any script as a root user" 
   echo "####### think twice..." 
-  echo "########################################" 
+  echo "###################################################" 
   echo " "
 fi
 
  # ask user if they want to run this script as sudo or not
  echo " "
  echo "####### checking if you want to run this script as sudo..."
- read -p "do you want to run this script as sudo (y/n)?" choice
+ echo "If without sudo gives you an error, rerun the script with sudo"
 
+ read -p "do you want to run this script as sudo (y/n)?" choice
  case "$choice" in
    y|Y ) echo "running as sudo..."
          su_user=sudo
