@@ -13,8 +13,6 @@ This repository helps to restore or configure a new machine with one single shel
 
 # Script Files 
 
-List of files under this repository
-
 | File | Type |  Description |
 | --- | --- | --- |
 | `install.sh` | Shell Script  | starter script  |
@@ -24,25 +22,56 @@ List of files under this repository
 # Configuration files
 | File | Type |  Description |
 | --- | --- | --- |
-| `software.yaml`  | YAML file | List of softwares to be installed | 
-| `config/.tmux.conf`|  Tmux  | tmux configuration file| 
-| `config/.wezterm.lua`| Terminal | wezterm lua config file | 
+| `software.yaml`  | yaml file | List of softwares to be installed | 
+| `config/.tmux.conf`|  tmux  | tmux configuration file| 
+| `config/.wezterm.lua`| terminal | wezterm lua terminal config file | 
 | `config/.zshrc`| profile | shell profile| 
-| `config/starship.toml`| Shell Prompt | shell prompt | 
+| `config/starship.toml`| shell Prompt | shell prompt | 
 
 
 # Versions Tested on
 | OS | Version |  Details |
 | --- | --- | --- |
+| mac | Ventura | | 
+| mac  | Sonoma | | 
+| linux | Fedora | Virtual Machine & Docker | 
+| Linux | Arch | Docker | 
 | | | | 
-| | | | 
-| | | | 
-| | | | 
-| | | | 
+
+**`Note`**: The script works on Ubuntu machine but the apt package manager does not pull latest neovim version. 
+
+
+# Docker Images
+If you want to install the script on a `throw away` machine then try on docker images. Here are the steps to be followed. Below example is on fedora, but the steps pretty much remain the same on any version
+
+- Install docker on your host machine. 
+- Pull the image from docker hub (requires sign-in)
+  
+```bash
+$> docker pull fedora
+
+# to check if the image is downloaded on your system
+$> docker images
+```
+- Setup the container using the following commands
+```bash
+  $> docker run --name test -d -i -t fedora /bin/bash
+
+  # check the processes
+  $> docker ps
+
+```
+- finally execute the following command to login to the container. Replace "container id" shown from the `docker ps` command above
+  
+```bash
+  $> docker exec -it container-id /bin/bash
+```
+
+- You will dropped into this container as root. This script will work fine as a root user but on a real machine/virtual enviornment, never run any script as root.
 
 
 
-# Setup Process
+# Script Workflow
 The main script `install.sh` will guide through the setup processes. The workflow is as follows
 
 - 
@@ -57,10 +86,7 @@ The list of things I did was
 
 - Install docker desktop on mac (.dmg file)
 - Pull docker ubuntu image and view them
-```bash
-  $> docker pull ubuntu
-  $> docker images
-```
+
 - Set the container and connect 
 ```bash
   # setup the container
