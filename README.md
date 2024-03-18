@@ -71,13 +71,6 @@ $> docker images
 
 
 
-# Script Workflow
-The main script `install.sh` will guide through the setup processes. The workflow is as follows
-
-- 
-
-
-
 # Docker
 I wanted to test this on another machine apart so better option was to install docker and try on various "throw away" machine.
 Next step is to automate this as part of my shellscript.
@@ -116,4 +109,17 @@ The list of things I did was
   $> /bin/sh install.sh
  
 ```
+
+
+
+# Script Workflow
+The main script `install.sh` will guide through the setup processes. The workflow is as follows
+
+- 
+
+
+
+# Future Support
+- Option to choose Ocaml Installation
+- Ubuntu OS
 
