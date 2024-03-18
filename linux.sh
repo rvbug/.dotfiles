@@ -53,10 +53,10 @@ fi
 echo " "
 echo " "
 echo " "
-echo "####### os detected will be $os_name"
-echo "####### package manager will be $pkg_mgr"
-
-exit 0
+echo "####### os detected :  $os_name"
+echo "####### package manager :  $pkg_mgr"
+echo " "
+echo " "
 echo " "
 
 
@@ -68,7 +68,7 @@ if [ "$user" == "root" ]; then
   echo "###################################################" 
   echo "####### looks like you are running as root"
   echo "####### never run any script as a root user" 
-  echo "####### think twice..." 
+  echo "####### please proceed with caution..." 
   echo "###################################################" 
   echo " "
 fi
@@ -76,8 +76,6 @@ fi
  # ask user if they want to run this script as sudo or not
  echo " "
  echo "####### checking if you want to run this script as sudo..."
- echo "If without sudo gives you an error, rerun the script with sudo"
-
  read -p "do you want to run this script as sudo (y/n)?" choice
  case "$choice" in
    y|Y ) echo "running as sudo..."
@@ -86,9 +84,11 @@ fi
         ;;
    n|N ) su_user=" " 
      echo "running as normal user..."
+     echo "If without sudo gives you an error, accept \"y\"" 
         ;;
    * ) su_user=" " 
      echo "invalid input, running as normal user"
+     echo "If without sudo gives you an error, accept \"y\"" 
    ;;
 esac
 
@@ -108,7 +108,7 @@ fi
 
 echo " "
 echo "checking if you have wget installed on your machine, if not then install it"
-wget --version > /dev/null 2>&1
+$su_user wget --version > /dev/null 2>&1
 if [ $? -eq 0 ]; then
   echo " "
   echo "####### wget is already installed"
@@ -117,7 +117,7 @@ else
   echo " "
   echo "wget is not installed on your machine..."
   echo "installing wget..."
-  $pkg_mgr install wget -y
+  $su_user $pkg_mgr install wget -y
 fi  
 
 # setting up pkg manager as global variable 
@@ -172,26 +172,7 @@ function install_essentials {
    echo " "
    echo "####### checking if ocaml is already installed..."
 
-   # if  dnf list installed ocaml &>/dev/null; then
-   #    read -p "Do you want to initialize opam?: (y/n) " choice
-   #
-   #  case "$choice" in
-   #    y|Y ) echo "initializing opam..."
-   #          opam init
-   #          opam install ocaml-lsp-server odoc ocamlformat utop
-   #        ;;
-   #    n|N ) echo "skipping opam initialization..."
-   #      ;;
-   #    * ) echo "invalid input, skipping opam initialization"
-   #    ;;
-   #  esac
-
-    # echo "###################################################################"
-    # echo "####### starting configuration process..."
-    # echo " "
-    # echo "###################################################################"
-    #
-    # configure_linux
+  # configure_linux
   if $pkg_mgr list installed ocaml &>/dev/null; then
     echo "####### ocaml is already installed"
   else
@@ -219,13 +200,13 @@ function install_essentials {
   for software in "${list[@]}"; do
     case "$software" in
       wezterm) echo " "
-        echo "####### wezterm is unavailble on fedora, use inbuilt terminal instead, skipping..."
+        echo "####### wezterm is unavailble on $os_name, use inbuilt terminal instead, skipping..."
         ;;
       starship) echo " " 
-        echo "####### starship is not yet supported on fedora, use ohmyzsh instead..."
+        echo "####### starship is not yet supported on $os_name, use ohmyzsh instead..."
         ;;
       fd) echo " "
-        echo "####### fd is not yet supported on fedora, use ripgrep instead..."
+        echo "####### fd is not yet supported on $os_name, use ripgrep instead..."
         ;;
       yarn) echo " "
         echo "####### installing yarnpkg"
@@ -233,20 +214,23 @@ function install_essentials {
         $su_user $pkg_mgr install yarnpkg -y
         ;;
       lazygit) echo " " 
-        echo "####### lazygit is not yet supported on fedora, installing gitui instead..."
+        echo "####### lazygit is not yet supported on $os_name..."
         # dnf install gitui -y
-        $su_user $pkg_mgr install gitui -y
+        # $su_user $pkg_mgr install gitui -y
         ;;
-      lua5.4) echo "lua5.4 is not yet supported on fedora, installing lua5.1 instead..."
+      lua5.4) echo "lua5.4 is not yet supported on $os_name, installing lua5.1 instead..."
         # dnf install lua5.1 -y
         $su_user $pkg_mgr install lua5.1 -y 
         ;;
-      npm) echo "npm is installed via nodejs in fedora, installing"
+      npm) echo "npm is installed separately.." 
         # dnf install nodejs -y
-        $su_user $pkg_mgr install nodejs -y
+        # $su_user $pkg_mgr install nodejs -y
         ;;
       tree-sitter) echo " "
         echo "####### tree-sitter is unavailable in fedora...download it manually..."
+        ;;
+      neovim) echo " "
+        echo "####### installing neovim seperately since it works only on fedora..."
         ;;
       # ocaml) echo " "
       #   # dnf install ocaml -y
@@ -263,6 +247,26 @@ function install_essentials {
     esac
   done
 
+  # for ubuntu and debian, npm is available and for fedora, it is via nodejs
+  if [ $os_name == "ubuntu" ] || [ $os_name == "debian" ]; then
+    echo " "
+    echo "####### installing npm..."
+    $su_user $pkg_mgr install npm -y
+    echo " "
+    echo "neovim 0.9x is not supported for ubuntu or fedora"
+  
+  elif [ $os_name == "fedora" ]; then
+    echo " "
+    echo "####### installing nodejs..."
+    $su_user $pkg_mgr install nodejs -y
+    echo " "
+    $su_user $pkg_mgr install neovim -y
+  else
+    echo " "
+    echo "you need npm or nodejs for neovim to work"
+    echo "try installing npm or nodejs & neovim manually..."
+  fi
+
 }
 install_essentials
 
@@ -270,12 +274,9 @@ function configure_linux() {
 
   config_list=($(yq '.config-list' softwares.yaml))
 
-
   echo " "
   echo "######## starting configuration process..."
-
   echo " "
-  echo "ensure you do not run this as root..." 
 
   # check if the config folder is available
   # if available, then skip the installation
