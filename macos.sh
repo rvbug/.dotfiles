@@ -19,6 +19,17 @@ else
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
+echo " "
+echo "checking if git is installed..."
+
+if command -v git &>/dev/null; then
+  echo "git already installed..."
+else
+  echo "##### Installing git..."
+  brew install git
+fi
+
+
 # for this script to work, we need a yaml processor
 echo " "
 echo "####### checking for yq is installation..."
