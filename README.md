@@ -4,6 +4,8 @@
   
 ![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)
 ![Fedora](https://img.shields.io/badge/Fedora-294172?style=for-the-badge&logo=fedora&logoColor=white)
+![Debian](https://img.shields.io/badge/Debian-D70A53?style=for-the-badge&logo=debian&logoColor=white)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)  
 
 ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white)
@@ -172,18 +174,9 @@ List of packages installed for Data Science and ML
 | notebook | | 
 | jupyterlab | | 
 
-
-(TODO) - 
-
-# Mac OS
-- If `macos.sh` is called then
-   - check for homebrew installation, installs if it isn't available
-   - check for `yq` 
+ 
 
 
 # Future Support
-- Option to choose Ocaml Installation
-- Neovim 9.0 on Ubuntu OS, Arch distro
-- Option to skip neovim if the version is < 0.9x
-- Check for git is installed using `git -v > /dev/null' on mac
-
+- Ubuntu - yaml not installed, check for pip
+- Debian - issue with yq
