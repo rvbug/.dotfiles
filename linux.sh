@@ -185,10 +185,6 @@ function install_essentials {
   fi
 
 
-  fi
-
-
-
   list=($(yq '.software-list' softwares.yaml))
 
   for software in "${list[@]}"; do
