@@ -148,9 +148,13 @@ function ds_tools() {
           echo " "
         fi
       ;;
-      n|N) echo "Skipping ..."
+      n|N) echo " " 
+        echo "Skipping ds tools installation..."
+        echo "this script is completed..."
       ;;
-      *) echo "Invalid choice. Skipping..."
+      *) echo " " 
+        echo "Invalid choice. Skipping data science tool installation..."
+        echo "this script is completed..."
       ;;
     esac
 
