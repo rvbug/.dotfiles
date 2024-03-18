@@ -113,29 +113,64 @@ The list of things I did was
  
 ```
 
+# Installations
+
+The main script `install.sh` will guide through the setup processes. If the OS version is "Darwin" it calls for `macos.sh`. If it is "Linux" then runs `linux.sh`.   
+Once the machine is detected, check if following prerequisites are installed    
+
+|  packages |  description |
+| --- |  --- |
+| brew| macos package manager|
+| yq    | yaml processor (supports xml and json too) |
+| dnf   | if Fedora then choose dnf package manager  |
 
 
-# Script Workflow
-The main script `install.sh` will guide through the setup processes. The workflow is as follows
+Here are the list of softwares to be installed 
+|  packages |  description |
+| --- |  --- |
+| wezterm | Terminal written in rust on Mac os| 
+| neovim | An IDE supports mac and fedora   | 
+| starship| customizable command prompt on Mac os | 
+| curl | | 
+| wget | | 
+| tmux | | 
+| fd | | 
+| ripgrep | | 
+| npm | |
+| yarn | | 
+| python3 | | 
+| lua5.4 | | 
+| rust-analyzer | | 
+| lazygit | | 
+| ocaml | |
+| tree | | 
+| tree-sitter | | 
 
-- The script first check the OS version by using `uname -s` command
+List of packages installed for Data Science and ML
 
-```bash
-os=$(uname -s)
-if [ $os == "Darwin" ]; then
-  echo "detected mac os machine"
-elif [ $os == "Linux" ];
-  # this could be one of the distro of Linux
-  echo "detected mac linux machine"
-else
-echo " this could be any other machine other than linux"
-fi
+|  packages |  description |
+| --- |  --- |
+| numpy | | 
+| pandas | | 
+| scikit-learn| | 
+| matplotlib | | 
+| seaborn| | 
+| tensorflow| | 
+| notebook | | 
+| jupyterlab | | 
 
-```
 
+(TODO) - 
+
+# Mac OS
+- If `macos.sh` is called then
+   - check for homebrew installation, installs if it isn't available
+   - check for `yq` 
 
 
 # Future Support
 - Option to choose Ocaml Installation
-- Ubuntu OS
+- Neovim 9.0 on Ubuntu OS, Arch distro
+- Option to skip neovim if the version is < 0.9x
+- Check for git is installed using `git -v > /dev/null' on mac
 
