@@ -270,6 +270,10 @@ function install_essentials {
 }
 install_essentials
 
+echo "calling the datascience tools script..."
+./ds_tools.sh
+
+
 function configure_linux() {
 
   config_list=($(yq '.config-list' softwares.yaml))
@@ -390,7 +394,4 @@ function configure_linux() {
 }
 
 # calling the ds script
-
-echo "calling the datascience tools script..."
-./ds_tools.sh
 
