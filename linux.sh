@@ -143,19 +143,19 @@ function install_essentials {
    echo " "
    echo "####### checking if ocaml is already installed..."
 
-   if  dnf list installed ocaml &>/dev/null; then
-      read -p "Do you want to initialize opam?: (y/n) " choice
-
-    case "$choice" in
-      y|Y ) echo "initializing opam..."
-            opam init
-            opam install ocaml-lsp-server odoc ocamlformat utop
-          ;;
-      n|N ) echo "skipping opam initialization..."
-        ;;
-      * ) echo "invalid input, skipping opam initialization"
-      ;;
-    esac
+   # if  dnf list installed ocaml &>/dev/null; then
+   #    read -p "Do you want to initialize opam?: (y/n) " choice
+   #
+   #  case "$choice" in
+   #    y|Y ) echo "initializing opam..."
+   #          opam init
+   #          opam install ocaml-lsp-server odoc ocamlformat utop
+   #        ;;
+   #    n|N ) echo "skipping opam initialization..."
+   #      ;;
+   #    * ) echo "invalid input, skipping opam initialization"
+   #    ;;
+   #  esac
 
     # echo "###################################################################"
     # echo "####### starting configuration process..."
@@ -163,6 +163,28 @@ function install_essentials {
     # echo "###################################################################"
     #
     # configure_linux
+  if dnf list ocaml &>/dev/null; then
+    echo "####### ocaml is already installed"
+  else
+      echo " "
+      read -p "do you want to install ocaml? (y/n): " choice
+      
+      if [ -z "$choice" ]; then
+        choice="y"
+      fi
+      if [ "$choice" = "y" ] || [ "$choice" = "Y" ]; then
+          echo " "
+          echo "####### installing ocaml..."
+          brew install ocaml
+          echo "####### installing ocaml's package manager..."
+          bash -c "sh <(curl -fsSL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)"
+          echo "####### Initialise opam..."
+          opam init
+      fi
+
+  fi
+
+
   fi
 
 
