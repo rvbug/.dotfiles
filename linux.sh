@@ -140,6 +140,33 @@ function install_essentials {
    echo "####### for linux distro using dnf "  
 
 
+   echo " "
+   echo "####### checking if ocaml is already installed..."
+
+   if  dnf list installed ocaml &>/dev/null; then
+      read -p "Do you want to initialize opam?: (y/n) " choice
+
+    case "$choice" in
+      y|Y ) echo "initializing opam..."
+            opam init
+            opam install ocaml-lsp-server odoc ocamlformat utop
+          ;;
+      n|N ) echo "skipping opam initialization..."
+        ;;
+      * ) echo "invalid input, skipping opam initialization"
+      ;;
+    esac
+
+    # echo "###################################################################"
+    # echo "####### starting configuration process..."
+    # echo " "
+    # echo "###################################################################"
+    #
+    # configure_linux
+  fi
+
+
+
   list=($(yq '.software-list' softwares.yaml))
 
   for software in "${list[@]}"; do
@@ -170,11 +197,11 @@ function install_essentials {
       tree-sitter) echo " "
         echo "####### tree-sitter is unavailable in fedora...download it manually..."
         ;;
-      ocaml) echo " "
-        # dnf install ocaml -y
-        echo "####### installing opam..."
-        bash -c "sh <(curl -fsSL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)"
-        ;; 
+      # ocaml) echo " "
+      #   # dnf install ocaml -y
+      #   echo "####### installing opam..."
+      #   bash -c "sh <(curl -fsSL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)"
+      #   ;; 
       *) echo "checking other packages..."
           # if dnf list $software &>/dev/null; then 
           #   echo "####### $software is already installed" 
@@ -184,27 +211,6 @@ function install_essentials {
     esac
   done
 
-    if  dnf list installed ocaml &>/dev/null; then
-      read -p "Do you want to initialize opam?: (y/n) " choice
-
-      case "$choice" in
-        y|Y ) echo "initializing opam..."
-              opam init
-              opam install ocaml-lsp-server odoc ocamlformat utop
-            ;;
-        n|N ) echo "skipping opam initialization..."
-          ;;
-        * ) echo "invalid input, skipping opam initialization"
-        ;;
-      esac
-
-    # echo "###################################################################"
-    # echo "####### starting configuration process..."
-    # echo " "
-    # echo "###################################################################"
-    #
-    # configure_linux
-  fi
 }
 install_essentials
 

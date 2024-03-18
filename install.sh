@@ -13,25 +13,25 @@ echo " "
 # preinstallation steps to be done
 # before installing the essentials
 
-function check_for_docker() {
-
-    echo  " "
-     read -p "Do you want install on a docker machine? (y/n): " choice
-
-     case "$choice" in
-        y|Y) echo "installation on docker instance..."
-          echo "####### calling docker script"
-          source ./docker_install.sh
-          exit 0
-          ;;   
-        n|N) echo "Skipping docker installation..."
-            # exit 1 
-        ;;
-        *) echo "Invalid choice. Skipping..."
-          exit 0
-        ;;
-     esac   
-}
+# function check_for_docker() {
+#
+#     echo  " "
+#      read -p "Do you want install on a docker machine? (y/n): " choice
+#
+#      case "$choice" in
+#         y|Y) echo "installation on docker instance..."
+#           echo "####### calling docker script"
+#           source ./docker_install.sh
+#           exit 0
+#           ;;   
+#         n|N) echo "Skipping docker installation..."
+#             # exit 1 
+#         ;;
+#         *) echo "Invalid choice. Skipping..."
+#           exit 0
+#         ;;
+#      esac   
+# }
 
 function check_os() {
   # function to check the OS version
