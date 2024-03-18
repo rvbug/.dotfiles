@@ -1,51 +1,50 @@
 #!/bin/bash
-#
+
 echo " "
 echo "#############################################"
 
-
-# check which packae manager is being used
-# option 1: apt for debian
-# option 2: pacman for arch
-# option 3: dnf for fedora
-# option 4: zypper
-# option 5: brew
-# option 6: choco
-# option 7: yay
-# option 8: flatpak
-# option 9: snap
-# option 10: none
-
 echo " "
-echo "Checking version of Linux"
+echo " "
+echo "####### checking for linux distro..."
 echo " "
 
+pkg_mgr=""
 
 if [ -f "/etc/debian_version" ]; then
-  echo "debian uses apt or apt-get pkg manager"
-  echo "at this time, I am unable to get neovim installed on debian"
-  pkg_mgr=apt
+    echo "debian uses apt or apt-get pkg manager"
+    echo "at this time, I am unable to get neovim installed on debian"
+    pkg_mgr=apt
 
 elif [ -f "/etc/fedora-release" ]; then
-  echo "looks like this is fedora"
-  echo "starting the installation process"
-  pkg_mgr=dnf
-else
-  echo "this could be ubuntu"
-  echo "currently, I am unable to install neovim on ubuntu"
-  exit 0
+    echo "looks like this is fedora"
+    echo "####### checking if package manager is dnf or yum"
+    dnf > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+      echo " "
+      echo "dnf is available so using it as the package manager"
+      echo " "
+      pkg_mgr=dnf
+    else
+      echo "dnf is unavailable so using yum..."
+      pkg_mgr=yum
+    fi
+
+ elif [-z "/etc/os-release"]; then
+     source /etc/os-release
+     os-name=$NAME
+     if [ "$os-name" == "Ubuntu" ]; then
+       echo " "
+       echo "looks like this is ubuntu"
+       echo "starting the installation process"
+     pkg_mgr=apt
+     fi 
+  else
+    echo "not sure what this machine is"
+    echo "exiting the script..."
+    exit 0
 fi
 
 echo " "
-# checking for pkg manager here to keep the variable global
-echo "####### checking if package manager is dnf or yum"
-dnf > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-  echo " "
-  echo "dnf is available so using as the package manager"
-  echo " "
-fi
-
 echo " "
 echo " "
 
@@ -58,11 +57,27 @@ if [ "$user" == "root" ]; then
   echo "####### think twice..." 
   echo "########################################" 
   echo " "
- fi
+fi
 
+ # ask user if they want to run this script as sudo or not
+ echo " "
+ echo "####### checking if you want to run this script as sudo..."
+ read -p "do you want to run this script as sudo (y/n)?" choice
+
+ case "$choice" in
+   y|Y ) echo "running as sudo..."
+         su_user=sudo
+         pkg_mgr="$su_user $pkg_mgr"
+        ;;
+   n|N ) su_user=" " 
+     echo "running as normal user..."
+        ;;
+   * ) su_user=" " 
+     echo "invalid input, running as normal user"
+   ;;
+esac
 
 echo "before starting the installation process, ensure you have git installed on your machine..."
-# check if git is installed on your machine
 git --version > /dev/null 2>&1
 if [ $? -eq 0 ]; then
   echo " "
@@ -76,31 +91,31 @@ else
 fi
 
 
+echo " "
+echo "checking if you have wget installed on your machine, if not then install it"
+wget --version > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+  echo " "
+  echo "####### wget is already installed"
+  echo "continuing..."
+else
+  echo " "
+  echo "wget is not installed on your machine..."
+  echo "installing wget..."
+  $pkg_mgr install wget -y
+fi  
+
 # setting up pkg manager as global variable 
-pkg_mgr=dnf
+# pkg_mgr=dnf
 
 function install_essentials {
 
   echo "Package manager is $pkg_mgr"
-
   echo "####### checking other essentials..."
   echo " "
-  echo "checking for wget ..."
-  wget --version > /dev/null 2>&1
-  if [ $? -eq 0 ]; then
-    echo " "
-    echo "wget is installed on your machine"
-    echo "continuing..."
-  else
-    echo " "
-    echo "wget is not installed on your machine..."
-    echo "installing wget..."
-    sudo $pkg_mgr install wget -y
-  fi
 
   echo "####### checking if yq is installed"
-
-  if dnf list installed yq &>/dev/null; then
+  if $pkg_mgr list installed yq &>/dev/null; then
     echo " "
     echo "yq already installed..."
   else
@@ -108,17 +123,16 @@ function install_essentials {
       echo "##### Installing yq..."
       echo "#######downloaing the package using wget.."
       echo "#######this will take few minutes..." 
-      sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+      $su_user wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
       if [ $? -eq 0 ]; then
-      sudo chmod +x /usr/local/bin/yq
-      echo " " 
-      echo "####### checking for the installation..."
+        $su_user chmod +x /usr/local/bin/yq
 
-      if yq --version &>/dev/null; then
-        echo " "
-        echo "yq installed successfully..."
-      fi
-
+        echo " " 
+        echo "####### checking for the installation..."
+        if yq --version &>/dev/null; then
+          echo " "
+          echo "yq installed successfully..."
+        fi
       else
       echo "####### yq installation failed, please manually install this package to proceed with the installation"
       exit 0
@@ -129,7 +143,7 @@ function install_essentials {
   read -p "Do you want to update your system?: (y/n) " choice 
   case "$choice" in
     y|Y ) echo "updating system..."
-          sudo $pkg_mgr update -y
+          $su_user $pkg_mgr update -y
         ;;
     n|N ) echo "skipping update..."
       ;;
@@ -163,7 +177,7 @@ function install_essentials {
     # echo "###################################################################"
     #
     # configure_linux
-  if dnf list ocaml &>/dev/null; then
+  if $pkg_mgr list installed ocaml &>/dev/null; then
     echo "####### ocaml is already installed"
   else
       echo " "
@@ -175,7 +189,7 @@ function install_essentials {
       if [ "$choice" = "y" ] || [ "$choice" = "Y" ]; then
           echo " "
           echo "####### installing ocaml..."
-          brew install ocaml
+          $pkg_mgr install ocaml
           echo "####### installing ocaml's package manager..."
           bash -c "sh <(curl -fsSL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)"
           echo "####### Initialise opam..."
@@ -200,17 +214,21 @@ function install_essentials {
         ;;
       yarn) echo " "
         echo "####### installing yarnpkg"
-        dnf install yarnpkg -y
+        # dnf install yarnpkg -y
+        $su_user $pkg_mgr install yarnpkg -y
         ;;
       lazygit) echo " " 
         echo "####### lazygit is not yet supported on fedora, installing gitui instead..."
-        dnf install gitui -y
+        # dnf install gitui -y
+        $su_user $pkg_mgr install gitui -y
         ;;
       lua5.4) echo "lua5.4 is not yet supported on fedora, installing lua5.1 instead..."
-        dnf install lua5.1 -y
+        # dnf install lua5.1 -y
+        $su_user $pkg_mgr install lua5.1 -y 
         ;;
       npm) echo "npm is installed via nodejs in fedora, installing"
-        dnf install nodejs -y
+        # dnf install nodejs -y
+        $su_user $pkg_mgr install nodejs -y
         ;;
       tree-sitter) echo " "
         echo "####### tree-sitter is unavailable in fedora...download it manually..."
@@ -224,7 +242,8 @@ function install_essentials {
           # if dnf list $software &>/dev/null; then 
           #   echo "####### $software is already installed" 
           # else
-            dnf install $software -y
+            # dnf install $software -y
+            $su_user $pkg_mgr install $software -y
           ;;
     esac
   done
