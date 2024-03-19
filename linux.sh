@@ -11,7 +11,7 @@ echo " "
 pkg_mgr=""
 os_name=""
 
-if [-f "/etc/os-release"]; then
+if [ -f "/etc/os-release"]; then
   source /etc/os-release
   os_name=$NAME
 else
