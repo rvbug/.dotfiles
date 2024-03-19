@@ -10,45 +10,92 @@ echo " "
 
 pkg_mgr=""
 os_name=""
-if [ -f "/etc/debian_version" ]; then
-    echo " " 
-    echo "looks like this is debian"
-    echo "####### debian uses apt or apt-get pkg manager"
-    # echo "at this time, I am unable to get neovim installed on debian"
-    pkg_mgr=apt
-    os_name="debian"
-elif [ -f "/etc/fedora-release" ]; then
-    echo " "
-    echo "looks like this is fedora"
-    echo "####### checking for dnf or yum"
-    dnf > /dev/null 2>&1
-    if [ $? -eq 0 ]; then
-      echo " "
-      echo "dnf is available so using it as your package manager..."
-      echo " "
-      pkg_mgr=dnf
-      os_name="fedora"
-    else
-      echo "dnf is unavailable so using yum..."
-      pkg_mgr=yum
-      os_name="fedora"
-    fi
 
- elif [-f "/etc/os-release"]; then
-     source /etc/os-release
-     os_name=$NAME
-     if [ "$os_name" == "Ubuntu" ]; then
-       echo " "
-       echo "looks like this is ubuntu"
-       echo "####### using apt as your pkg manager"
-     pkg_mgr=apt
-     os_name="ubuntu"
-     fi 
-  else
+if [-f "/etc/os-release"]; then
+  source /etc/os-release
+  os_name=$NAME
+
+ if [ "$os_name" == "Ubuntu" ]; then
+   echo " "
+   echo "looks like this is ubuntu"
+   echo "####### using apt as your pkg manager"
+   pkg_mgr=apt
+   os_name="ubuntu"
+
+ elif [ "$os_name" == "Debian GNU/Linux" ]; then
+   echo " "
+   echo "looks like this is debian"
+   echo "####### debian uses apt or apt-get pkg manager"
+   # echo "at this time, I am unable to get neovim installed on debian"
+   pkg_mgr=apt
+   os_name="debian"
+
+ elif [ "$os_name" == "Fedora" ]; then
+   echo " "
+   echo "looks like this is fedora"
+   echo "####### checking for dnf or yum"
+   dnf > /dev/null 2>&1
+   if [ $? -eq 0 ]; then
+     echo " "
+     echo "dnf is available so using it as your package manager..."
+     echo " "
+     pkg_mgr=dnf
+     os_name="fedora"
+   else
+     echo "dnf is unavailable so using yum..."
+     pkg_mgr=yum
+     os_name="fedora"
+   fi
+
+ else
     echo "sorry, I am not sure what this machine is"
     echo "exiting the script..."
     exit 0
-fi
+ fi 
+
+fi # end of main if
+
+
+
+# if [ -f "/etc/debian_version" ]; then
+#     echo " " 
+#     echo "looks like this is debian"
+#     echo "####### debian uses apt or apt-get pkg manager"
+#     # echo "at this time, I am unable to get neovim installed on debian"
+#     pkg_mgr=apt
+#     os_name="debian"
+# elif [ -f "/etc/fedora-release" ]; then
+#     echo " "
+#     echo "looks like this is fedora"
+#     echo "####### checking for dnf or yum"
+#     dnf > /dev/null 2>&1
+#     if [ $? -eq 0 ]; then
+#       echo " "
+#       echo "dnf is available so using it as your package manager..."
+#       echo " "
+#       pkg_mgr=dnf
+#       os_name="fedora"
+#     else
+#       echo "dnf is unavailable so using yum..."
+#       pkg_mgr=yum
+#       os_name="fedora"
+#     fi
+#
+#  elif [-f "/etc/os-release"]; then
+#      source /etc/os-release
+#      os_name=$NAME
+#      if [ "$os_name" == "Ubuntu" ]; then
+#        echo " "
+#        echo "looks like this is ubuntu"
+#        echo "####### using apt as your pkg manager"
+#      pkg_mgr=apt
+#      os_name="ubuntu"
+#      fi 
+#   else
+#     echo "sorry, I am not sure what this machine is"
+#     echo "exiting the script..."
+#     exit 0
+# fi
 
 echo " "
 echo " "
