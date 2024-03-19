@@ -45,6 +45,19 @@ if [ -f "software_list.txt" ]; then
   cat software_list.txt | while read line
   do
     echo "checking if $line is already installed..."
+
+    # check if the $line is lua 
+    if [ "$line" = "lua" ]; then
+      if brew list lua@5.4 &>/dev/null; then
+        echo "lua is already installed..."
+      else
+        echo " "
+        echo "####### installing lua..."
+        brew install lua@5.1
+      fi
+    fi
+
+
     if brew list $line &>/dev/null; then
       echo "$line is already installed"
     else
@@ -210,6 +223,7 @@ function configure_mac() {
   # backup dotfiles from the yaml file
   echo " "
   echo "####### backing up .config files"
+  cd $HOME
   if [ -f "config_list.txt" ]; then
     echo "####### config_list.txt exists."
     cat config_list.txt | while read line
@@ -301,7 +315,8 @@ echo " configuring your new machine"
 echo " "
 echo "###################################################################"
 
-# configure_mac
+configure_mac
+
 echo " "
 echo "data science setup coming soon..."
 # ./ds_tools.sh
