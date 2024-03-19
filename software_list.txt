@@ -9,7 +9,7 @@ ripgrep
 npm
 yarn
 python3
-lua5.1
+lua
 rust-analyzer
 lazygit
 tree
