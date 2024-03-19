@@ -244,31 +244,31 @@ function install_essentials {
   echo "####### checking other essentials..."
   echo " "
 
-  echo "####### checking if yq is installed"
-  if $pkg_mgr list installed yq &>/dev/null; then
-    echo " "
-    echo "yq already installed..."
-  else
-      echo " "
-      echo "##### Installing yq..."
-      echo "#######downloaing the package using wget.."
-      echo "#######this will take few minutes..." 
-      $su_user wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-      if [ $? -eq 0 ]; then
-        $su_user chmod +x /usr/local/bin/yq
-
-        echo " " 
-        echo "####### checking for the installation..."
-        if yq --version &>/dev/null; then
-          echo " "
-          echo "yq installed successfully..."
-        fi
-      else
-      echo "####### yq installation failed, please manually install this package to proceed with the installation"
-      exit 0
-      fi
-  fi
-
+  # echo "####### checking if yq is installed"
+  # if $pkg_mgr list installed yq &>/dev/null; then
+  #   echo " "
+  #   echo "yq already installed..."
+  # else
+  #     echo " "
+  #     echo "##### Installing yq..."
+  #     echo "#######downloaing the package using wget.."
+  #     echo "#######this will take few minutes..." 
+  #     $su_user wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+  #     if [ $? -eq 0 ]; then
+  #       $su_user chmod +x /usr/local/bin/yq
+  #
+  #       echo " " 
+  #       echo "####### checking for the installation..."
+  #       if yq --version &>/dev/null; then
+  #         echo " "
+  #         echo "yq installed successfully..."
+  #       fi
+  #     else
+  #     echo "####### yq installation failed, please manually install this package to proceed with the installation"
+  #     exit 0
+  #     fi
+  # fi
+ #
   # echo " "
   # read -p "Do you want to update your system?: (y/n) " choice 
   # case "$choice" in
@@ -386,7 +386,7 @@ function install_essentials {
 install_essentials
 
 echo "calling the datascience tools script..."
-source ./ds_tools.sh
+./ds_tools.sh
 
 
 function configure_linux() {
