@@ -109,20 +109,6 @@ echo " "
 echo " "
 echo " "
 
-  echo " "
-  read -p "Do you want to update your system?: (y/n) " choice 
-  case "$choice" in
-    y|Y ) echo "updating system..."
-          $su_user $pkg_mgr update -y
-        ;;
-    n|N ) echo "skipping update..."
-      ;;
-    * ) echo "invalid input, skipping update"
-    ;;
-  esac
-   echo " " 
-   echo "####### for linux distro using dnf "  
-
 
 
 # check if you are runing as root
@@ -155,6 +141,21 @@ fi
      echo "If without sudo gives you an error, accept \"y\"" 
    ;;
 esac
+
+echo " "
+read -p "Do you want to update your system?: (y/n) " choice 
+case "$choice" in
+  y|Y ) echo "updating system..."
+        $su_user $pkg_mgr update -y
+      ;;
+  n|N ) echo "skipping update..."
+    ;;
+  * ) echo "invalid input, skipping update"
+  ;;
+esac
+ echo " " 
+ echo "####### for linux distro using dnf "  
+
 
 echo "before starting the installation process, ensure you have git installed on your machine..."
 git --version > /dev/null 2>&1
