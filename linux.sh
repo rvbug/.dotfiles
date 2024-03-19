@@ -235,6 +235,7 @@ if [ $? -eq 0 ]; then
     $su_user chmod +x /usr/local/bin/yq
 fi
 
+sudo pip install yq 
 # setting up pkg manager as global variable 
 # pkg_mgr=dnf
 
