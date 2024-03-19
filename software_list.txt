@@ -1,0 +1,17 @@
+wezterm
+neovim
+starship
+curl
+wget
+tmux
+fd
+ripgrep
+npm
+yarn
+python3
+lua5.1
+rust-analyzer
+lazygit
+tree
+tree-sitter
+

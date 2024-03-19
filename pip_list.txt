@@ -1,0 +1,10 @@
+pyyaml
+jupyter
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+tensorflow
+notebook
+jupyterlab

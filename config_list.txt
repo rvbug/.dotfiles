@@ -1,0 +1,5 @@
+.tmux.conf 
+.wezterm.lua 
+.zshrc 
+.config/starship.toml
+
