@@ -206,7 +206,7 @@ else
     $su_user $pkg_mgr install python3-pip -y
     echo " "
     echo "checking if pip3 is installed"
-    pip3 --version > /dev/null; then
+    pip3 --version > /dev/null
     echo "pip3 is already installed now ..."
     echo " "
 fi
