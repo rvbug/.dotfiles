@@ -34,10 +34,10 @@ elif [ -f "/etc/fedora-release" ]; then
       os_name="fedora"
     fi
 
- elif [-z "/etc/os-release"]; then
+ elif [-f "/etc/os-release"]; then
      source /etc/os-release
      os_name=$NAME
-     if [ "$os-name" == "Ubuntu" ]; then
+     if [ "$os_name" == "Ubuntu" ]; then
        echo " "
        echo "looks like this is ubuntu"
        echo "####### using apt as your pkg manager"
@@ -133,6 +133,9 @@ else
     echo "installing pip3..."
     $su_user $pkg_mgr install python3-pip -y
 fi
+
+# install pyyaml 
+$su_user pip3 install pyyaml
 
 # setting up pkg manager as global variable 
 # pkg_mgr=dnf
