@@ -227,6 +227,10 @@ fi
 
 # install pyyaml 
 $su_user pip3 install pyyaml
+$su_user wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+if [ $? -eq 0 ]; then
+    $su_user chmod +x /usr/local/bin/yq
+fi
 
 # setting up pkg manager as global variable 
 # pkg_mgr=dnf
