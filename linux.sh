@@ -271,7 +271,7 @@ function install_essentials {
 install_essentials
 
 echo "calling the datascience tools script..."
-./ds_tools.sh
+source ./ds_tools.sh
 
 
 function configure_linux() {
