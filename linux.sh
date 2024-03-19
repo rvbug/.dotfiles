@@ -14,15 +14,21 @@ os_name=""
 if [-f "/etc/os-release"]; then
   source /etc/os-release
   os_name=$NAME
+else
+  echo " "
+  echo "this looks like a different linux distro.."
+  echo "exiting the script..."
+  exit 0
+fi
 
- if [ "$os_name" == "Ubuntu" ]; then
+if [ "$os_name" == "Ubuntu" ]; then
    echo " "
    echo "looks like this is ubuntu"
    echo "####### using apt as your pkg manager"
    pkg_mgr=apt
    os_name="ubuntu"
 
- elif [ "$os_name" == "Debian GNU/Linux" ]; then
+elif [ "$os_name" == "Debian GNU/Linux" ]; then
    echo " "
    echo "looks like this is debian"
    echo "####### debian uses apt or apt-get pkg manager"
@@ -30,7 +36,7 @@ if [-f "/etc/os-release"]; then
    pkg_mgr=apt
    os_name="debian"
 
- elif [ "$os_name" == "Fedora" ]; then
+elif [ "$os_name" == "Fedora" ]; then
    echo " "
    echo "looks like this is fedora"
    echo "####### checking for dnf or yum"
@@ -47,11 +53,11 @@ if [-f "/etc/os-release"]; then
      os_name="fedora"
    fi
 
- else
+else
     echo "sorry, I am not sure what this machine is"
     echo "exiting the script..."
     exit 0
- fi 
+fi 
 
 fi # end of main if
 
