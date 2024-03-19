@@ -109,6 +109,20 @@ echo " "
 echo " "
 echo " "
 
+  echo " "
+  read -p "Do you want to update your system?: (y/n) " choice 
+  case "$choice" in
+    y|Y ) echo "updating system..."
+          $su_user $pkg_mgr update -y
+        ;;
+    n|N ) echo "skipping update..."
+      ;;
+    * ) echo "invalid input, skipping update"
+    ;;
+  esac
+   echo " " 
+   echo "####### for linux distro using dnf "  
+
 
 
 # check if you are runing as root
@@ -181,7 +195,7 @@ else
 fi
 
 
-if pip3 --version > /dev/null; then
+if pip --version > /dev/null; then
     echo "pip3 is already installed..."
     echo " "
 else
@@ -242,19 +256,19 @@ function install_essentials {
       fi
   fi
 
-  echo " "
-  read -p "Do you want to update your system?: (y/n) " choice 
-  case "$choice" in
-    y|Y ) echo "updating system..."
-          $su_user $pkg_mgr update -y
-        ;;
-    n|N ) echo "skipping update..."
-      ;;
-    * ) echo "invalid input, skipping update"
-    ;;
-  esac
-   echo " " 
-   echo "####### for linux distro using dnf "  
+  # echo " "
+  # read -p "Do you want to update your system?: (y/n) " choice 
+  # case "$choice" in
+  #   y|Y ) echo "updating system..."
+  #         $su_user $pkg_mgr update -y
+  #       ;;
+  #   n|N ) echo "skipping update..."
+  #     ;;
+  #   * ) echo "invalid input, skipping update"
+  #   ;;
+  # esac
+  #  echo " " 
+  #  echo "####### for linux distro using dnf "  
 
 
    echo " "
