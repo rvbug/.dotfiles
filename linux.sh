@@ -174,7 +174,14 @@ if python3 --version > /dev/null; then
   echo "python3 is already installed..."
   echo " "
   echo "checking for pip3 installation..."
-elif pip3 --version > /dev/null; then
+else
+  echo " "
+  echo "installing python3..."
+  $su_user $pkg_mgr install python3 -y
+fi
+
+
+if pip3 --version > /dev/null; then
     echo "pip3 is already installed..."
     echo " "
 else
@@ -183,6 +190,20 @@ else
     echo "installing pip3..."
     $su_user $pkg_mgr install python3-pip -y
 fi
+
+# if python3 --version > /dev/null; then
+#   echo "python3 is already installed..."
+#   echo " "
+#   echo "checking for pip3 installation..."
+# elif pip3 --version > /dev/null; then
+#     echo "pip3 is already installed..."
+#     echo " "
+# else
+#     echo "pip3 is not installed..."
+#     # exit 0
+#     echo "installing pip3..."
+#     $su_user $pkg_mgr install python3-pip -y
+# fi
 
 # install pyyaml 
 $su_user pip3 install pyyaml
