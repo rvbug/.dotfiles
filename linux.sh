@@ -59,9 +59,6 @@ else
     exit 0
 fi 
 
-fi # end of main if
-
-
 
 # if [ -f "/etc/debian_version" ]; then
 #     echo " " 
