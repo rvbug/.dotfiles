@@ -109,6 +109,9 @@ function ds_tools() {
   # setup all the libraries on the virtual env
   # regardless of the OS
 
+  # install pyaml first
+  pip install pyyaml
+
   echo " "
   read -p "####### Do you want to install Data Science & ML tools? (y/n): " choice
     case "$choice" in
