@@ -213,9 +213,6 @@ function ds_tools() {
 
  ds_tools
 #
-#
-#
-#
 #home folder
 function configure_mac() {
   # backup dotfiles from the yaml file
