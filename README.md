@@ -4,8 +4,6 @@
   
 ![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)
 ![Fedora](https://img.shields.io/badge/Fedora-294172?style=for-the-badge&logo=fedora&logoColor=white)
-![Debian](https://img.shields.io/badge/Debian-D70A53?style=for-the-badge&logo=debian&logoColor=white)
-![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)  
 
 ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white)
@@ -37,7 +35,9 @@ This repository helps to restore/configure new machine via script based on the O
 # Configuration files
 | File | Type |  Description |
 | --- | --- | --- |
-| `software.yaml`  | yaml file | List of softwares to be installed | 
+| `software_list.txt`  | text file | List of softwares to be installed | 
+| `pip_list.txt`  | text file | List of softwares for data science and ML | 
+| `config_list.txt`  | text file | List of config files | 
 | `config/.tmux.conf`|  tmux  | tmux configuration file| 
 | `config/.wezterm.lua`| terminal | wezterm lua terminal config file | 
 | `config/.zshrc`| profile | shell profile| 
@@ -49,11 +49,10 @@ This repository helps to restore/configure new machine via script based on the O
 | --- | --- | --- |
 | mac | Ventura | homebrew | 
 | mac  | Sonoma | homebrew | 
-| linux | Fedora | dnf | 
-| linux | Ubuntu | apt (neovim is not available)|
+| linux | Fedora (including docker image) | dnf | 
+
 
 **`Note`**: The script works on Ubuntu/Arch/Debian machines but the apt package manager keeps pointing to neovim 0.7x version. Current version of neovim as of today is 0.9x 
-
 
 # Docker Images
 If you want to install the script on a `throw away` machine then try on docker images. Here are the steps to be followed. Below example is on fedora, but the steps pretty much remain the same on any version
