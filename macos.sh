@@ -110,7 +110,18 @@ function ds_tools() {
   # regardless of the OS
 
   # install pyaml first
-  pip install pyyaml
+  echo " "
+  echo " ###### installing pyaml..."
+  brew install pyyaml 
+  # check if this is successful
+  if [ $? -eq 0 ]; then
+    echo " "
+    echo "pyaml is installed successfully"
+  else
+    echo " "
+    echo "something went wrong, go for manual installation..."
+    echo " "
+  fi
 
   echo " "
   read -p "####### Do you want to install Data Science & ML tools? (y/n): " choice
@@ -163,7 +174,7 @@ function ds_tools() {
           echo " "
           echo "upgrading pip before installing rest of the tools.."
           python3 -m pip install --upgrade pip
-          if [ -f "config_list.txt" ]; then
+          if [ -f "./config_list.txt" ]; then
               echo "####### config_list.txt exists."
               cat config_list.txt | while read cfg 
               do
