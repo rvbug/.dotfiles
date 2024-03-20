@@ -12,18 +12,17 @@
 
 echo " "
 echo "####### starting mac os installation..."
-echo "to get started..."
 echo "########################################"
+echo "to get started..."
 echo "you will need to install homebrew first "
-echo " it will ask you to run 2 commands on the terminal once the installaiton is complete"
+echo "it will ask you to run 2 commands on the terminal once the installaiton is complete"
 echo " "
 echo "xcode command line tool will also be installed along with git..."
-echo "once the installation is completed, close the terminal and reopen.."
+echo "once the installation is completed, close and reopen the terminal..."
 echo "########################################"
 
-# installating some essential softwares
 echo " "
-echo "checking for essential softwares first..."
+echo "checking essential softwares..."
 
 echo "####### checking for homebrew..."
 if command -v brew &>/dev/null; then
@@ -43,28 +42,24 @@ else
   brew install git
 fi
 
-
-
 echo " "
-echo "checking if the software list exists..."
+echo "####### checking list of software on the system..."
 
 if [ -f "software_list.txt" ]; then
   echo "####### software_list.txt exists."
   cat software_list.txt | while read line
   do
-    echo "checking if $line is already installed..."
-
+    echo "#######"
     # check if the $line is lua 
     if [ "$line" = "lua" ]; then
-      if brew list lua@5.4 &>/dev/null; then
+      if brew list lua &>/dev/null; then
         echo "lua is already installed..."
       else
         echo " "
         echo "####### installing lua..."
-        brew install lua@5.1
+        brew install lua@5.4
       fi
     fi
-
 
     if brew list $line &>/dev/null; then
       echo "$line is already installed"
@@ -81,7 +76,7 @@ else
 fi 
 
 echo " "
-echo "checking for ocaml ..."
+echo "####### checking for ocaml ..."
 
 if brew list ocaml &>/dev/null; then
   echo "####### ocaml is already installed"
@@ -111,16 +106,15 @@ function ds_tools() {
 
   # install pyaml first
   echo " "
-  echo " ###### installing pyaml..."
-  brew install pyyaml 
-  # check if this is successful
-  if [ $? -eq 0 ]; then
+  echo " ###### checking for pyaml..."
+  # check if pyyaml is installed
+  if brew list pyyaml &>/dev/null; then
     echo " "
-    echo "pyaml is installed successfully"
+    echo "pyaml is already installed"
   else
     echo " "
-    echo "something went wrong, go for manual installation..."
-    echo " "
+    echo "####### installing pyaml..."
+    brew install pyyaml
   fi
 
   echo " "
