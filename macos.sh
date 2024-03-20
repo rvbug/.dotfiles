@@ -253,55 +253,6 @@ function configure_mac() {
         rm -rf "$HOME/.dotfiles"
   fi
 
-  # if [ -f "config_list.txt" ]; then
-  #   echo "####### config_list.txt exists."
-  #   config_dir=".config"
-  #    
-  #   cat config_list.txt | while read line
-  #   do
-  #     cp "$HOME/$line" "$HOME/$line.bak.$(date +%Y-%m-%d-%H:%M:%S)"
-  #     # ls "$HOME/$line"
-  #   done
-  #   exit 0
-  # fi
-  #
-  # if [ -f "config_list.txt" ]; then
-  #   echo "####### config_list.txt exists."
-  #   cat config_list.txt | while read line
-  #   do
-  #     cp "$HOME/$config_list" "$HOME/$config_list.bak.$(date +%Y-%m-%d-%H:%M:%S)"
-  #     ls "$HOME/$config_list"
-  #   done
-  #    echo "cloning the repo"
-  #    config_dir=".config"
-  #    git clone "https://github.com/rvbug/.dotfiles/" "$HOME/.dotfiles"
-  #      for files in "$HOME/.dotfiles/$config_dir"/.*; do
-  #        echo $files
-  #        cp "$files" "$HOME/"
-  #        echo "files are now moved"
-  #      done
-  #     # delete the repo
-  #     echo " "
-  #     echo "deleting the repo..."
-  #     rm -rf "$HOME/.dotfiles"
-  #    else
-  #    echo "config folder is not available"
-  #    echo " continue with rest of the installation..."
-  #   fi
-
-   # if [ -d "$HOME/.dotfiles/$config_dir" ]; then
-   #     cp "$HOME/.dotfiles/$config_dir"/.tmux.conf "$HOME/"
-   #     cp "$HOME/.dotfiles/$config_dir"/.wezterm.lua "$HOME/"
-   #     cp "$HOME/.dotfiles/$config_dir"/.zshrc "$HOME/"
-   #     cp "$HOME/.dotfiles/$config_dir"/startship.toml "$HOME/$config_dir/"
-
-     
-
-  # now once this is completed then check if neovim is installed
-  # if not then install it
-  
-  # check if neovim is installed
-  
   if brew list neovim &>/dev/null; then
     echo " "
     echo "neovim is already installed"
@@ -356,7 +307,7 @@ echo " configuring your new machine"
 echo " "
 echo "###################################################################"
 
-# configure_mac
+ configure_mac
 
 echo " "
 echo "data science setup coming soon..."
