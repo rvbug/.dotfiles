@@ -45,6 +45,7 @@ fi
 echo " "
 echo "####### checking list of software on the system..."
 
+
 if [ -f "software_list.txt" ]; then
   echo "####### software_list.txt exists."
   cat software_list.txt | while read line
