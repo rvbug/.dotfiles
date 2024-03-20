@@ -14,10 +14,11 @@ echo " "
 echo "####### starting mac os installation..."
 echo "to get started..."
 echo "########################################"
-echo "you will need to install homebrew by runing the following command"
-echo ""/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
+echo "you will need to install homebrew first "
+echo " it will ask you to run 2 commands on the terminal once the installaiton is complete"
 echo " "
 echo "xcode command line tool will also be installed along with git..."
+echo "once the installation is completed, close the terminal and reopen.."
 echo "########################################"
 
 # installating some essential softwares
