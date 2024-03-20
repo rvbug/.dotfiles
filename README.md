@@ -49,7 +49,7 @@ This repository helps to restore/configure new machine via script based on the O
 | --- | --- | --- |
 | mac | Ventura | homebrew | 
 | mac  | Sonoma | homebrew | 
-| linux | Fedora (including docker image) | dnf | 
+| linux | Fedora (incld. docker support) | dnf | 
 
 
 **`Note`**: The script works on Ubuntu/Arch/Debian machines but the apt package manager keeps pointing to neovim 0.7x version. Current version of neovim as of today is 0.9x 
@@ -87,16 +87,22 @@ $> docker images
 
 # Installations
 
-The main script `install.sh` will guide through the setup processes. If the OS version is "Darwin" it calls for `macos.sh`. If it is "Linux" then runs `linux.sh`.   
-Once the machine is detected, check if following prerequisites are installed    
+The main script `install.sh` will guide through the setup processes. 
+
+If the OS version is "Darwin" it calls for `macos.sh`. If it is "Linux" then runs `linux.sh`.   
+
+Following are the prerequisite before starting the script
 
 |  packages |  description |
 | --- |  --- |
-| brew| macos package manager|
+| brew| macos package manager, usually installs xcode-command line tools and also git|
 | dnf   | if Fedora then it uses dnf package manager  |
+| git  | install seperately if it is not installed using your package manager | 
 
 
-Here are the list of softwares to be installed 
+
+Here are the list of softwares which will be installed
+
 |  packages |  description |
 | --- |  --- |
 | wezterm | Terminal written in rust on Mac os| 
