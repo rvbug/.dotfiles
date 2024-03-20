@@ -104,125 +104,114 @@ else
 fi
 
 
-# function ds_tools() {
-#   # this will install ds tools from cookie-ml repo
-#   # setup all the libraries on the virtual env
-#   # regardless of the OS
-#
-#   echo " "
-#   echo "checking if the config file exists..."
-#
-#
-#   # echo " "
-#   # echo "####### checking for yaml..."
-#   #
-#
-#   echo " "
-#   read -p "####### Do you want to install Data Science & ML tools? (y/n): " choice
-#     case "$choice" in
-#       y|Y) echo " "
-#         # check if ml-cookie-cutter folder is available
-#         # if available, then skip the installation
-#         if [ -d "$HOME/ml-cookie-cutter" ]; then
-#           echo " "
-#           echo "cookie cutter project is setup at \"$HOME\" ..."
-#           echo "skipping ml setup installation..."
-#           echo " " 
-#           echo "continue with rest of the installation..."
-#         else
-#           # run the command with the structure
-#           # setting up cookie-ml repo
-#           # cd into HOME directory  
-#           cd $HOME
-#           git clone https://github.com/rvbug/cookie-ml.git 
-#           # cd into the cloned repo 
-#           cd cookie-ml
-#           echo "####### setting up ml-cookie-cutter in your \"$HOME\" dir.."
-#           echo "feel free to rename this project"
-#           echo " "
-#           echo "installing cookie cutter project...."
-#           echo " "
-#           echo "####### Here's the help for cookie-ml..."
-#           echo " "
-#           echo " "
-#           echo "###########################################################################"
-#           python3 main.py --h
-#           echo " "
-#           echo " " 
-#           echo "###########################################################################"
-#           echo " "
-#           # cookie-ml help
-#           python3 main.py --v 
-#           pwd
-#           echo " "
-#           # delete the cloned repo
-#           echo "####### deleting the cookie-ml repo..."
-#           cd $HOME
-#           rm -rf cookie-ml
-#
-#           # moving to ml-cookie-cutter folder
-#           cd $HOME/ml-cookie-cutter
-#           # activing the venv
-#           echo " "
-#           echo " "
-#           echo "####### activating the venv..."
-#           source venv/bin/activate
-#
-#           echo " "
-#           echo "upgrading pip before installing rest of the tools.."
-#           python3 -m pip install --upgrade pip
-#           if [ -f "config_list.txt" ]; then
-#               echo "####### config_list.txt exists."
-#               cat config_list.txt | while read cfg 
-#               do
-#                 echo "checking if $cfg is already installed..."
-#                 if brew list $cfg &>/dev/null; then
-#                   echo "$cfg is already installed"
-#                 else
-#                   echo " "
-#                   echo "####### installing $cfg..."
-#                   brew install $cfg
-#                 fi
-#               done
-#           else
-#               echo " "
-#               "####### config_list.txt does not exist, exiting the script..."
-#               exit 0
-#           fi 
-#
-#           # for pip_list in "${pip_list[@]}"; do
-#           #   echo "installing packages using $pip_list"
-#           #   # pip install $pip_list
-#           # done
-#       
-#           echo " "
-#           echo "####### packages is installed successfully"
-#           echo " "
-#           echo "deactivating the venv..."
-#           deactivate
-#           echo " "
-#           echo "deleteing the cookie-ml repo..."
-#           rm -rf "$HOME/cookie-ml"
-#           echo " "
-#           echo " "
-#           echo "###################################################################"
-#           echo "ml-cookie-cutter is setup at $HOME directory"
-#           echo " "
-#           echo "activate your project using source venv/bin/activate"
-#           echo "###################################################################"
-#           echo " "
-#           echo " "
-#         fi
-#       ;;
-#       n|N) echo "Skipping ..."
-#       ;;
-#       *) echo "Invalid choice. Skipping..."
-#       ;;
-#     esac
-#
-# }
-#
-# #ds_tools
+function ds_tools() {
+  # this will install ds tools from cookie-ml repo
+  # setup all the libraries on the virtual env
+  # regardless of the OS
+
+  echo " "
+  read -p "####### Do you want to install Data Science & ML tools? (y/n): " choice
+    case "$choice" in
+      y|Y) echo " "
+        # check if ml-cookie-cutter folder is available
+        # if available, then skip the installation
+        if [ -d "$HOME/ml-cookie-cutter" ]; then
+          echo " "
+          echo "cookie cutter project is setup at \"$HOME\" ..."
+          echo "skipping ml setup installation..."
+          echo " " 
+          echo "continue with rest of the installation..."
+        else
+          cd $HOME
+          git clone https://github.com/rvbug/cookie-ml.git 
+          # cd into the cloned repo 
+          cd cookie-ml
+          echo "####### setting up ml-cookie-cutter in your \"$HOME\" dir.."
+          echo "feel free to rename this project"
+          echo " "
+          echo "installing cookie cutter project...."
+          echo " "
+          echo "####### Here's the help for cookie-ml..."
+          echo " "
+          echo " "
+          echo "###########################################################################"
+          python3 main.py --h
+          echo " "
+          echo " " 
+          echo "###########################################################################"
+          echo " "
+          # cookie-ml help
+          python3 main.py --v 
+          pwd
+          echo " "
+          # delete the cloned repo
+          echo "####### deleting the cookie-ml repo..."
+          cd $HOME
+          rm -rf cookie-ml
+
+          # moving to ml-cookie-cutter folder
+          cd $HOME/ml-cookie-cutter
+          # activing the venv
+          echo " "
+          echo " "
+          echo "####### activating the venv..."
+          source venv/bin/activate
+
+          echo " "
+          echo "upgrading pip before installing rest of the tools.."
+          python3 -m pip install --upgrade pip
+          if [ -f "config_list.txt" ]; then
+              echo "####### config_list.txt exists."
+              cat config_list.txt | while read cfg 
+              do
+                echo "checking if $cfg is already installed..."
+                if brew list $cfg &>/dev/null; then
+                  echo "$cfg is already installed"
+                else
+                  echo " "
+                  echo "####### installing $cfg..."
+                  brew install $cfg
+                fi
+              done
+          else
+              echo " "
+              "####### config_list.txt does not exist, exiting the script..."
+              exit 0
+          fi 
+
+          # for pip_list in "${pip_list[@]}"; do
+          #   echo "installing packages using $pip_list"
+          #   # pip install $pip_list
+          # done
+      
+          echo " "
+          echo "####### packages is installed successfully"
+          echo " "
+          echo "deactivating the venv..."
+          deactivate
+          echo " "
+          echo "deleteing the cookie-ml repo..."
+          rm -rf "$HOME/cookie-ml"
+          echo " "
+          echo " "
+          echo "###################################################################"
+          echo "ml-cookie-cutter is setup at $HOME directory"
+          echo " "
+          echo "activate your project using source venv/bin/activate"
+          echo "###################################################################"
+          echo " "
+          echo " "
+        fi
+      ;;
+      n|N) echo "Skipping ..."
+      ;;
+      *) echo "Invalid choice. Skipping..."
+      ;;
+    esac
+
+}
+
+ ds_tools
 #
 #
 #
