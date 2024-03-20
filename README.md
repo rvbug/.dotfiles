@@ -102,33 +102,33 @@ Here are the list of softwares to be installed
 | wezterm | Terminal written in rust on Mac os| 
 | neovim | An IDE supports mac and fedora   | 
 | starship| customizable command prompt on Mac os | 
-| curl | | 
-| wget | | 
-| tmux | | 
-| fd | | 
-| ripgrep | | 
-| npm | |
-| yarn | | 
-| python3 | | 
-| lua5.4 | | 
-| rust-analyzer | | 
-| lazygit | | 
-| ocaml | |
-| tree | | 
-| tree-sitter | | 
+| curl | Client URL to enables data exchange between client and a server | 
+| wget | same as curl | 
+| tmux | Terminal Multiplexer | 
+| fd | simple and fast alternative to find command| 
+| ripgrep | real time grep | 
+| npm | package manager|
+| yarn | package manager| 
+| python3 | Python | 
+| lua5.4 | Lua | 
+| rust-analyzer | For Rust| 
+| lazygit | neat UI for git | 
+| ocaml | For OCaml|
+| tree | helps in directoy listing| 
+| tree-sitter | parser generator | 
 
 List of packages installed for Data Science and ML
 
 |  packages |  description |
 | --- |  --- |
-| numpy | | 
-| pandas | | 
-| scikit-learn| | 
-| matplotlib | | 
-| seaborn| | 
-| tensorflow| | 
-| notebook | | 
-| jupyterlab | | 
+| numpy | library for mathematical function | 
+| pandas | library for data manipulation | 
+| scikit-learn | simple ML libraries | 
+| matplotlib | for plotting | 
+| seaborn| alternative to matplotlib for plotting | 
+| tensorflow | highlevel ML library | 
+| notebook | IDE | 
+| jupyterlab | IDE | 
 
  
 # Future Support
