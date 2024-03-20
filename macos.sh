@@ -174,18 +174,21 @@ function ds_tools() {
           echo " "
           echo "upgrading pip before installing rest of the tools.."
           python3 -m pip install --upgrade pip
-          if [ -f "$HOME/.dotfiles/config_list.txt" ]; then
-              echo "####### config_list.txt exists."
-              cat $HOME/.dotfiles/config_list.txt | while read cfg 
+          if [ -f "$HOME/.dotfiles/pip_list.txt" ]; then
+              echo "####### pip_list.txt exists."
+              cat $HOME/.dotfiles/pip_list.txt | while read cfg 
               do
                 echo "checking if $cfg is already installed..."
-                if brew list $cfg &>/dev/null; then
-                  echo "$cfg is already installed"
-                else
-                  echo " "
-                  echo "####### installing $cfg..."
-                  brew install $cfg
-                fi
+                pip3 install $cfg
+
+                # if brew list $cfg &>/dev/null; then
+                #   echo "$cfg is already installed"
+                # else
+                #   echo " "
+                #   echo "####### installing $cfg..."
+                #   brew install $cfg
+                # fi
+
               done
           else
               echo " "
@@ -201,6 +204,7 @@ function ds_tools() {
           echo " "
           echo "####### packages is installed successfully"
           echo " "
+          cd $HOME/ml-cookie-cutter
           echo "deactivating the venv..."
           deactivate
           echo " "
