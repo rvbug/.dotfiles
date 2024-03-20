@@ -54,7 +54,7 @@ This repository helps to restore/configure new machine via script based on the O
 
 **`Note`**: The script works on Ubuntu/Arch/Debian machines but the apt package manager keeps pointing to neovim 0.7x version. Current version of neovim as of today is 0.9x 
 
-# Docker Images
+# Docker
 If you want to install the script on a `throw away` machine then try on docker images. Here are the steps to be followed. Below example is on fedora, but the steps pretty much remain the same on any version
 
 - Install docker on your host machine. 
@@ -62,10 +62,6 @@ If you want to install the script on a `throw away` machine then try on docker i
   
 ```bash
 $> docker pull fedora
-
-# for arch linux
-$> docker pull archlinux/archlinux
-
 
 # to check if the image is downloaded on your system
 $> docker images
@@ -88,44 +84,6 @@ $> docker images
 
 
 
-# Docker
-I wanted to test this on another machine apart so better option was to install docker and try on various "throw away" machine.
-Next step is to automate this as part of my shellscript.
-
-The list of things I did was 
-
-- Install docker desktop on mac (.dmg file)
-- Pull docker ubuntu image and view them
-
-- Set the container and connect 
-```bash
-  # setup the container
-  $> docker run --name test -d -i -t ubuntu /bin/sh
-  # you can see the container active using
-  $> docker ps
-  # get into the container
-  $> docker exec -it container-id /bin/sh
-
-```
-- Once inside the image then do the following (to be automated)
-```bash
-  # update the image
-  $> apt update
-
-  # install git to clone the repo
-  # will have to make this repo public
-  $> apt install git -y
-
-  # create a folder for cloning the repo
-  $> mkdir project; cd project
-
-  # cloning the repo
-  $> git clone https://github.com/rvbug/.dotfiles.git
-
-  $> cd .dotfiles
-  $> /bin/sh install.sh
- 
-```
 
 # Installations
 
@@ -135,8 +93,7 @@ Once the machine is detected, check if following prerequisites are installed
 |  packages |  description |
 | --- |  --- |
 | brew| macos package manager|
-| yq    | yaml processor (supports xml and json too) |
-| dnf   | if Fedora then choose dnf package manager  |
+| dnf   | if Fedora then it uses dnf package manager  |
 
 
 Here are the list of softwares to be installed 
@@ -174,8 +131,10 @@ List of packages installed for Data Science and ML
 | jupyterlab | | 
 
  
-
-
 # Future Support
-- Ubuntu - yaml not installed, check for pip
-- Debian - issue with yq
+- Ubuntu & Debian
+
+# References
+
+- [Neovim Configuration](https://github.com/rvbug/neovim)  
+- [Cookie-ml](https://github.com/rvbug/cookie-ml/)  
