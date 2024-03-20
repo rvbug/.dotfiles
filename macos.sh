@@ -174,9 +174,9 @@ function ds_tools() {
           echo " "
           echo "upgrading pip before installing rest of the tools.."
           python3 -m pip install --upgrade pip
-          if [ -f "./config_list.txt" ]; then
+          if [ -f "$HOME/.dotfiles/config_list.txt" ]; then
               echo "####### config_list.txt exists."
-              cat config_list.txt | while read cfg 
+              cat $HOME/.dotfiles/config_list.txt | while read cfg 
               do
                 echo "checking if $cfg is already installed..."
                 if brew list $cfg &>/dev/null; then
