@@ -21,7 +21,11 @@
 
 # Introduction
 
-This repository helps to restore/configure new machine via script based on the OS 
+This repository helps to restore/configure new machine via script based on the OS. Currently, this configuration supports
+
+- Mac OS
+- Linux Fedora
+- Linux 
 
 # Script Files 
 
