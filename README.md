@@ -35,13 +35,14 @@ This repository helps to restore/configure new machine via script based on the O
 | `macos.sh` | shell Script | Script to run on mac os| 
 | `linux.sh` | shell Script | To run on Linux machine (Fedora) | 
 | `ds_tools.sh` | shell script | To setup data science & ML tools |
+| `projects.sh` | shell script | Initalizes your projects |
+| `software_list.txt`  | text file | List of softwares to be installed | 
+| `pip_list.txt`  | text file | List of softwares for data science and ML | 
+| `config_list.txt`  | text file | List of config files | 
 
 # Configuration files
 | File | Type |  Description |
 | --- | --- | --- |
-| `software_list.txt`  | text file | List of softwares to be installed | 
-| `pip_list.txt`  | text file | List of softwares for data science and ML | 
-| `config_list.txt`  | text file | List of config files | 
 | `config/.tmux.conf`|  tmux  | tmux configuration file| 
 | `config/.wezterm.lua`| terminal | wezterm lua terminal config file | 
 | `config/.zshrc`| profile | shell profile| 
@@ -53,10 +54,12 @@ This repository helps to restore/configure new machine via script based on the O
 | --- | --- | --- |
 | mac | Ventura | homebrew | 
 | mac  | Sonoma | homebrew | 
-| linux | Fedora (incld. docker support) | dnf | 
+| linux | Fedora  | dnf | 
+| linux | Fedora on docker | dnf | 
 
 
-**`Note`**: The script works on Ubuntu/Arch/Debian machines but the apt package manager keeps pointing to neovim 0.7x version. Current version of neovim as of today is 0.9x 
+**`Note`**: The script works on Ubuntu/Debian OS but the apt package manager keeps pointing to neovim 0.7x version. Current version of neovim as of today is 0.9x. 
+This script can still be used on Ubuntu and Debain machine without Neovim.
 
 # Docker
 If you want to install the script on a `throw away` machine then try on docker images. Here are the steps to be followed. Below example is on fedora, but the steps pretty much remain the same on any version
