@@ -22,6 +22,7 @@ echo " "
 
 
 echo "#######################################################"
+echo " "
 echo "1) .dotfiles"
 echo "2) neovim"
 echo "3) cookie-ml"
@@ -33,12 +34,15 @@ echo "#######################################################"
 
 read -p "select : " -n 1 -r reply
 echo " "
-echo "project selectec is $reply"
+echo "project selected is $reply"
 
 case $reply in
-  1)  cd $root_dir/dotfiles
+  1) echo " "  
+    cd $root_dir/.dotfiles
+    nvim .
     ;;
-  2)  cd $root_dir/neovim
+  2)  cd $HOME/.config/neovim
+      nvim .
     ;;
   3)  cd $root_dir/cookie-ml
     ;;
@@ -47,3 +51,30 @@ case $reply in
   5)  exit
     ;;
 esac
+
+# if [[ $reply == 1 ]]; then
+#   # check if the directory exists
+#   if [ -d "$root_dir/.dotfiles" ]; then
+#     cd $root_dir/.dotfiles
+#
+#   else
+#     echo " "
+#     echo "directory not found.. exiting the script"
+#     exit 0
+#   fi
+#
+#
+#
+# elif [[ $reply == 2 ]]; then
+#   cd $HOME/.config/neovim
+# elif [[ $reply == 3 ]]; then
+#   cd $root_dir/cookie-ml
+# elif [[ $reply == 4 ]]; then
+#   cd $root_dir/ml-cookie-project
+# elif [[ $reply == 5 ]]; then
+#   exit
+# fi
+#
+#
+
+
