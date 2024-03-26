@@ -2,7 +2,6 @@
 
 <p align="center"> <img height=18 src="https://img.shields.io/badge/License-GPLv3-blue.svg"> <img height=25  src="https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white"> </p>
 
-
 <p align="center">
   <img src="https://img.shields.io/badge/mac%20os-000000?style=for-plastic&logo=macos&logoColor=F0F0F0">
    <img src="https://img.shields.io/badge/Fedora-294172?style=for-plastic&logo=fedora&logoColor=white">
@@ -26,11 +25,11 @@
 
 # Introduction
 
-This repository helps to restore/configure new machine via script based on the OS. Currently, this configuration supports
+This repository helps to restore/configure new machine via script based on the OS you run. This configuration supports:   
 
 - Mac OS
 - Linux Fedora
-- Linux 
+- Linux Fedora on docker
 
 # Script Files 
 
@@ -50,7 +49,7 @@ This repository helps to restore/configure new machine via script based on the O
 | --- | --- | --- |
 | `config/.tmux.conf`|  tmux  | tmux configuration file| 
 | `config/.wezterm.lua`| terminal | wezterm lua terminal config file | 
-| `config/.zshrc`| profile | shell profile| 
+| `config/.zshrc`| profile | shell profile and aliases | 
 | `config/starship.toml`| shell Prompt | shell prompt | 
 
 
@@ -62,7 +61,7 @@ This repository helps to restore/configure new machine via script based on the O
 | linux | Fedora  | dnf | 
 | linux | Fedora on docker | dnf | 
 
-
+<br>
 **`Note`**: The script works on Ubuntu/Debian OS but the apt package manager keeps pointing to neovim 0.7x version. Current version of neovim as of today is 0.9x. 
 This script can still be used on Ubuntu and Debain machine without Neovim.
 
@@ -102,6 +101,9 @@ $> docker images
 The main script `install.sh` will guide through the setup processes. 
 
 If the OS version is "Darwin" it calls for `macos.sh`. If it is "Linux" then runs `linux.sh`.   
+You will be promoted if this script require sudo access to run the installation.   
+
+`Note:` Avoid running this (or any script) as root. This script prompts you if you are a root user. 
 
 Following are the prerequisite before starting the script
 
@@ -151,6 +153,8 @@ List of packages installed for Data Science and ML
  
 # Future Support
 - Ubuntu & Debian
+- Tmux session support
+- Friendly messages
 
 # References
 
