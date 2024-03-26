@@ -9,7 +9,7 @@
 #
 #
 
-root_dir="$HOME/Documents/projects"
+main_dir="$HOME/Documents/projects"
 
 
 echo " "
@@ -38,17 +38,36 @@ echo "project selected is $reply"
 
 case $reply in
   1) echo " "  
-    cd $root_dir/.dotfiles
+    cd $main_dir/.dotfiles
+    echo " "
+    echo "pulling latest code base from github..."
+    git pull https://github.com/rvbug/.dotfiles
     nvim .
     ;;
-  2)  cd $HOME/.config/neovim
+
+  2) echo " "  
+    cd $HOME/.config/neovim
+      echo " "
+      echo "pulling latest code base from github..."
+      git pull https://github.com/rvbug/neovim 
       nvim .
     ;;
-  3)  cd $root_dir/cookie-ml
+
+  3) echo " "  
+    cd $main_dir/cookie-ml
+    echo " "
+    echo "pulling latest code base from github..."
+    git pull https://github.com/rvbug/cookie-ml
     ;;
-  4)  cd $root_dir/ml-cookie-project
+  
+  4) echo " "  
+    cd $main_dir/ml-cookie-project
+    echo " "
     ;;
-  5)  exit
+  
+  5) echo " "
+    echo "invalid option.. exiting the script..."
+    exit
     ;;
 esac
 
