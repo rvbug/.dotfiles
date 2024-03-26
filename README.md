@@ -154,7 +154,7 @@ List of packages installed for Data Science and ML
 # Future Support
 - Ubuntu & Debian
 - Tmux session support
-- Friendly messages
+- Formatted messages
 
 # References
 
