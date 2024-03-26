@@ -154,6 +154,7 @@ List of packages installed for Data Science and ML
 # Future Support
 - Ubuntu & Debian
 - Tmux session support
+- Missing font installation for Neovim
 - Formatted messages
 
 # References
