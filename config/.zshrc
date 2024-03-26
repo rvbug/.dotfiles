@@ -13,6 +13,6 @@ alias project="sh $HOME/Documents/projects/.dotfiles/projects.sh"
 echo " if you want to know more about aliases set type 'alias' "
 
 
-echo "Think Different!!!!"
+cowsay "Think Different!"
 
 eval "$(starship init zsh)"

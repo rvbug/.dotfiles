@@ -14,4 +14,4 @@ rust-analyzer
 lazygit
 tree
 tree-sitter
-
+cowsay
