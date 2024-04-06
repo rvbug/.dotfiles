@@ -156,6 +156,7 @@ List of packages installed for Data Science and ML
 - Tmux session support
 - Missing font installation for Neovim
 - Formatted messages
+- Yabai & Skhd - Window manager support
 
 # References
 
