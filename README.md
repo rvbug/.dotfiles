@@ -149,7 +149,6 @@ List of packages installed for Data Science and ML
 | tensorflow | highlevel ML library | 
 | notebook | IDE | 
 | jupyterlab | IDE | 
-
  
 # Future Support
 - Ubuntu & Debian
