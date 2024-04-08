@@ -3,4 +3,4 @@
 .zshrc 
 .config/starship.toml
 .config/yabai/yabairc
-
+.config/skhd/skhdrc
