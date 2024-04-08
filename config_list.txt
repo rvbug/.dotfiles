@@ -2,4 +2,5 @@
 .wezterm.lua 
 .zshrc 
 .config/starship.toml
+.config/yabai/yabairc
 
