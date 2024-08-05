@@ -25,7 +25,10 @@
 
 # Introduction
 
-This repository helps to restore/configure new machine via script based on the OS you run. This configuration supports:   
+This repository helps to restore/configure new machine via script based on the OS you run. 
+All the configuration will be managed using GNU Stow.
+
+Supported OS:   
 
 - Mac OS
 - Linux Fedora
