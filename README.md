@@ -158,7 +158,8 @@ List of packages installed for Data Science and ML
 # GNU Stow (WIP)
 GNU Stow is the symlink farm manager which helps you control your configuration files 
 
-
+## Installation
+`brew install stow`
 
 
 
