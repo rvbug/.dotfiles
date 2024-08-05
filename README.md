@@ -62,7 +62,8 @@ This repository helps to restore/configure new machine via script based on the O
 | linux | Fedora on docker | dnf | 
 
 <br>
-**`Note`**: The script works on Ubuntu/Debian OS but the apt package manager keeps pointing to neovim 0.7x version. Current version of neovim as of today is 0.9x. 
+
+**Note** : The script works on Ubuntu/Debian OS but the apt package manager keeps pointing to neovim 0.7x version. Current version of neovim as of today is 0.9x. 
 This script can still be used on Ubuntu and Debain machine without Neovim.
 
 # Docker
@@ -149,8 +150,18 @@ List of packages installed for Data Science and ML
 | tensorflow | highlevel ML library | 
 | notebook | IDE | 
 | jupyterlab | IDE | 
+
+
+# GNU Stow (WIP)
+GNU Stow is the symlink farm manager which helps you control your configuration files 
+
+
+
+
+
  
 # Future Support
+- GNU Stow
 - Ubuntu & Debian
 - Tmux session support
 - Missing font installation for Neovim
