@@ -8,7 +8,7 @@
 ########################################################
 
 echo " "
-echo "Starting installation process... "
+echo "####### Starting installation process... "
 echo " "
 # preinstallation steps to be done
 # before installing the essentials
@@ -44,11 +44,10 @@ function check_os() {
   if [ $os == "Darwin" ]; then
 
     echo " "
-    echo "####### Mac OS detected..."
+    echo "####### detected mac os..."
     # check_for_docker
 
     echo " "
-    echo "####### initiating macos installation"
     ./macos.sh
 
     # check_n_install_essentials "macos"

@@ -1,29 +1,38 @@
 # <p align="center"> <bold>•</bold>dotfiles </p> 
 
+<p align="center"> <img height=18 src="https://img.shields.io/badge/License-GPLv3-blue.svg"> <img height=25  src="https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white"> </p>
 
-  
-![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)
-![Fedora](https://img.shields.io/badge/Fedora-294172?style=for-the-badge&logo=fedora&logoColor=white)
-![Debian](https://img.shields.io/badge/Debian-D70A53?style=for-the-badge&logo=debian&logoColor=white)
-![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)  
+<p align="center">
+  <img src="https://img.shields.io/badge/mac%20os-000000?style=for-plastic&logo=macos&logoColor=F0F0F0">
+   <img src="https://img.shields.io/badge/Fedora-294172?style=for-plastic&logo=fedora&logoColor=white">
+   <img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-plastic&logo=docker&logoColor=white">
+   <img src="https://img.shields.io/badge/numpy-%23013243.svg?style=for-plastic&logo=numpy&logoColor=white">
+   <img src="https://img.shields.io/badge/pandas-%23150458.svg?style=for-plastic&logo=pandas&logoColor=white">
+   <img src="https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-plastic&logo=scikit-learn&logoColor=white">
+   <img src="https://img.shields.io/badge/Matplotlib-%23ffffff.svg?style=for-plastic&logo=Matplotlib&logoColor=black">
+   <img src="https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=for-plastic&logo=TensorFlow&logoColor=white">
+   <img src="https://img.shields.io/badge/jupyter-%23FA0F00.svg?style=for-plastic&logo=jupyter&logoColor=white">
+   <img src="https://img.shields.io/badge/NeoVim-%2357A143.svg?&style=for-plastic&logo=neovim&logoColor=white">
+    <img src="https://img.shields.io/badge/python-3670A0?style=for-plastic&logo=python&logoColor=ffdd54">
+    <img src="https://img.shields.io/badge/lua-%232C2D72.svg?style=for-plastic&logo=lua&logoColor=white">
+    <img src="https://img.shields.io/badge/rust-%23000000.svg?style=for-plastic&logo=rust&logoColor=white">
+    <img src="https://img.shields.io/badge/OCaml-%23E98407.svg?style=for-plastic&logo=ocaml&logoColor=white">
+  <!--  <img src=""> -->
 
-![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white)
-![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white)
-![Matplotlib](https://img.shields.io/badge/Matplotlib-%23ffffff.svg?style=for-the-badge&logo=Matplotlib&logoColor=black)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=for-the-badge&logo=TensorFlow&logoColor=white)
-![Jupyter Notebook](https://img.shields.io/badge/jupyter-%23FA0F00.svg?style=for-the-badge&logo=jupyter&logoColor=white)  
+</p>
 
-![Neovim](https://img.shields.io/badge/NeoVim-%2357A143.svg?&style=for-the-badge&logo=neovim&logoColor=white)
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-![Lua](https://img.shields.io/badge/lua-%232C2D72.svg?style=for-the-badge&logo=lua&logoColor=white)
-![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white)
-![OCaml](https://img.shields.io/badge/OCaml-%23E98407.svg?style=for-the-badge&logo=ocaml&logoColor=white)
+ ---
 
 # Introduction
 
-This repository helps to restore/configure new machine via script based on the OS 
+This repository helps to restore/configure new machine via script based on the OS you run. 
+All the configuration will be managed using GNU Stow.
+
+Supported OS:   
+
+- Mac OS
+- Linux Fedora
+- Linux Fedora on docker
 
 # Script Files 
 
@@ -33,14 +42,17 @@ This repository helps to restore/configure new machine via script based on the O
 | `macos.sh` | shell Script | Script to run on mac os| 
 | `linux.sh` | shell Script | To run on Linux machine (Fedora) | 
 | `ds_tools.sh` | shell script | To setup data science & ML tools |
+| `projects.sh` | shell script | Initalizes your projects |
+| `software_list.txt`  | text file | List of softwares to be installed | 
+| `pip_list.txt`  | text file | List of softwares for data science and ML | 
+| `config_list.txt`  | text file | List of config files | 
 
 # Configuration files
 | File | Type |  Description |
 | --- | --- | --- |
-| `software.yaml`  | yaml file | List of softwares to be installed | 
 | `config/.tmux.conf`|  tmux  | tmux configuration file| 
 | `config/.wezterm.lua`| terminal | wezterm lua terminal config file | 
-| `config/.zshrc`| profile | shell profile| 
+| `config/.zshrc`| profile | shell profile and aliases | 
 | `config/starship.toml`| shell Prompt | shell prompt | 
 
 
@@ -49,13 +61,15 @@ This repository helps to restore/configure new machine via script based on the O
 | --- | --- | --- |
 | mac | Ventura | homebrew | 
 | mac  | Sonoma | homebrew | 
-| linux | Fedora | dnf | 
-| linux | Ubuntu | apt (neovim is not available)|
+| linux | Fedora  | dnf | 
+| linux | Fedora on docker | dnf | 
 
-**`Note`**: The script works on Ubuntu/Arch/Debian machines but the apt package manager keeps pointing to neovim 0.7x version. Current version of neovim as of today is 0.9x 
+<br>
 
+**Note** : The script works on Ubuntu/Debian OS but the apt package manager keeps pointing to neovim 0.7x version. Current version of neovim as of today is 0.9x. 
+This script can still be used on Ubuntu and Debain machine without Neovim.
 
-# Docker Images
+# Docker
 If you want to install the script on a `throw away` machine then try on docker images. Here are the steps to be followed. Below example is on fedora, but the steps pretty much remain the same on any version
 
 - Install docker on your host machine. 
@@ -63,10 +77,6 @@ If you want to install the script on a `throw away` machine then try on docker i
   
 ```bash
 $> docker pull fedora
-
-# for arch linux
-$> docker pull archlinux/archlinux
-
 
 # to check if the image is downloaded on your system
 $> docker images
@@ -89,94 +99,80 @@ $> docker images
 
 
 
-# Docker
-I wanted to test this on another machine apart so better option was to install docker and try on various "throw away" machine.
-Next step is to automate this as part of my shellscript.
-
-The list of things I did was 
-
-- Install docker desktop on mac (.dmg file)
-- Pull docker ubuntu image and view them
-
-- Set the container and connect 
-```bash
-  # setup the container
-  $> docker run --name test -d -i -t ubuntu /bin/sh
-  # you can see the container active using
-  $> docker ps
-  # get into the container
-  $> docker exec -it container-id /bin/sh
-
-```
-- Once inside the image then do the following (to be automated)
-```bash
-  # update the image
-  $> apt update
-
-  # install git to clone the repo
-  # will have to make this repo public
-  $> apt install git -y
-
-  # create a folder for cloning the repo
-  $> mkdir project; cd project
-
-  # cloning the repo
-  $> git clone https://github.com/rvbug/.dotfiles.git
-
-  $> cd .dotfiles
-  $> /bin/sh install.sh
- 
-```
 
 # Installations
 
-The main script `install.sh` will guide through the setup processes. If the OS version is "Darwin" it calls for `macos.sh`. If it is "Linux" then runs `linux.sh`.   
-Once the machine is detected, check if following prerequisites are installed    
+The main script `install.sh` will guide through the setup processes. 
+
+If the OS version is "Darwin" it calls for `macos.sh`. If it is "Linux" then runs `linux.sh`.   
+You will be promoted if this script require sudo access to run the installation.   
+
+`Note:` Avoid running this (or any script) as root. This script prompts you if you are a root user. 
+
+Following are the prerequisite before starting the script
 
 |  packages |  description |
 | --- |  --- |
-| brew| macos package manager|
-| yq    | yaml processor (supports xml and json too) |
-| dnf   | if Fedora then choose dnf package manager  |
+| brew| macos package manager, usually installs xcode-command line tools and also git|
+| dnf   | if Fedora then it uses dnf package manager  |
+| git  | install seperately if it is not installed using your package manager | 
 
 
-Here are the list of softwares to be installed 
+
+Here are the list of softwares which will be installed
+
 |  packages |  description |
 | --- |  --- |
 | wezterm | Terminal written in rust on Mac os| 
 | neovim | An IDE supports mac and fedora   | 
 | starship| customizable command prompt on Mac os | 
-| curl | | 
-| wget | | 
-| tmux | | 
-| fd | | 
-| ripgrep | | 
-| npm | |
-| yarn | | 
-| python3 | | 
-| lua5.4 | | 
-| rust-analyzer | | 
-| lazygit | | 
-| ocaml | |
-| tree | | 
-| tree-sitter | | 
+| curl | Client URL to enables data exchange between client and a server | 
+| wget | same as curl | 
+| tmux | Terminal Multiplexer | 
+| fd | simple and fast alternative to find command| 
+| ripgrep | real time grep | 
+| npm | package manager|
+| yarn | package manager| 
+| python3 | Python | 
+| lua5.4 | Lua | 
+| rust-analyzer | For Rust| 
+| lazygit | neat UI for git | 
+| ocaml | For OCaml|
+| tree | helps in directoy listing| 
+| tree-sitter | parser generator | 
 
 List of packages installed for Data Science and ML
 
 |  packages |  description |
 | --- |  --- |
-| numpy | | 
-| pandas | | 
-| scikit-learn| | 
-| matplotlib | | 
-| seaborn| | 
-| tensorflow| | 
-| notebook | | 
-| jupyterlab | | 
+| numpy | library for mathematical function | 
+| pandas | library for data manipulation | 
+| scikit-learn | simple ML libraries | 
+| matplotlib | for plotting | 
+| seaborn| alternative to matplotlib for plotting | 
+| tensorflow | highlevel ML library | 
+| notebook | IDE | 
+| jupyterlab | IDE | 
+
+
+# GNU Stow (WIP)
+GNU Stow is the symlink farm manager which helps you control your configuration files 
+
+## Installation
+`brew install stow`
+
+
 
  
-
-
 # Future Support
-- Ubuntu - yaml not installed, check for pip
-- Debian - issue with yq
+- GNU Stow
+- Ubuntu & Debian
+- Tmux session support
+- Missing font installation for Neovim
+- Formatted messages
+- Yabai & Skhd - Window manager support
+
+# References
+
+- [Neovim Configuration](https://github.com/rvbug/neovim)  
+- [Cookie-ml](https://github.com/rvbug/cookie-ml/)  

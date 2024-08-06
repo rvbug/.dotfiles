@@ -8,14 +8,21 @@
 ########################################################
 
 # script first check if the software list file exists
+#
 
 echo " "
 echo "####### starting mac os installation..."
-
-
-# installating some essential softwares
+echo "########################################"
+echo "to get started..."
+echo "you will need to install homebrew first "
+echo "it will ask you to run 2 commands on the terminal once the installaiton is complete"
 echo " "
-echo "checking for essential softwares first..."
+echo "xcode command line tool will also be installed along with git..."
+echo "once the installation is completed, close and reopen the terminal..."
+echo "########################################"
+
+echo " "
+echo "checking essential softwares..."
 
 echo "####### checking for homebrew..."
 if command -v brew &>/dev/null; then
@@ -35,28 +42,25 @@ else
   brew install git
 fi
 
-
-
 echo " "
-echo "checking if the software file exists..."
+echo "####### checking list of software on the system..."
+
 
 if [ -f "software_list.txt" ]; then
   echo "####### software_list.txt exists."
   cat software_list.txt | while read line
   do
-    echo "checking if $line is already installed..."
-
+    echo "#######"
     # check if the $line is lua 
     if [ "$line" = "lua" ]; then
-      if brew list lua@5.4 &>/dev/null; then
+      if brew list lua &>/dev/null; then
         echo "lua is already installed..."
       else
         echo " "
         echo "####### installing lua..."
-        brew install lua@5.1
+        brew install lua@5.4
       fi
     fi
-
 
     if brew list $line &>/dev/null; then
       echo "$line is already installed"
@@ -73,7 +77,7 @@ else
 fi 
 
 echo " "
-echo "checking for ocaml ..."
+echo "####### checking for ocaml ..."
 
 if brew list ocaml &>/dev/null; then
   echo "####### ocaml is already installed"
@@ -96,129 +100,133 @@ else
 fi
 
 
-# function ds_tools() {
-#   # this will install ds tools from cookie-ml repo
-#   # setup all the libraries on the virtual env
-#   # regardless of the OS
+function ds_tools() {
+  # this will install ds tools from cookie-ml repo
+  # setup all the libraries on the virtual env
+  # regardless of the OS
+
+  # install pyaml first
+  echo " "
+  echo " ###### checking for pyaml..."
+  # check if pyyaml is installed
+  if brew list pyyaml &>/dev/null; then
+    echo " "
+    echo "pyaml is already installed"
+  else
+    echo " "
+    echo "####### installing pyaml..."
+    brew install pyyaml
+  fi
+
+  echo " "
+  read -p "####### Do you want to install Data Science & ML tools? (y/n): " choice
+    case "$choice" in
+      y|Y) echo " "
+        # check if ml-cookie-cutter folder is available
+        # if available, then skip the installation
+        if [ -d "$HOME/ml-cookie-cutter" ]; then
+          echo " "
+          echo "cookie cutter project is setup at \"$HOME\" ..."
+          echo "skipping ml setup installation..."
+          echo " " 
+          echo "continue with rest of the installation..."
+        else
+          cd $HOME
+          git clone https://github.com/rvbug/cookie-ml.git 
+          # cd into the cloned repo 
+          cd cookie-ml
+          echo "####### setting up ml-cookie-cutter in your \"$HOME\" dir.."
+          echo "feel free to rename this project"
+          echo " "
+          echo "installing cookie cutter project...."
+          echo " "
+          echo "####### Here's the help for cookie-ml..."
+          echo " "
+          echo " "
+          echo "###########################################################################"
+          python3 main.py --h
+          echo " "
+          echo " " 
+          echo "###########################################################################"
+          echo " "
+          # cookie-ml help
+          python3 main.py --v 
+          pwd
+          echo " "
+          # delete the cloned repo
+          echo "####### deleting the cookie-ml repo..."
+          cd $HOME
+          rm -rf cookie-ml
+
+          # moving to ml-cookie-cutter folder
+          cd $HOME/ml-cookie-cutter
+          # activing the venv
+          echo " "
+          echo " "
+          echo "####### activating the venv..."
+          source venv/bin/activate
+
+          echo " "
+          echo "upgrading pip before installing rest of the tools.."
+          python3 -m pip install --upgrade pip
+          if [ -f "$HOME/.dotfiles/pip_list.txt" ]; then
+              echo "####### pip_list.txt exists."
+              cat $HOME/.dotfiles/pip_list.txt | while read cfg 
+              do
+                echo "checking if $cfg is already installed..."
+                pip3 install $cfg
+
+                # if brew list $cfg &>/dev/null; then
+                #   echo "$cfg is already installed"
+                # else
+                #   echo " "
+                #   echo "####### installing $cfg..."
+                #   brew install $cfg
+                # fi
+
+              done
+          else
+              echo " "
+              "####### config_list.txt does not exist, exiting the script..."
+              exit 0
+          fi 
+
+          # for pip_list in "${pip_list[@]}"; do
+          #   echo "installing packages using $pip_list"
+          #   # pip install $pip_list
+          # done
+      
+          echo " "
+          echo "####### packages is installed successfully"
+          echo " "
+          cd $HOME/ml-cookie-cutter
+          echo "deactivating the venv..."
+          deactivate
+          echo " "
+          echo "deleteing the cookie-ml repo..."
+          rm -rf "$HOME/cookie-ml"
+          echo " "
+          echo " "
+          echo "###################################################################"
+          echo "ml-cookie-cutter is setup at $HOME directory"
+          echo " "
+          echo "activate your project using source venv/bin/activate"
+          echo "###################################################################"
+          echo " "
+          echo " "
+        fi
+      ;;
+      n|N) echo "Skipping ..."
+      ;;
+      *) echo "Invalid choice. Skipping..."
+      ;;
+    esac
+
+}
+
+ ds_tools
 #
-#   echo " "
-#   echo "checking if the config file exists..."
-#
-#
-#   # echo " "
-#   # echo "####### checking for yaml..."
-#   #
-#
-#   echo " "
-#   read -p "####### Do you want to install Data Science & ML tools? (y/n): " choice
-#     case "$choice" in
-#       y|Y) echo " "
-#         # check if ml-cookie-cutter folder is available
-#         # if available, then skip the installation
-#         if [ -d "$HOME/ml-cookie-cutter" ]; then
-#           echo " "
-#           echo "cookie cutter project is setup at \"$HOME\" ..."
-#           echo "skipping ml setup installation..."
-#           echo " " 
-#           echo "continue with rest of the installation..."
-#         else
-#           # run the command with the structure
-#           # setting up cookie-ml repo
-#           # cd into HOME directory  
-#           cd $HOME
-#           git clone https://github.com/rvbug/cookie-ml.git 
-#           # cd into the cloned repo 
-#           cd cookie-ml
-#           echo "####### setting up ml-cookie-cutter in your \"$HOME\" dir.."
-#           echo "feel free to rename this project"
-#           echo " "
-#           echo "installing cookie cutter project...."
-#           echo " "
-#           echo "####### Here's the help for cookie-ml..."
-#           echo " "
-#           echo " "
-#           echo "###########################################################################"
-#           python3 main.py --h
-#           echo " "
-#           echo " " 
-#           echo "###########################################################################"
-#           echo " "
-#           # cookie-ml help
-#           python3 main.py --v 
-#           pwd
-#           echo " "
-#           # delete the cloned repo
-#           echo "####### deleting the cookie-ml repo..."
-#           cd $HOME
-#           rm -rf cookie-ml
-#
-#           # moving to ml-cookie-cutter folder
-#           cd $HOME/ml-cookie-cutter
-#           # activing the venv
-#           echo " "
-#           echo " "
-#           echo "####### activating the venv..."
-#           source venv/bin/activate
-#
-#           echo " "
-#           echo "upgrading pip before installing rest of the tools.."
-#           python3 -m pip install --upgrade pip
-#           if [ -f "config_list.txt" ]; then
-#               echo "####### config_list.txt exists."
-#               cat config_list.txt | while read cfg 
-#               do
-#                 echo "checking if $cfg is already installed..."
-#                 if brew list $cfg &>/dev/null; then
-#                   echo "$cfg is already installed"
-#                 else
-#                   echo " "
-#                   echo "####### installing $cfg..."
-#                   brew install $cfg
-#                 fi
-#               done
-#           else
-#               echo " "
-#               "####### config_list.txt does not exist, exiting the script..."
-#               exit 0
-#           fi 
-#
-#           # for pip_list in "${pip_list[@]}"; do
-#           #   echo "installing packages using $pip_list"
-#           #   # pip install $pip_list
-#           # done
-#       
-#           echo " "
-#           echo "####### packages is installed successfully"
-#           echo " "
-#           echo "deactivating the venv..."
-#           deactivate
-#           echo " "
-#           echo "deleteing the cookie-ml repo..."
-#           rm -rf "$HOME/cookie-ml"
-#           echo " "
-#           echo " "
-#           echo "###################################################################"
-#           echo "ml-cookie-cutter is setup at $HOME directory"
-#           echo " "
-#           echo "activate your project using source venv/bin/activate"
-#           echo "###################################################################"
-#           echo " "
-#           echo " "
-#         fi
-#       ;;
-#       n|N) echo "Skipping ..."
-#       ;;
-#       *) echo "Invalid choice. Skipping..."
-#       ;;
-#     esac
-#
-# }
-#
-# #ds_tools
-#
-#
-#
-#
+#home folder
 function configure_mac() {
   # backup dotfiles from the yaml file
   echo " "
@@ -228,39 +236,22 @@ function configure_mac() {
     echo "####### config_list.txt exists."
     cat config_list.txt | while read line
     do
-      cp "$HOME/$config_list" "$HOME/$config_list.bak.$(date +%Y-%m-%d-%H:%M:%S)"
-      ls "$HOME/$config_list"
+      cp $HOME/$line $HOME/$line.bak.$(date +%Y-%m-%d-%H:%M:%S)
     done
-     echo "cloning the repo"
-     config_dir=".config"
-     git clone "https://github.com/rvbug/.dotfiles/" "$HOME/.dotfiles"
-       for files in "$HOME/.dotfiles/$config_dir"/.*; do
-         echo $files
-         cp "$files" "$HOME/"
-         echo "files are now moved"
-       done
-      # delete the repo
-      echo " "
-      echo "deleting the repo..."
-      rm -rf "$HOME/.dotfiles"
-     else
-     echo "config folder is not available"
-     echo " continue with rest of the installation..."
-    fi
+       echo "cloning the repo"
+       config_dir=".config"
+       git clone "https://github.com/rvbug/.dotfiles/" "$HOME/.dotfiles"
+         for files in "$HOME/.dotfiles/$config_dir"/.*; do
+           echo $files
+           cp "$files" "$HOME/"
+           echo "files are now moved"
+         done
+        delete the repo
+        echo " "
+        echo "deleting the repo..."
+        rm -rf "$HOME/.dotfiles"
+  fi
 
-   # if [ -d "$HOME/.dotfiles/$config_dir" ]; then
-   #     cp "$HOME/.dotfiles/$config_dir"/.tmux.conf "$HOME/"
-   #     cp "$HOME/.dotfiles/$config_dir"/.wezterm.lua "$HOME/"
-   #     cp "$HOME/.dotfiles/$config_dir"/.zshrc "$HOME/"
-   #     cp "$HOME/.dotfiles/$config_dir"/startship.toml "$HOME/$config_dir/"
-
-     
-
-  # now once this is completed then check if neovim is installed
-  # if not then install it
-  
-  # check if neovim is installed
-  
   if brew list neovim &>/dev/null; then
     echo " "
     echo "neovim is already installed"
@@ -315,7 +306,7 @@ echo " configuring your new machine"
 echo " "
 echo "###################################################################"
 
-configure_mac
+ configure_mac
 
 echo " "
 echo "data science setup coming soon..."
