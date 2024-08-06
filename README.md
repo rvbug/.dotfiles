@@ -26,7 +26,7 @@
 # Introduction
 
 This repository helps to restore/configure new machine via script based on the OS you run. 
-All the configuration will be managed using GNU Stow.
+All the configuration will be managed using [GNU Stow](https://www.gnu.org/software/stow/).
 
 Supported OS:   
 
@@ -165,14 +165,13 @@ GNU Stow is the symlink farm manager which helps you control your configuration 
 
  
 # Future Support
-- GNU Stow
 - Ubuntu & Debian
 - Tmux session support
 - Missing font installation for Neovim
 - Formatted messages
-- Yabai & Skhd - Window manager support
 
 # References
 
 - [Neovim Configuration](https://github.com/rvbug/neovim)  
-- [Cookie-ml](https://github.com/rvbug/cookie-ml/)  
+- [Cookie-ml](https://github.com/rvbug/cookie-ml/)
+- [GNU Stow](https://www.gnu.org/software/stow/)
