@@ -48,12 +48,13 @@ Supported OS:
 | `config_list.txt`  | text file | List of config files | 
 
 # Configuration files
-| File | Type |  Description |
-| --- | --- | --- |
-| `config/.tmux.conf`|  tmux  | tmux configuration file| 
-| `config/.wezterm.lua`| terminal | wezterm lua terminal config file | 
-| `config/.zshrc`| profile | shell profile and aliases | 
-| `config/starship.toml`| shell Prompt | shell prompt | 
+| File | Type |  OS Supported | Description |
+| --- | --- | --- | -- |
+| `config/.tmux.conf`|  tmux  | Mac , Arch  | tmux configuration file| 
+| `config/.wezterm.lua`| terminal | Mac , Arch | wezterm lua terminal config file | 
+| `config/.zshrc`| profile | Mac , Arch | shell profile and aliases | 
+| `config/starship.toml`| shell Prompt | Mac , Arch | shell prompt | 
+
 
 
 # Versions Tested on
