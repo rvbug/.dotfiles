@@ -4,6 +4,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/mac%20os-000000?style=for-plastic&logo=macos&logoColor=F0F0F0">
+  <img height=20px src="https://img.shields.io/badge/Arch%20Linux-1793D1?logo=arch-linux&logoColor=fff&style=for-the-badge">
    <img src="https://img.shields.io/badge/Fedora-294172?style=for-plastic&logo=fedora&logoColor=white">
    <img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-plastic&logo=docker&logoColor=white">
    <img src="https://img.shields.io/badge/numpy-%23013243.svg?style=for-plastic&logo=numpy&logoColor=white">
@@ -25,7 +26,8 @@
 
 # Introduction
 
-This repository helps to restore/configure new machine via script based on the OS you run. 
+This repository helps to restore/configure new machine via script based on the OS you run.   
+
 All the configuration will be managed using [GNU Stow](https://www.gnu.org/software/stow/).
 
 Supported OS:   
@@ -33,6 +35,7 @@ Supported OS:
 - Mac OS
 - Linux Fedora
 - Linux Fedora on docker
+- Arch Linux 
 
 # Script Files 
 
@@ -54,6 +57,10 @@ Supported OS:
 | `config/.wezterm.lua`| terminal | Mac , Arch | wezterm lua terminal config file | 
 | `config/.zshrc`| profile | Mac , Arch | shell profile and aliases | 
 | `config/starship.toml`| shell Prompt | Mac , Arch | shell prompt | 
+| `config/yabai/yabairc` | Tiling Window Manger | Mac | Window Manager | 
+| `config/skhd/skhdrc` | Tiling Window Manger | Mac | Window Manager | 
+| `config/i3/config` | i3 window manager | Arch | Tiling window manager |
+| `config/polybar/config.ini` | status bar | Arch | Polybar status | 
 
 
 
@@ -64,6 +71,7 @@ Supported OS:
 | mac  | Sonoma | homebrew | 
 | linux | Fedora  | dnf | 
 | linux | Fedora on docker | dnf | 
+| Linux | Arch on VM | pacman , yay |
 
 <br>
 
@@ -163,13 +171,6 @@ GNU Stow is the symlink farm manager which helps you control your configuration 
 `brew install stow`
 
 
-
- 
-# Future Support
-- Ubuntu & Debian
-- Tmux session support
-- Missing font installation for Neovim
-- Formatted messages
 
 # References
 
