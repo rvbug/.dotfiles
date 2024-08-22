@@ -32,7 +32,8 @@ All the configuration will be managed using [GNU Stow](https://www.gnu.org/softw
 
 Supported OS:   
 
-- Mac OS
+- Mac
+- Ubuntu 
 - Linux Fedora
 - Linux Fedora on docker
 - Arch Linux 
@@ -75,8 +76,9 @@ Supported OS:
 
 <br>
 
-**Note** : The script works on Ubuntu/Debian OS but the apt package manager keeps pointing to neovim 0.7x version. Current version of neovim as of today is 0.9x. 
-This script can still be used on Ubuntu and Debain machine without Neovim.
+**Note** : The script works on Ubuntu/Debian OS but the apt package manager keeps pointing to neovim 0.7x version. 
+You will have to build it from source manually which is a separate step under [`Ubuntu Neovim (Manual)`](https://github.com/rvbug/.dotfiles/edit/main/README.md#ubuntu-neovim-manual) installation section. 
+
 
 # Docker
 If you want to install the script on a `throw away` machine then try on docker images. Here are the steps to be followed. Below example is on fedora, but the steps pretty much remain the same on any version
@@ -164,11 +166,40 @@ List of packages installed for Data Science and ML
 | jupyterlab | IDE | 
 
 
+# Ubuntu Neovim (Manual)
+If you follow `sudo apt install neovim`, and run `nvim --version` , it will point to 0.7 version. The current version is `0.10`. Follow these steps for building neovim from source
+
+### Build Pre-requisites
+- You should either have  `clang` or `gcc` , if not available install using `sudo apt install clang` or `sudo apt install gcc`
+- If you do not have CMake then install using `sudo apt install cmake` else you will have to install python3g `sudo apt install python` and then run `pip install cmake`
+- Next, install the following
+  ```bash
+  sudo apt-get install ninja-build gettext cmake unzip curl build-essential
+  ```
+- Next, let us download the neovim source code 
+
+### Installing Neovim
+```bash
+
+# clone the repository
+git clone https://github.com/neovim/neovim
+cd neovim
+
+# set make
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+
+# Fetch the stable branch (latest one)
+git checkout stable
+sudo make install
+```
+
+
 # GNU Stow (WIP)
 GNU Stow is the symlink farm manager which helps you control your configuration files 
 
 ## Installation
 `brew install stow`
+
 
 
 
