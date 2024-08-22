@@ -64,7 +64,6 @@ Supported OS:
 | `config/polybar/config.ini` | status bar | Arch | Polybar status | 
 
 
-
 # Versions Tested on
 | OS | Version |  package manager |
 | --- | --- | --- |
@@ -193,12 +192,19 @@ git checkout stable
 sudo make install
 ```
 
-
 # GNU Stow (WIP)
 GNU Stow is the symlink farm manager which helps you control your configuration files 
 
 ## Installation
 `brew install stow`
+
+## Stow setup
+
+
+
+ 
+
+
 
 
 
