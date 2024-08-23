@@ -27,7 +27,8 @@
 
 # Introduction
 
-This repository helps to restore/configure new machine via script based on the OS you run.   
+Dotfiles helps you to personalize your machine and your enviornment across your machine to have a unified experience.
+This repository helps to restore/configure new machine via script based on the OS you run. 
 
 All the configuration will be managed using [GNU Stow](https://www.gnu.org/software/stow/).
 
@@ -52,6 +53,13 @@ Supported OS:
 | `pip_list.txt`  | text file | List of softwares for data science and ML | 
 | `config_list.txt`  | text file | List of config files | 
 
+<br>
+
+> # **Script**  
+If you do not want to use scripts, just use your package manager to install them manually.
+
+
+
 # Configuration files
 | File | Type |  OS Supported | Description |
 | --- | --- | --- | -- |
@@ -65,7 +73,7 @@ Supported OS:
 | `config/polybar/config.ini` | status bar | Arch | Polybar status | 
 
 
-# Versions Tested on
+# Package Manager
 | OS | Version |  package manager |
 | --- | --- | --- |
 | mac | Ventura | homebrew | 
@@ -73,10 +81,13 @@ Supported OS:
 | linux | Fedora  | dnf | 
 | linux | Fedora on docker | dnf | 
 | Linux | Arch on VM | pacman , yay |
+| Linux | Ubuntu | apt |
 
 <br>
 
-**Note** : The script works on Ubuntu/Debian OS but the apt package manager keeps pointing to neovim 0.7x version. 
+
+> # **Ubuntu Neovim**   
+The script works well on Ubuntu/Debian OS but the apt package manager keeps pointing to neovim 0.7x version. 
 You will have to build it from source manually which is a separate step under [`Ubuntu Neovim (Manual)`](https://github.com/rvbug/.dotfiles/edit/main/README.md#ubuntu-neovim-manual) installation section. 
 
 
@@ -107,8 +118,6 @@ $> docker images
 ```
 
 - You will dropped into this container as root. This script will work fine as a root user but on a real machine/virtual enviornment, never run any script as root.
-
-
 
 
 # Installations
@@ -193,19 +202,54 @@ git checkout stable
 sudo make install
 ```
 
-# GNU Stow (WIP)
+
+ # GNU Stow
 GNU Stow is the symlink farm manager which helps you control your configuration files 
 
 ## Installation
 `brew install stow`
 
-## Stow setup
+## Setup
+Installing Stow using your package manager.
 
+```bash
+# mac
+brew install stow
 
+# ubuntu
+sudo apt install stow
 
- 
+# arch
+pacman -S stow
 
+```
 
+It is very easy to use. Replicate location of your files and use `stow` command to create symlink. 
+
+1. Create a folder to store all your dotfiles
+2. Example - wezterm config file's original location is `~/.config/wezterm/wezterm.lua `
+3. Same can be followed for all your dotfiles
+
+```bash
+
+$> mkdir ~/.dotfiles
+$> cd ~/.dotfiles
+
+# for weztem
+# create main directory
+$> mkdir wezterm/
+$> cd wezterm
+# replicate the location
+$> mkdir -p .config/wezterm/
+
+# mv the wezterm.lua file to this new location
+$> mv wezterm.lua ~/.dotfiles/wezterm/.config/wezterm
+
+# running stow command will create the sym link
+$> cd ~/.dotfiles/
+$> stow wezterm
+
+```
 
 
 
