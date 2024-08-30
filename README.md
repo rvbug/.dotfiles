@@ -4,7 +4,9 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/mac%20os-000000?style=for-plastic&logo=macos&logoColor=F0F0F0">
+  <img height=20px src="https://img.shields.io/badge/Arch%20Linux-1793D1?logo=arch-linux&logoColor=fff&style=for-the-badge">
    <img src="https://img.shields.io/badge/Fedora-294172?style=for-plastic&logo=fedora&logoColor=white">
+  <img height=20px src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white">
    <img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-plastic&logo=docker&logoColor=white">
    <img src="https://img.shields.io/badge/numpy-%23013243.svg?style=for-plastic&logo=numpy&logoColor=white">
    <img src="https://img.shields.io/badge/pandas-%23150458.svg?style=for-plastic&logo=pandas&logoColor=white">
@@ -25,14 +27,18 @@
 
 # Introduction
 
+Dotfiles helps you to personalize your machine and your enviornment across your machine to have a unified experience.
 This repository helps to restore/configure new machine via script based on the OS you run. 
+
 All the configuration will be managed using [GNU Stow](https://www.gnu.org/software/stow/).
 
 Supported OS:   
 
-- Mac OS
+- Mac
+- Ubuntu 
 - Linux Fedora
 - Linux Fedora on docker
+- Arch Linux 
 
 # Script Files 
 
@@ -47,6 +53,13 @@ Supported OS:
 | `pip_list.txt`  | text file | List of softwares for data science and ML | 
 | `config_list.txt`  | text file | List of config files | 
 
+<br>
+
+> # **Script**  
+If you do not want to use scripts, just use your package manager to install them manually.
+
+
+
 # Configuration files
 | File | Type |  OS Supported | Description |
 | --- | --- | --- | -- |
@@ -54,21 +67,29 @@ Supported OS:
 | `config/.wezterm.lua`| terminal | Mac , Arch | wezterm lua terminal config file | 
 | `config/.zshrc`| profile | Mac , Arch | shell profile and aliases | 
 | `config/starship.toml`| shell Prompt | Mac , Arch | shell prompt | 
+| `config/yabai/yabairc` | Tiling Window Manger | Mac | Window Manager | 
+| `config/skhd/skhdrc` | Tiling Window Manger | Mac | Window Manager | 
+| `config/i3/config` | i3 window manager | Arch | Tiling window manager |
+| `config/polybar/config.ini` | status bar | Arch | Polybar status | 
 
 
-
-# Versions Tested on
+# Package Manager
 | OS | Version |  package manager |
 | --- | --- | --- |
 | mac | Ventura | homebrew | 
 | mac  | Sonoma | homebrew | 
 | linux | Fedora  | dnf | 
 | linux | Fedora on docker | dnf | 
+| Linux | Arch on VM | pacman , yay |
+| Linux | Ubuntu | apt |
 
 <br>
 
-**Note** : The script works on Ubuntu/Debian OS but the apt package manager keeps pointing to neovim 0.7x version. Current version of neovim as of today is 0.9x. 
-This script can still be used on Ubuntu and Debain machine without Neovim.
+
+> # **Ubuntu Neovim**   
+The script works well on Ubuntu/Debian OS but the apt package manager keeps pointing to neovim 0.7x version. 
+You will have to build it from source manually which is a separate step under [`Ubuntu Neovim (Manual)`](https://github.com/rvbug/.dotfiles/edit/main/README.md#ubuntu-neovim-manual) installation section. 
+
 
 # Docker
 If you want to install the script on a `throw away` machine then try on docker images. Here are the steps to be followed. Below example is on fedora, but the steps pretty much remain the same on any version
@@ -97,8 +118,6 @@ $> docker images
 ```
 
 - You will dropped into this container as root. This script will work fine as a root user but on a real machine/virtual enviornment, never run any script as root.
-
-
 
 
 # Installations
@@ -156,20 +175,84 @@ List of packages installed for Data Science and ML
 | jupyterlab | IDE | 
 
 
-# GNU Stow (WIP)
+# Ubuntu Neovim (Manual)
+If you follow `sudo apt install neovim`, and run `nvim --version` , it will point to 0.7 version. The current version is `0.10`. Follow these steps for building neovim from source
+
+### Build Pre-requisites
+- You should either have  `clang` or `gcc` , if not available install using `sudo apt install clang` or `sudo apt install gcc`
+- If you do not have CMake then install using `sudo apt install cmake` else you will have to install python3g `sudo apt install python` and then run `pip install cmake`
+- Next, install the following
+  ```bash
+  sudo apt-get install ninja-build gettext cmake unzip curl build-essential
+  ```
+- Next, let us download the neovim source code 
+
+### Installing Neovim
+```bash
+
+# clone the repository
+git clone https://github.com/neovim/neovim
+cd neovim
+
+# set make
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+
+# Fetch the stable branch (latest one)
+git checkout stable
+sudo make install
+```
+
+
+ # GNU Stow
 GNU Stow is the symlink farm manager which helps you control your configuration files 
 
 ## Installation
 `brew install stow`
 
+## Setup
+Installing Stow using your package manager.
+
+```bash
+# mac
+brew install stow
+
+# ubuntu
+sudo apt install stow
+
+# arch
+pacman -S stow
+
+```
+
+It is very easy to use. Replicate location of your files and use `stow` command to create symlink. 
+
+1. Create a folder to store all your dotfiles
+2. Example - wezterm config file's original location is `~/.config/wezterm/wezterm.lua `
+3. Same can be followed for all your dotfiles
+
+```bash
+
+$> mkdir ~/.dotfiles
+$> cd ~/.dotfiles
+
+# for weztem
+# create main directory
+$> mkdir wezterm/
+$> cd wezterm
+# replicate the location
+$> mkdir -p .config/wezterm/
+
+# mv the wezterm.lua file to this new location
+$> mv wezterm.lua ~/.dotfiles/wezterm/.config/wezterm
+
+# running stow command will create the sym link
+$> cd ~/.dotfiles/
+$> stow wezterm
+
+```
 
 
- 
-# Future Support
-- Ubuntu & Debian
-- Tmux session support
-- Missing font installation for Neovim
-- Formatted messages
+
 
 # References
 
