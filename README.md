@@ -88,7 +88,7 @@ If you do not want to use scripts, just use your package manager to install them
 
 > # **Ubuntu Neovim**   
 The script works well on Ubuntu/Debian OS but the apt package manager keeps pointing to neovim 0.7x version. 
-You will have to build it from source manually which is a separate step under [`Ubuntu Neovim (Manual)`](https://github.com/rvbug/.dotfiles/edit/main/README.md#ubuntu-neovim-manual) installation section. 
+You will have to build it from source manually which is a separate step under `Ubuntu Neovim (Manual)` installation section below. 
 
 
 # Docker
