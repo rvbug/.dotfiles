@@ -27,7 +27,7 @@
 
 # Introduction
 
-Dotfiles helps you to personalize your machine and your enviornment across your machine to have a unified experience.
+Dotfiles helps you to personalize your enviornment across all your machine for a  unified experience.
 This repository helps to restore/configure new machine via script based on the OS you run. 
 
 All the configuration will be managed using [GNU Stow](https://www.gnu.org/software/stow/).
