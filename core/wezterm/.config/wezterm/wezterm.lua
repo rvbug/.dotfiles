@@ -24,6 +24,14 @@ local config = wezterm.config_builder()
   -- audio bell 
   audible_bell = "Disabled",
 
+  -- keys = {
+  --   key = 'n',
+  --   mods = 'SHIFT|CTRL',
+  --   action = wezterm.action.ToggleFullScreen,
+  -- }
+
+
+
 }
 
 return config

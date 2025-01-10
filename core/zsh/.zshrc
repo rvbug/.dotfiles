@@ -12,13 +12,24 @@ neofetch
 # aliases
 alias v="nvim"
 alias vim="nvim"
-alias vw="nvim ~/.config/wezterm/wezterm.lua"
-alias src="source ~/.zshrc"
+alias wez="nvim ~/.config/wezterm/wezterm.lua"
+alias zsh="nvim ~/.zshrc"
+alias z="source ~/.zshrc"
+
+alias aero="nvim ~/.config/aerospace/aerospace.toml"
+alias aerolist="aerospace list-apps"
+
 alias projects="cd ~/Documents/projects"
 alias proj="cd ~/Documents/projects"
 alias la="ls -al"
 alias ll="ls -lrt"
+alias t="tmux"
+alias dot="cd ~/.dotfiles && nvim ."
 
-
+echo " "
+echo " "
+echo " ######## "
+alias
+echo " ######## "
 
 eval "$(starship init zsh)"
