@@ -19,6 +19,10 @@ alias z="source ~/.zshrc"
 alias aero="nvim ~/.config/aerospace/aerospace.toml"
 alias aerolist="aerospace list-apps"
 
+alias sbar-start="brew services start sketchybar"
+alias sbar-reload="sketchybar --reload"
+
+
 alias projects="cd ~/Documents/projects"
 alias proj="cd ~/Documents/projects"
 alias la="ls -al"
