@@ -1,12 +1,8 @@
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 # PS1='%n:%1~ %# '
-
-
-
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 
-# Added by Windsurf
-export PATH="/Users/rv/.codeium/windsurf/bin:$PATH"
+export CONFIG_DIR=$HOME/.config/sketchybar
 
 neofetch
 # aliases
