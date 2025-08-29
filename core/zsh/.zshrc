@@ -97,6 +97,40 @@ eval "$(zoxide init zsh)"
 
 #export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
+## - CIOP system
+# CIOP System
+precmd() {
+  local RET=$?
+  local TS=$(date -Iseconds)
+  # last command from history
+  local CMD=$(fc -ln -1)
+  local CMD_B64=$(printf "%s" "$CMD" | base64 | tr -d '\n')
+  printf "%s\t%s\t%s\t%s\n" "$TS" "$PWD" "$RET" "$CMD_B64" >> ~/.cli_command_buffer
+}
+
+# bandit-suggest() {
+#   CMD=$(python3 /Users/rv/Documents/projects/ciop/agent/cli_agent/bandit_suggest.py)
+#   if [ -n "$CMD" ]; then
+#     echo "🧠 Bandit suggests: $CMD"
+#     eval "$CMD"
+#   fi
+# }
+# bindkey -s '^b' 'bandit-suggest\n'   # Ctrl-B
+#
+
+bandit-suggest() {
+  CMD=$(python3 /Users/rv/Documents/projects/ciop/agent/cli_agent/bandit_suggest.py)
+  if [ -n "$CMD" ]; then
+    # run command printed by the script
+    echo "🧠 Bandit suggests: $CMD"
+    eval "$CMD"
+  fi
+}
+# bind Ctrl-B to the function (zsh)
+bindkey -s '^b' 'bandit-suggest\n'
+
+
+
 # bun
 export BUN_INSTALL="$HOME/Library/Application Support/reflex/bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
