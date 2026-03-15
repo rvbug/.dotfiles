@@ -1,6 +1,4 @@
-wezterm
 neovim
-starship
 curl
 wget
 tmux
@@ -14,4 +12,4 @@ rust-analyzer
 lazygit
 tree
 tree-sitter
-cowsay
+ghostty
